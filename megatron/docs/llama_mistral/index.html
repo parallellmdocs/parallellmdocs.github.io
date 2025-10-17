@@ -1,0 +1,2328 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="中文翻译文档集合">
+      
+      
+      
+      
+        <link rel="prev" href="../../megatron/core/datasets/readme/">
+      
+      
+        <link rel="next" href="../../megatron/core/MSC_Integration/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>Llama/Mistral 指南 - Unified Docs (CN)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#megatron-lm-llamamistral-llama" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Unified Docs (CN)" class="md-header__button md-logo" aria-label="Unified Docs (CN)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unified Docs (CN)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Llama/Mistral 指南
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Unified Docs (CN)" class="md-nav__button md-logo" aria-label="Unified Docs (CN)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Unified Docs (CN)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Megatron
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Megatron
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    快速入门
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            快速入门
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../megatron/core/QuickStart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    快速开始
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../megatron/core/datasets/readme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数据集管线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Llama/Mistral 指南
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    核心能力
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            核心能力
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../megatron/core/MSC_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MSC 集成
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../megatron/core/README_STRAGGLER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Straggler 检测
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../megatron/core/transformer/moe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MoE 架构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../megatron/core/optimizer/cpu_offloading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    优化器 CPU Offload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../megatron/core/models/mimo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MIMO 模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../megatron/core/distributed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式 FSDP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../megatron/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    核心概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API 指南
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            API 指南
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    导航
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transformer 主体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/tensor_parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    张量并行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/pipeline_parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    流水线并行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/context_parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Context Parallel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/moe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MoE 系统
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/multi_latent_attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multi-Latent Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/multi_token_prediction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多 Token 预测
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/dist_optimizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式优化器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/custom_fsdp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    自定义 FSDP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/dist_checkpointing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    检查点策略
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/tokenizers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分词体系
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_5" id="__nav_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    示例与工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            示例与工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/user-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    示例导航
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    模型导出
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    推理实践
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/multimodal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多模态示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/retro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retro 工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/retro/build_db/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retro 数据库构建
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/retro/sft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retro 微调
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_6" id="__nav_1_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    进一步阅读
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            进一步阅读
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/models.bert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 参考：BERT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/models.gpt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 参考：GPT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/models.t5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 参考：T5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/optimizer_param_scheduler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    优化器调度
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/optimizer_cpu_offload/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CPU Offload 参考
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/api-guide/distributed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    自定义分布式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    TransformerEngine
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            TransformerEngine
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    安装指南
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    调试工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            调试工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    目录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/debug/1_getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    快速入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/debug/2_config_file_structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    配置结构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/debug/3_api_debug_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    初始化 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/debug/3_api_features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    功能列表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/debug/3_api_te_calls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inspect API 调用
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/debug/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 索引
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/debug/4_distributed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式调试
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a id="llama-mistral-and-other-llama-like-model-support-in-megatron-lm"></a></p>
+<h1 id="megatron-lm-llamamistral-llama">在 Megatron-LM 中支持 Llama、Mistral 及其他 Llama 系模型</h1>
+<p>注意：为简化代码，目前仅支持转换从 HuggingFace 下载的 Llama-3.x 与 Mistral 检查点。</p>
+<p><a href="https://ai.meta.com/llama/">Llama-2</a> 与 <a href="https://llama.meta.com/">Llama-3.x</a> 家族提供了开源的预训练与聊天微调模型，在多项基准上表现优异。两代模型发布时都位列开源模型前列，并与领先的闭源模型相竞争（参见 https://arxiv.org/pdf/2307.09288.pdf 与 https://ai.meta.com/blog/meta-llama-3/）。</p>
+<p>同样地，<a href="https://mistral.ai/news/announcing-mistral-7b/">Mistral-7B</a> 也是开源模型，包含预训练与聊天微调版本，基准成绩突出。</p>
+<p>在架构上，Llama-2、Llama-3 与 Mistral-7B 高度相似。因此 Megatron 可以加载三种模型的检查点，用于推理或微调。转换方式在细节上略有差异，下面按模型分别说明。</p>
+<ul>
+<li><a href="#llama-mistral-and-other-llama-like-model-support-in-megatron-lm">在 Megatron-LM 中支持 Llama、Mistral 及其他 Llama 系模型</a></li>
+<li><a href="#llama-2">Llama-2</a></li>
+<li><a href="#download-meta-or-huggingface-checkpoints">下载 Meta 或 HuggingFace 检查点</a></li>
+<li><a href="#convert-checkpoint-format">转换检查点格式</a><ul>
+<li><a href="#meta-format">Meta 格式</a></li>
+<li><a href="#huggingface-format">HuggingFace 格式</a></li>
+</ul>
+</li>
+<li><a href="#launch-model">启动模型</a><ul>
+<li><a href="#launch-megatron">调整 Megatron 启动参数</a></li>
+<li><a href="#launch-meta">使用 Meta 脚本启动</a></li>
+<li><a href="#launch-huggingface">使用 HuggingFace 启动</a></li>
+</ul>
+</li>
+<li><a href="#benchmark-results">基准结果</a><ul>
+<li><a href="#big-bench">Big Bench</a></li>
+<li><a href="#multilingual">多语言基准</a></li>
+<li><a href="#lm-evaluation-harness">LM Evaluation Harness</a></li>
+<li><a href="#mmlu">MMLU</a></li>
+</ul>
+</li>
+<li><a href="#llama-3x">Llama-3.x</a></li>
+<li><a href="#download-huggingface-checkpoints">下载 HuggingFace 检查点</a></li>
+<li><a href="#convert-checkpoint-format-1">转换检查点格式</a><ul>
+<li><a href="#huggingface-format-1">HuggingFace 格式</a></li>
+</ul>
+</li>
+<li><a href="#optional-validate-checkpoints">（可选）验证检查点</a></li>
+<li><a href="#launch-model-1">启动模型</a></li>
+<li><a href="#mistral-7b">Mistral-7B</a></li>
+<li><a href="#download-huggingface-checkpoints-2">下载 HuggingFace 检查点</a></li>
+<li><a href="#convert-checkpoint-format-3">转换检查点格式</a></li>
+<li><a href="#optional-validate-checkpoints-2">（可选）验证检查点</a></li>
+<li><a href="#launch-model-3">启动模型</a></li>
+<li><a href="#other-llama-like-model-support">其他 Llama 系模型支持</a></li>
+<li><a href="#known-numerical-differences">已知数值差异</a></li>
+<li><a href="#using-legacy-model-format">使用旧版模型格式</a></li>
+</ul>
+<h1 id="llama-2">Llama-2</h1>
+<p>Llama-2 检查点可用于 Megatron 推理与微调，主要步骤如下：</p>
+<ol>
+<li>获取下载检查点的权限。</li>
+<li>将 Meta/HuggingFace 格式转换为 Megatron 格式。</li>
+<li>配置启动模型所需的参数。</li>
+</ol>
+<p>下文依次介绍各步骤，最后附上基准结果对比：1) 使用 Meta 原生检查点与 Meta 推理代码的表现；2) 使用转换后检查点与 Megatron 推理代码的表现。</p>
+<p><a id="download-meta-or-huggingface-checkpoints"></a></p>
+<h2 id="meta-huggingface">下载 Meta 或 HuggingFace 检查点</h2>
+<p>需要先申请访问权限，从 <a href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/">Meta</a> 或 <a href="https://huggingface.co/docs/transformers/main/model_doc/llama2">HuggingFace</a>（简称 HF）下载 Llama-2 检查点。两种格式均可转换为 Megatron：Meta 原生格式（可在 Meta 与 HF 获取）以及 HF 提供的格式（仅在 HF 下载）。</p>
+<p><a id="convert-checkpoint-format"></a></p>
+<h2 id="_1">转换检查点格式</h2>
+<p>推荐在训练或微调时使用 <code>--dtype bf16</code>。推理则可选择 bfloat16 或 float16。</p>
+<p><a id="meta-format"></a></p>
+<h3 id="meta">Meta 格式</h3>
+<p>Meta 格式检查点会先转换为 HF 格式，再转换为 Megatron 格式。需要安装 <code>transformers</code> 包，版本需不低于 4.31.0（例如 <code>pip install transformers&gt;=4.31.0</code>）。<strong>注意</strong>：已在 <code>4.31.0</code> 与 <code>4.32.0</code> 上验证，更新版本可能略有差异。假设下载好的检查点在 <code>$CHECKPOINT_DIR</code>（按 7B、13B、70B 等子目录划分），以下命令可将 Llama-2 格式转换为 bfloat16 的 HF 格式：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python<span class="w"> </span>tools/checkpoint/convert.py<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>&gt;<span class="w">   </span>--model-type<span class="w"> </span>GPT<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>&gt;<span class="w">   </span>--loader<span class="w"> </span>llama_mistral<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>&gt;<span class="w">   </span>--load-dir<span class="w"> </span><span class="si">${</span><span class="nv">META_FORMAT_DIR</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>&gt;<span class="w">   </span>--model-size<span class="w"> </span><span class="si">${</span><span class="nv">MODEL_SIZE</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>&gt;<span class="w">   </span>--checkpoint-type<span class="w"> </span>meta<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>&gt;<span class="w">   </span>--tokenizer-model<span class="w"> </span><span class="si">${</span><span class="nv">TOKENIZER_MODEL</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>&gt;<span class="w">   </span>--saver<span class="w"> </span>core<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>&gt;<span class="w">   </span>--save-dir<span class="w"> </span><span class="si">${</span><span class="nv">MEGATRON_FORMAT_DIR</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>&gt;<span class="w">   </span>--target-tensor-parallel-size<span class="w"> </span><span class="si">${</span><span class="nv">TP</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>&gt;<span class="w">   </span>--target-pipeline-parallel-size<span class="w"> </span><span class="si">${</span><span class="nv">PP</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>&gt;<span class="w">   </span>--bf16
+</code></pre></div>
+<p><code>--model-size</code> 的合法取值包括：<code>llama2-7B</code>、<code>llama2-13B</code>、<code>llama2-70B</code>（预训练模型），以及 <code>llama2-7Bf</code>、<code>llama2-13Bf</code>、<code>llama2-70Bf</code>（聊天微调模型）。</p>
+<p><a id="huggingface-format"></a></p>
+<h3 id="huggingface">HuggingFace 格式</h3>
+<p>Megatron 提供了 Llama-2 检查点转换脚本（<code>tools/checkpoint/loader_llama_mistral.py</code>），可直接将 HF 格式转换为 Megatron 格式。务必根据模型设定正确的张量并行规模（<code>TP</code>）；下表给出了推荐值：</p>
+<table>
+<thead>
+<tr>
+<th>模型规模</th>
+<th>张量并行规模 (<code>TP</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7B</td>
+<td>1</td>
+</tr>
+<tr>
+<td>13B</td>
+<td>2</td>
+</tr>
+<tr>
+<td>70B</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>设置好 <code>TP</code> 并提供 Llama-2 tokenizer（随原始检查点下载，见 <code>${TOKENIZER_MODEL}</code>）后，在 Megatron 仓库根目录运行：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>tools/checkpoint/convert.py<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>&gt;<span class="w">   </span>--model-type<span class="w"> </span>GPT<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>&gt;<span class="w">   </span>--loader<span class="w"> </span>llama_mistral<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>&gt;<span class="w">   </span>--load-dir<span class="w"> </span><span class="si">${</span><span class="nv">HF_FORMAT_DIR</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>&gt;<span class="w">   </span>--model-size<span class="w"> </span><span class="si">${</span><span class="nv">MODEL_SIZE</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>&gt;<span class="w">   </span>--checkpoint-type<span class="w"> </span>hf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>&gt;<span class="w">   </span>--tokenizer-model<span class="w"> </span><span class="si">${</span><span class="nv">TOKENIZER_MODEL</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>&gt;<span class="w">   </span>--saver<span class="w"> </span>core<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>&gt;<span class="w">   </span>--save-dir<span class="w"> </span><span class="si">${</span><span class="nv">MEGATRON_FORMAT_DIR</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>&gt;<span class="w">   </span>--target-tensor-parallel-size<span class="w"> </span><span class="si">${</span><span class="nv">TP</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>&gt;<span class="w">   </span>--target-pipeline-parallel-size<span class="w"> </span><span class="si">${</span><span class="nv">PP</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>&gt;<span class="w">   </span>--bf16
+</code></pre></div>
+<p>转换完成后即可将检查点加载到 Megatron GPT 模型中。</p>
+<p><a id="launch-model"></a></p>
+<h2 id="_2">启动模型</h2>
+<p><a id="launch-megatron"></a></p>
+<h3 id="megatron">调整 Megatron 启动参数</h3>
+<p>无论推理或微调，可参考以下常用参数：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>--tensor-model-parallel-size ${TP} \
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>--pipeline-model-parallel-size 1 \
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>--seq-length 4096 \
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>--max-position-embeddings 4096 \
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>--tokenizer-type Llama2Tokenizer \
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>--tokenizer-model ${TOKENIZER_MODEL} \
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>--load ${CHECKPOINT_DIR} \
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>--exit-on-missing-checkpoint \
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>--use-checkpoint-args \
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>--no-load-optim \
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>--no-load-rng \
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>--untie-embeddings-and-output-weights \
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>--use-rotary-position-embeddings \
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>--normalization RMSNorm \
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>--no-position-embedding \
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>--no-masked-softmax-fusion \
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>--attention-softmax-in-fp32
+</code></pre></div>
+<p><strong>注意：</strong> 若转换时使用了旧版模型格式（<code>--saver legacy</code>），请参阅<a href="#using-legacy-model-format">使用旧版模型格式</a>。</p>
+<p><a id="launch-meta"></a></p>
+<h3 id="meta_1">使用 Meta 脚本启动</h3>
+<p>Meta 官方推理脚本可直接加载 Meta 格式检查点，代码位于：https://github.com/facebookresearch/llama</p>
+<p><a id="launch-huggingface"></a></p>
+<h3 id="huggingface_1">使用 HuggingFace 启动</h3>
+<p>HuggingFace Transformers 提供了 Llama 推理代码，可在此查看：https://github.com/huggingface/transformers/blob/main/src/transformers/models/llama/modeling_llama.py</p>
+<p><a id="benchmark-results"></a></p>
+<h2 id="_3">基准结果</h2>
+<p>下列表格比较了 Meta 原生推理（使用 Meta 格式检查点）与 Megatron 推理（使用转换后的 HF 检查点）之间的差异。</p>
+<p>误差按照 <code>|&lt;llama_score&gt; - &lt;megatron_score&gt;| / &lt;llama_score&gt;</code> 计算。对每个模型规模共统计 80 项测试，平均误差为 0.15%。差异主要源自两套实现的数值细节不同，例如：</p>
+<ul>
+<li>Megatron 在自注意力与 SwiGLU 等位置使用批量矩阵乘法，而 Llama 分多次执行。</li>
+<li>Megatron 在自注意力中使用 <code>torch.baddbmm</code>，Llama 则使用 <code>torch.matmul</code>。</li>
+<li>Megatron 的旋转位置编码基于 <code>sin</code>/<code>cos</code>，Llama 使用 <code>polar</code>/<code>complex</code>。</li>
+<li>Llama 在初始化时调用 <code>torch.set_default_dtype(torch.float16)</code>，Megatron 则没有。</li>
+</ul>
+<p><a id="big-bench"></a></p>
+<h3 id="big-bench">Big Bench</h3>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>7B</th>
+<th>13B</th>
+<th>70B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>date_understanding</td>
+<td>0.29%</td>
+<td>0.13%</td>
+<td>0.12%</td>
+</tr>
+<tr>
+<td>general_knowledge</td>
+<td>0.00%</td>
+<td>0.00%</td>
+<td>0.00%</td>
+</tr>
+<tr>
+<td>human_organs_senses</td>
+<td>0.00%</td>
+<td>0.00%</td>
+<td>0.00%</td>
+</tr>
+<tr>
+<td>intent_recognition</td>
+<td>0.00%</td>
+<td>0.11%</td>
+<td>0.00%</td>
+</tr>
+<tr>
+<td>riddle_sense</td>
+<td>0.00%</td>
+<td>0.00%</td>
+<td>0.00%</td>
+</tr>
+<tr>
+<td>similarities_abstraction</td>
+<td>0.00%</td>
+<td>0.58%</td>
+<td>0.00%</td>
+</tr>
+<tr>
+<td>simple_arithmetic_json_multiple_choice</td>
+<td>0.00%</td>
+<td>0.00%</td>
+<td>0.00%</td>
+</tr>
+<tr>
+<td>undo_permutation</td>
+<td>0.19%</td>
+<td>0.19%</td>
+<td>0.18%</td>
+</tr>
+</tbody>
+</table>
+<p><a id="multilingual"></a></p>
+<h3 id="_4">多语言基准</h3>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>7B</th>
+<th>13B</th>
+<th>70B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>en-template-mGPT-remove-punctuation</td>
+<td>0.08%</td>
+<td>0.00%</td>
+<td>0.00%</td>
+</tr>
+<tr>
+<td>et-template-mGPT-remove-punctuation</td>
+<td>0.00%</td>
+<td>0.13%</td>
+<td>0.25%</td>
+</tr>
+<tr>
+<td>ht-template-mGPT-remove-punctuation</td>
+<td>0.26%</td>
+<td>0.13%</td>
+<td>0.26%</td>
+</tr>
+<tr>
+<td>id-template-mGPT-remove-punctuation</td>
+<td>0.11%</td>
+<td>0.00%</td>
+<td>0.19%</td>
+</tr>
+<tr>
+<td>it-template-mGPT-remove-punctuation</td>
+<td>0.00%</td>
+<td>0.10%</td>
+<td>0.09%</td>
+</tr>
+<tr>
+<td>qu-template-mGPT-remove-punctuation</td>
+<td>0.00%</td>
+<td>0.00%</td>
+<td>0.27%</td>
+</tr>
+<tr>
+<td>sw-template-mGPT-remove-punctuation</td>
+<td>0.14%</td>
+<td>0.13%</td>
+<td>0.13%</td>
+</tr>
+<tr>
+<td>th-template-mGPT-remove-punctuation</td>
+<td>0.25%</td>
+<td>0.13%</td>
+<td>0.13%</td>
+</tr>
+<tr>
+<td>tr-template-mGPT-remove-punctuation</td>
+<td>0.26%</td>
+<td>0.00%</td>
+<td>0.34%</td>
+</tr>
+<tr>
+<td>vi-template-mGPT-remove-punctuation</td>
+<td>0.00%</td>
+<td>0.11%</td>
+<td>0.00%</td>
+</tr>
+<tr>
+<td>zh-template-mGPT-remove-punctuation</td>
+<td>0.00%</td>
+<td>0.10%</td>
+<td>0.09%</td>
+</tr>
+</tbody>
+</table>
+<p><a id="lm-evaluation-harness"></a></p>
+<h3 id="lm-evaluation-harness">LM Evaluation Harness</h3>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>7B</th>
+<th>13B</th>
+<th>70B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolq</td>
+<td>0.04%</td>
+<td>0.04%</td>
+<td>0.07%</td>
+</tr>
+<tr>
+<td>hellaswag</td>
+<td>0.02%</td>
+<td>0.03%</td>
+<td>0.03%</td>
+</tr>
+<tr>
+<td>piqa</td>
+<td>0.00%</td>
+<td>0.00%</td>
+<td>0.07%</td>
+</tr>
+<tr>
+<td>winogrande</td>
+<td>0.00%</td>
+<td>0.11%</td>
+<td>0.20%</td>
+</tr>
+</tbody>
+</table>
+<p><a id="mmlu"></a></p>
+<h3 id="mmlu">MMLU</h3>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>7B</th>
+<th>13B</th>
+<th>70B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stem [18]</td>
+<td>0.79%</td>
+<td>0.05%</td>
+<td>0.01%</td>
+</tr>
+<tr>
+<td>humanities [13]</td>
+<td>0.19%</td>
+<td>0.01%</td>
+<td>0.02%</td>
+</tr>
+<tr>
+<td>other (business, health, misc.) [14]</td>
+<td>0.08%</td>
+<td>0.06%</td>
+<td>0.12%</td>
+</tr>
+<tr>
+<td>social sciences [12]</td>
+<td>0.37%</td>
+<td>0.21%</td>
+<td>0.01%</td>
+</tr>
+</tbody>
+</table>
+<h1 id="llama-3x">Llama-3.x</h1>
+<p>Llama-3.x 检查点也可以在 Megatron 中用于推理或微调，流程涵盖：</p>
+<ol>
+<li>下载权重与 tokenizer。</li>
+<li>将 HuggingFace 格式转换为 Megatron 格式。</li>
+<li>（可选）验证转换结果。</li>
+<li>设置启动参数。</li>
+</ol>
+<p><a id="download-huggingface-checkpoints"></a></p>
+<h2 id="huggingface_2">下载 HuggingFace 检查点</h2>
+<p>从 <a href="https://huggingface.co/meta-llama">HuggingFace</a> 获取所需的 Llama-3.x 检查点（需提前申请）。</p>
+<p><a id="convert-checkpoint-format-1"></a></p>
+<h2 id="_5">转换检查点格式</h2>
+<p><a id="huggingface-format-1"></a></p>
+<h3 id="huggingface_3">HuggingFace 格式</h3>
+<p>使用 Megatron 提供的 Llama-3.x 转换脚本（同样位于 <code>tools/checkpoint/loader_llama_mistral.py</code>），即可将 HF 格式转换为 Megatron 格式。关键参数包括张量并行规模 <code>TP</code> 与 tokenizer 路径。</p>
+<table>
+<thead>
+<tr>
+<th>模型规模</th>
+<th>张量并行规模 (<code>TP</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1B</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3B</td>
+<td>1</td>
+</tr>
+<tr>
+<td>8B</td>
+<td>1</td>
+</tr>
+<tr>
+<td>70B</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python<span class="w"> </span>tools/checkpoint/convert.py<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--model-type<span class="w"> </span>GPT<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>--loader<span class="w"> </span>llama_mistral<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>--checkpoint-type<span class="w"> </span>hf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>--tokenizer-model<span class="w"> </span><span class="si">${</span><span class="nv">TOKENIZER_MODEL</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span>--load-dir<span class="w"> </span><span class="si">${</span><span class="nv">HF_CHECKPOINT_DIR</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span>--save-dir<span class="w"> </span><span class="si">${</span><span class="nv">MEGATRON_FORMAT_DIR</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span>--saver<span class="w"> </span>core<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span>--target-tensor-parallel-size<span class="w"> </span><span class="si">${</span><span class="nv">TP</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span>--target-pipeline-parallel-size<span class="w"> </span><span class="si">${</span><span class="nv">PP</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span>--bf16
+</code></pre></div>
+<p>Megatron 会根据设定的 TP 值拆分权重文件。<code>--tokenizer-model</code> 指向对应的 tokenizer 模型。</p>
+<p><a id="optional-validate-checkpoints"></a></p>
+<h2 id="_6">（可选）验证检查点</h2>
+<p>转换完成后，可使用 <code>examples/inference/llama_mistral/run_text_generation_llama3.sh &lt;PATH_TO_CONVERTED_CORE_CHECKPOINT&gt; &lt;PATH_TO_DOWNLOADED_HUGGINGFACE_CHECKPOINT&gt;</code> 启动 Megatron 文本生成服务。对于 Llama3.1，请使用 <code>run_text_generation_llama3.1.sh</code>。</p>
+<p>服务启动后，可通过
+<code>curl 'http://&lt;TEXT_GENERATION_SERVER_IP&gt;:5000/api' -X 'PUT' -H 'Content-Type: application/json; charset=UTF-8' -d '{"prompts":["&lt;SOME_PROMPT&gt;"], "tokens_to_generate":100, "top_k":1}'</code> 进行测试。</p>
+<p>可运行 <code>python examples/llama_mistral/huggingface_reference.py --model_path &lt;PATH_TO_DOWNLOADED_HUGGINGFACE_CHECKPOINT&gt; --prompt &lt;SOME_PROMPT&gt;</code> 获得 HuggingFace 参考结果。</p>
+<p><a id="launch-model-1"></a></p>
+<h2 id="_7">启动模型</h2>
+<p>推理或微调时常用的参数示例：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>--tensor-model-parallel-size ${TP} \
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>--pipeline-model-parallel-size 1 \
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>--seq-length 8192 \
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>--max-position-embeddings 8192 \
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>--tokenizer-type HuggingFaceTokenizer \
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>--tokenizer-model ${TOKENIZER_MODEL} \
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>--load ${CHECKPOINT_DIR} \
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>--exit-on-missing-checkpoint \
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>--use-checkpoint-args \
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>--no-load-optim \
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>--no-load-rng \
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>--untie-embeddings-and-output-weights \
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>--normalization RMSNorm \
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>--position-embedding-type rope \
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>--no-masked-softmax-fusion \
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>--attention-softmax-in-fp32 \
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>--disable-bias-linear \
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>--transformer-impl transformer_engine \
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>--group-query-attention 8 \
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>--attention-dropout 0.0 \
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>--hidden-dropout 0.0 \
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>--rotary-base 500000 \
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>--rotary-percent 1.0 \
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>--ffn-hidden-size 14336 \
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>--num-attention-heads 32 \
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>--swiglu \
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>--bf16 \
+</code></pre></div>
+<p>对于 Llama3.1，可使用以下参数：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>--tensor-model-parallel-size ${TP} \
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>--pipeline-model-parallel-size 1 \
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>--seq-length 8192 \
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>--max-position-embeddings 131072 \
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>--tokenizer-type HuggingFaceTokenizer \
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>--tokenizer-model ${TOKENIZER_MODEL} \
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>--load ${CHECKPOINT_DIR} \
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>--exit-on-missing-checkpoint \
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>--use-checkpoint-args \
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>--no-load-optim \
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>--no-load-rng \
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>--untie-embeddings-and-output-weights \
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>--normalization RMSNorm \
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>--position-embedding-type rope \
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>--no-masked-softmax-fusion \
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>--attention-softmax-in-fp32 \
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>--disable-bias-linear \
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>--transformer-impl transformer_engine \
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>--group-query-attention 8 \
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>--attention-dropout 0.0 \
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>--hidden-dropout 0.0 \
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>--rotary-base 500000 \
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>--rotary-percent 1.0 \
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>--use-rope-scaling \
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>--ffn-hidden-size 14336 \
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>--num-attention-heads 32 \
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>--swiglu \
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>--bf16 \
+</code></pre></div>
+<p><strong>注意：</strong> 若转换时使用 <code>--saver legacy</code>，请参阅<a href="#using-legacy-model-format">使用旧版模型格式</a>。</p>
+<p><a id="mistral-7b"></a></p>
+<h1 id="mistral-7b">Mistral-7B</h1>
+<p>Megatron 目前支持加载 Mistral-7B v0.3（不包含滑动窗口注意力，词表 32768）进行推理与微调。流程如下：</p>
+<ol>
+<li>获取权重与 tokenizer。</li>
+<li>将 HuggingFace 格式转换为 Megatron 格式。</li>
+<li>（可选）验证转换后的检查点。</li>
+<li>配置启动参数。</li>
+</ol>
+<p><a id="download-huggingface-checkpoints-2"></a></p>
+<h2 id="huggingface_4">下载 HuggingFace 检查点</h2>
+<p>从 <a href="https://huggingface.co/mistralai/Mistral-7B-v0.3">HuggingFace</a> 下载 Mistral-7B 检查点（需提前申请）。</p>
+<p><a id="convert-checkpoint-format-3"></a></p>
+<h2 id="_8">转换检查点格式</h2>
+<p>利用 Megatron 自带的转换脚本 <code>tools/checkpoint/loader_llama_mistral.py</code>，可将 HF 格式转换为 Megatron 格式。执行示例：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$&gt;:<span class="w"> </span>python<span class="w"> </span>tools/checkpoint/convert.py<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w"> </span>&gt;<span class="w">    </span>--bf16<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w"> </span>&gt;<span class="w">    </span>--model-type<span class="w"> </span>GPT<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w"> </span>&gt;<span class="w">    </span>--loader<span class="w"> </span>llama_mistral<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w"> </span>&gt;<span class="w">    </span>--saver<span class="w"> </span>core<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w"> </span>&gt;<span class="w">    </span>--target-tensor-parallel-size<span class="w"> </span><span class="si">${</span><span class="nv">TP</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w"> </span>&gt;<span class="w">    </span>--checkpoint-type<span class="w"> </span>hf<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w"> </span>&gt;<span class="w">    </span>--load-dir<span class="w"> </span><span class="si">${</span><span class="nv">HF_FORMAT_DIR</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w"> </span>&gt;<span class="w">    </span>--save-dir<span class="w"> </span><span class="si">${</span><span class="nv">MEGATRON_FORMAT_DIR</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w"> </span>&gt;<span class="w">    </span>--tokenizer-model<span class="w"> </span><span class="si">${</span><span class="nv">TOKENIZER_MODEL</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w"> </span>&gt;<span class="w">    </span>--model-size<span class="w"> </span>mistral<span class="w"> </span><span class="se">\</span>
+</code></pre></div>
+<p>转换完成后即可在 Megatron Core 的 GPT 模型中加载新的检查点。</p>
+<p><a id="optional-validate-checkpoints-2"></a></p>
+<h2 id="_9">（可选）验证检查点</h2>
+<p>可通过脚本 <code>examples/inference/llama_mistral/run_text_generation_mistral.sh &lt;PATH_TO_CONVERTED_MCORE_CHECKPOINT&gt; &lt;PATH_TO_DOWNLOADED_HUGGINGFACE_CHECKPOINT&gt;</code> 启动文本生成服务，并用如下请求测试：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl<span class="w"> </span><span class="s1">&#39;http://&lt;TEXT_GENERATION_SERVER_IP&gt;:5000/api&#39;</span><span class="w"> </span>-X<span class="w"> </span><span class="s1">&#39;PUT&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json; charset=UTF-8&#39;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;prompts&quot;:[&quot;&lt;SOME_PROMPT&gt;&quot;], &quot;tokens_to_generate&quot;:100, &quot;top_k&quot;:1}&#39;</span>
+</code></pre></div>
+<p>同时可运行 <code>python examples/inference/llama_mistral/huggingface_reference.py --model_path &lt;PATH_TO_DOWNLOADED_HUGGINGFACE_CHECKPOINT&gt; --prompt &lt;SOME_PROMPT&gt;</code> 获取 HuggingFace 参考结果进行对比。</p>
+<p><a id="launch-model-3"></a></p>
+<h2 id="_10">启动模型</h2>
+<p>推理或微调 Mistral-7B 时常用的参数：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>--tensor-model-parallel-size ${TP} \
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>--pipeline-model-parallel-size 1 \
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>--seq-length 4096 \
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>--max-position-embeddings 4096 \
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>--tokenizer-type HuggingFaceTokenizer \
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>--tokenizer-model ${TOKENIZER_MODEL} \
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>--load ${CHECKPOINT_DIR} \
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>--exit-on-missing-checkpoint \
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>--use-checkpoint-args \
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>--no-load-optim \
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>--no-load-rng \
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>--untie-embeddings-and-output-weights \
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>--normalization RMSNorm \
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>--position-embedding-type rope \
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>--no-masked-softmax-fusion \
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>--attention-softmax-in-fp32 \
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>--apply-layernorm-1p \
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>--transformer-impl transformer_engine \
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>--group-query-attention 8 \
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>--disable-bias-linear \
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>--rotary-base 1000000 \
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>--rotary-percent 1.0 \
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>--swiglu \
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>--ffn-hidden-size 14336 \
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>--num-attention-heads 32
+</code></pre></div>
+<p><strong>注意：</strong> 若使用 <code>--saver legacy</code> 转换，请参阅<a href="#using-legacy-model-format">使用旧版模型格式</a>。</p>
+<p><a id="other-llama-like-model-support"></a></p>
+<h1 id="llama">其他 Llama 系模型支持</h1>
+<p><em>注意：实验性功能</em></p>
+<p>许多模型（例如 Yi-34B、Qwen2.x）采用与 Llama 类似的架构，可按<a href="#llama-3x">Llama-3.x</a> 部分给出的命令将 HuggingFace 检查点转换为 Megatron 格式。</p>
+<p><a id="known-numerical-differences"></a></p>
+<h1 id="_11">已知数值差异</h1>
+<p>Megatron 与 HuggingFace 对 Llama-3.x、Mistral 模型的实现并非数值完全一致，存在一些预期内的细微差异，例如：</p>
+<ol>
+<li>TransformerEngine 在 RMSNorm 内使用模型的 <code>params_dtype</code>，而 HuggingFace 使用 FP32。详见：https://github.com/NVIDIA/TransformerEngine/issues/1132</li>
+<li>HuggingFace 将自注意力中的 q、k、v 投影拆分为三个 GEMM，而 Megatron 会合并为一次 GEMM，以提高效率，从而带来微小数值差别。</li>
+</ol>
+<p><a id="using-legacy-model-format"></a></p>
+<h1 id="_12">使用旧版模型格式</h1>
+<p>本文示例均使用 <code>--saver core</code>，即新版 Megatron GPT 模型类：</p>
+<ul>
+<li>旧类：<code>megatron.legacy.model.gpt_model.GPTModel</code></li>
+<li>新类：<code>megatron.core.models.gpt.gpt_model.GPTModel</code></li>
+</ul>
+<p>推荐使用新格式。如果需要使用旧类（即转换时指定 <code>--saver legacy</code>），在启动训练或微调时需额外传入：</p>
+<ul>
+<li><code>--use-legacy-models</code>：启用旧版模型类</li>
+<li><code>--ckpt-format torch</code>：使用 <code>torch</code> 检查点格式（旧版模型唯一兼容的格式）</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

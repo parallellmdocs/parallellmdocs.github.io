@@ -1,0 +1,2034 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="中文翻译文档集合">
+      
+      
+      
+      
+        <link rel="prev" href="../megatron/docs/source/api-guide/distributed/">
+      
+      
+        <link rel="next" href="docs/installation/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>概览 - Unified Docs (CN)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#transformer-engine" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="Unified Docs (CN)" class="md-header__button md-logo" aria-label="Unified Docs (CN)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unified Docs (CN)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              概览
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Unified Docs (CN)" class="md-nav__button md-logo" aria-label="Unified Docs (CN)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Unified Docs (CN)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Megatron
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Megatron
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    快速入门
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            快速入门
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/megatron/core/QuickStart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    快速开始
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/megatron/core/datasets/readme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数据集管线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/llama_mistral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Llama/Mistral 指南
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    核心能力
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            核心能力
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/megatron/core/MSC_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MSC 集成
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/megatron/core/README_STRAGGLER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Straggler 检测
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/megatron/core/transformer/moe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MoE 架构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/megatron/core/optimizer/cpu_offloading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    优化器 CPU Offload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/megatron/core/models/mimo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MIMO 模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/megatron/core/distributed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式 FSDP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/megatron/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    核心概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API 指南
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            API 指南
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    导航
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transformer 主体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/tensor_parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    张量并行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/pipeline_parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    流水线并行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/context_parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Context Parallel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/moe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MoE 系统
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/multi_latent_attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multi-Latent Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/multi_token_prediction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多 Token 预测
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/dist_optimizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式优化器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/custom_fsdp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    自定义 FSDP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/dist_checkpointing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    检查点策略
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/tokenizers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分词体系
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_5" id="__nav_1_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    示例与工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5">
+            <span class="md-nav__icon md-icon"></span>
+            示例与工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/user-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    示例导航
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/examples/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    模型导出
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/examples/inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    推理实践
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/examples/multimodal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多模态示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/tools/retro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retro 工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/tools/retro/build_db/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retro 数据库构建
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/tools/retro/sft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retro 微调
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_6" id="__nav_1_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    进一步阅读
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            进一步阅读
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/models.bert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 参考：BERT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/models.gpt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 参考：GPT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/models.t5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 参考：T5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/optimizer_param_scheduler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    优化器调度
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/optimizer_cpu_offload/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CPU Offload 参考
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../megatron/docs/source/api-guide/distributed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    自定义分布式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    TransformerEngine
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            TransformerEngine
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    概览
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    安装指南
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    调试工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            调试工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    目录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/debug/1_getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    快速入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/debug/2_config_file_structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    配置结构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/debug/3_api_debug_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    初始化 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/debug/3_api_features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    功能列表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/debug/3_api_te_calls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inspect API 调用
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/debug/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 索引
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/debug/4_distributed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式调试
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>..
+    Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.</p>
+<div class="highlight"><pre><span></span><code>See LICENSE for license information.
+</code></pre></div>
+<p>License</p>
+<h1 id="transformer-engine">Transformer Engine 概览</h1>
+<p><code>快速上手 &lt;#examples&gt;</code><em>  <code>安装指南 &lt;#installation&gt;</code></em>  <code>用户手册 &lt;https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/index.html&gt;</code><em>  <code>示例 &lt;https://github.com/NVIDIA/TransformerEngine/tree/main/examples&gt;</code></em>  <code>FP8 收敛性 &lt;#fp8-convergence&gt;</code><em>  <code>集成方案 &lt;#integrations&gt;</code></em>  <code>发行说明 &lt;https://docs.nvidia.com/deeplearning/transformer-engine/documentation-archive.html&gt;</code>_</p>
+<h1 id="_1">最新动态</h1>
+<ul>
+<li>[09/2025] <code>使用 NVFP4 预训练大型语言模型 &lt;https://www.arxiv.org/pdf/2509.25149&gt;</code>_</li>
+<li>[09/2025] <code>Ling 2.0 原生 FP8 混合精度训练已开源 &lt;https://huggingface.co/blog/im0qianqian/ling-mini-2-fp8-mixed-precision-training-solution&gt;</code>_</li>
+<li>[09/2025] <code>借助 NVIDIA NeMo 以 FP8 精度提升训练吞吐 &lt;https://developer.nvidia.com/blog/faster-training-throughput-in-fp8-precision-with-nvidia-nemo/&gt;</code>_</li>
+<li>[08/2025] <code>DeepL 如何以 FP8 打造下一代可训练与推理的 LLM &lt;https://www.deepl.com/en/blog/tech/next-generation-llm-fp8-training&gt;</code>_</li>
+<li>[08/2025] <code>NVFP4：兼具 16 位精度与 4 位速度与效率 &lt;https://developer.nvidia.com/blog/nvfp4-trains-with-precision-of-16-bit-and-speed-and-efficiency-of-4-bit/&gt;</code>_</li>
+<li>[06/2025] <code>浮点 8：高效低精度 AI 训练入门 &lt;https://developer.nvidia.com/blog/floating-point-8-an-introduction-to-efficient-lower-precision-ai-training/&gt;</code>_</li>
+<li>[05/2025] <code>在 NVIDIA Grace Hopper 上训练 LLM 的高级优化策略 &lt;https://developer.nvidia.com/blog/advanced-optimization-strategies-for-llm-training-on-nvidia-grace-hopper/&gt;</code>_</li>
+<li>[03/2025] <code>稳定且可扩展的 FP8 深度学习训练（Blackwell  GTC 2025） &lt;https://www.nvidia.com/en-us/on-demand/session/gtc25-s72778/&gt;</code>_</li>
+<li>[03/2025] <code>借助 NVIDIA DGX Cloud 基准测试衡量与提升 AI 工作负载性能 &lt;https://developer.nvidia.com/blog/measure-and-improve-ai-workload-performance-with-nvidia-dgx-cloud-benchmarking/&gt;</code>_</li>
+</ul>
+<p><img alt="NVIDIA DGX Cloud Benchmarking Performance Explorer 中 FP8 与 BF16 训练对比" src="docs/examples/comparison-fp8-bf16-training-nvidia-dgx-cloud-benchmarking-performance-explorer.jpg" /></p>
+<ul>
+<li>[02/2025] <code>借助 Evo 2 在新尺度理解生命分子的语言 &lt;https://developer.nvidia.com/blog/understanding-the-language-of-lifes-biomolecules-across-evolution-at-a-new-scale-with-evo-2/&gt;</code>_</li>
+<li>[02/2025] <code>NVIDIA DGX Cloud 推出开箱即用的基准模板 &lt;https://developer.nvidia.com/blog/nvidia-dgx-cloud-introduces-ready-to-use-templates-to-benchmark-ai-platform-performance/&gt;</code>_</li>
+<li>[01/2025] <code>联合 iGenius 与 NVIDIA DGX Cloud 为主权 AI 与受监管行业持续预训练 SOTA LLM &lt;https://developer.nvidia.com/blog/continued-pretraining-of-state-of-the-art-llms-for-sovereign-ai-and-regulated-industries-with-igenius-and-nvidia-dgx-cloud/&gt;</code>_</li>
+</ul>
+<p><code>历史动态 &lt;#previous-news&gt;</code>_</p>
+<h1 id="transformer-engine_1">什么是 Transformer Engine？</h1>
+<p>.. overview-begin-marker-do-not-remove</p>
+<p>Transformer Engine（简称 TE）是面向 NVIDIA GPU 的 Transformer 加速库，支持在 Hopper、Ada 与 Blackwell GPU 上使用 8 位浮点（FP8）精度，以在训练与推理中提供更高性能与更低内存占用。TE 提供针对主流 Transformer 架构高度优化的构建模块，以及类似自动混合精度的 API，可无缝融入各框架的代码。同时还包含与框架无关的 C++ API，便于其他深度学习库集成 FP8 支持。</p>
+<p>随着 Transformer 参数规模持续增长，BERT、GPT、T5 等架构在训练与推理阶段对显存与算力的需求也与日俱增。多数深度学习框架默认使用 FP32 训练，但在许多模型中，为获得完整精度并非必须。混合精度训练将单精度（FP32）与更低精度（如 FP16）结合，可在几乎不损失精度的情况下显著提升速度。Hopper GPU 架构引入了 FP8 精度，较 FP16 进一步提升性能且不降低准确性。不过，目前主流框架尚未原生支持 FP8。</p>
+<p>TE 通过提供可与主流大语言模型（LLM）库集成的 API 来解决 FP8 支持问题。它既包含可快速构建 Transformer 层的 Python 模块，也提供框架无关的 C++ 库（包含 FP8 所需的结构体与算子）。TE 模块会在内部维护缩放因子等 FP8 训练所需参数，从而大幅简化混合精度训练流程。</p>
+<h1 id="_2">亮点</h1>
+<ul>
+<li>提供便捷的 Transformer 层模块，并内置 FP8 支持</li>
+<li>针对 Transformer 模型的多种优化（如融合算子）</li>
+<li>支持在 NVIDIA Hopper、Ada、Blackwell GPU 上使用 FP8</li>
+<li>覆盖 NVIDIA Ampere 及更新架构上的各种精度优化（FP16、BF16 等）</li>
+</ul>
+<h1 id="_3">示例</h1>
+<h4 id="pytorch">PyTorch</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>
+</code></pre></div>
+<p>import torch
+  import transformer_engine.pytorch as te
+  from transformer_engine.common import recipe</p>
+<p># 设置维度
+  in_features = 768
+  out_features = 3072
+  hidden_size = 2048</p>
+<p># 初始化模型与输入
+  model = te.Linear(in_features, out_features, bias=True)
+  inp = torch.randn(hidden_size, in_features, device="cuda")</p>
+<p># 创建 FP8 配方（所有参数均为可选）
+  fp8_recipe = recipe.DelayedScaling(margin=0, fp8_format=recipe.Format.E4M3)</p>
+<p># 在前向传播中启用自动混合精度
+  with te.autocast(enabled=True, recipe=fp8_recipe):
+      out = model(inp)</p>
+<p>loss = out.sum()
+  loss.backward()</p>
+<h4 id="jax">JAX</h4>
+<h3 id="flax">Flax</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>
+</code></pre></div>
+<p>import flax
+  import jax
+  import jax.numpy as jnp
+  import transformer_engine.jax as te
+  import transformer_engine.jax.flax as te_flax
+  from transformer_engine.common import recipe</p>
+<p>BATCH = 32
+  SEQLEN = 128
+  HIDDEN = 1024</p>
+<p># 初始化随机数与输入
+  rng = jax.random.PRNGKey(0)
+  init_rng, data_rng = jax.random.split(rng)
+  inp = jax.random.normal(data_rng, [BATCH, SEQLEN, HIDDEN], jnp.float32)</p>
+<p># 创建 FP8 配方（所有参数均为可选）
+  fp8_recipe = recipe.DelayedScaling(margin=0, fp8_format=recipe.Format.HYBRID)</p>
+<p># 在前向传播中启用自动混合精度
+  with te.autocast(enabled=True, recipe=fp8_recipe):
+      model = te_flax.DenseGeneral(features=HIDDEN)</p>
+<div class="highlight"><pre><span></span><code>  def loss_fn(params, other_vars, inp):
+    out = model.apply({&#39;params&#39;:params, **other_vars}, inp)
+    return jnp.mean(out)
+
+  # 初始化模型
+  variables = model.init(init_rng, inp)
+  other_variables, params = flax.core.pop(variables, &#39;params&#39;)
+
+  # 构建前向与反向函数
+  fwd_bwd_fn = jax.value_and_grad(loss_fn, argnums=(0, 1))
+
+  for _ in range(10):
+    loss, (param_grads, other_grads) = fwd_bwd_fn(params, other_variables, inp)
+</code></pre></div>
+<p>完整教程请参阅 <code>快速上手 Notebook &lt;https://github.com/NVIDIA/TransformerEngine/blob/main/docs/examples/quickstart.ipynb&gt;</code>_。</p>
+<p>.. overview-end-marker-do-not-remove</p>
+<h1 id="_4">安装指南</h1>
+<h4 id="_5">系统要求</h4>
+<ul>
+<li>
+<p><strong>硬件：</strong> Blackwell、Hopper、Grace Hopper/Blackwell、Ada、Ampere</p>
+</li>
+<li>
+<p><strong>操作系统：</strong> Linux（官方支持）、WSL2（有限支持）</p>
+</li>
+<li>
+<p><strong>软件：</strong></p>
+</li>
+<li>
+<p>CUDA：12.1+（Hopper/Ada/Ampere），12.8+（Blackwell），需配套兼容的 NVIDIA 驱动</p>
+</li>
+<li>cuDNN：9.3+</li>
+<li>编译器：支持 C++17 的 GCC 9+ 或 Clang 10+</li>
+<li>
+<p>Python：推荐 3.12</p>
+</li>
+<li>
+<p><strong>源码编译额外需求：</strong> CMake 3.18+、Ninja、Git 2.17+、pybind11 2.6.0+</p>
+</li>
+<li>
+<p><strong>注意事项：</strong> FP8 功能需要计算能力 8.9+（Ada/Hopper/Blackwell）</p>
+</li>
+</ul>
+<h4 id="_6">安装方式</h4>
+<h4 id="docker">Docker（推荐）</h4>
+<p>最快的入门方式是使用 <code>NVIDIA GPU Cloud (NGC) Catalog &lt;https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch&gt;</code>_ 中的 Docker 映像。</p>
+<p>示例：交互式拉起 NGC PyTorch 容器</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>nvcr.io/nvidia/pytorch:25.08-py3
+</code></pre></div>
+<p>示例：交互式拉起 NGC JAX 容器</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>nvcr.io/nvidia/jax:25.08-py3
+</code></pre></div>
+<p>其中 25.08 表示 2025 年 8 月发布的容器版本。</p>
+<p><strong>使用 NGC 容器的优势：</strong></p>
+<ul>
+<li>预装所有依赖并经过优化配置</li>
+<li>NGC PyTorch 23.08+ 容器内置 FlashAttention-2</li>
+</ul>
+<h4 id="pip">pip 安装</h4>
+<p><strong>pip 安装前置条件：</strong></p>
+<ul>
+<li>兼容的 C++ 编译器</li>
+<li>安装了 cuDNN 与 NVCC 的 CUDA Toolkit</li>
+</ul>
+<p>安装最新稳定版：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 集成 PyTorch</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>pip<span class="w"> </span>install<span class="w"> </span>--no-build-isolation<span class="w"> </span>transformer_engine<span class="o">[</span>pytorch<span class="o">]</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 集成 JAX</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>pip<span class="w"> </span>install<span class="w"> </span>--no-build-isolation<span class="w"> </span>transformer_engine<span class="o">[</span>jax<span class="o">]</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># 同时支持 PyTorch 与 JAX</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>pip<span class="w"> </span>install<span class="w"> </span>--no-build-isolation<span class="w"> </span>transformer_engine<span class="o">[</span>pytorch,jax<span class="o">]</span>
+</code></pre></div>
+<p>也可直接从 GitHub 仓库安装：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--no-build-isolation<span class="w"> </span>git+https://github.com/NVIDIA/TransformerEngine.git@stable
+</code></pre></div>
+<p>从 GitHub 安装时，可通过环境变量显式指定要构建的框架：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">NVTE_FRAMEWORK</span><span class="o">=</span>pytorch,jax<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-build-isolation<span class="w"> </span>git+https://github.com/NVIDIA/TransformerEngine.git@stable
+</code></pre></div>
+<h4 id="conda">conda 安装</h4>
+<p>使用 conda-forge 获取最新稳定版：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 集成 PyTorch</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>transformer-engine-torch
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># JAX 集成（即将上线）</span>
+</code></pre></div>
+<h4 id="_7">源码安装</h4>
+<p><code>参见安装指南 &lt;https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/installation.html#installation-from-source&gt;</code>_</p>
+<h4 id="_8">环境变量</h4>
+<p>安装前可设置以下环境变量自定义构建流程：</p>
+<ul>
+<li><strong>CUDA_PATH</strong>：CUDA 安装路径</li>
+<li><strong>CUDNN_PATH</strong>：cuDNN 安装路径</li>
+<li><strong>CXX</strong>：C++ 编译器路径</li>
+<li><strong>NVTE_FRAMEWORK</strong>：构建框架列表，逗号分隔（如 <code>pytorch,jax</code>）</li>
+<li><strong>MAX_JOBS</strong>：限制并行构建任务数量（默认值依系统而定）</li>
+<li><strong>NVTE_BUILD_THREADS_PER_JOB</strong>：控制每个任务使用的线程数</li>
+</ul>
+<h4 id="flashattention">编译 FlashAttention</h4>
+<p>Transformer Engine 在 PyTorch 中支持 FlashAttention-2 与 FlashAttention-3，以获得更高性能。自 v1.11 起新增了 FlashAttention-3，当环境同时存在两个版本时会优先使用 FlashAttention-3。</p>
+<p>可通过以下环境变量检查当前使用的 FlashAttention 版本：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">NVTE_DEBUG</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">NVTE_DEBUG_LEVEL</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>python<span class="w"> </span>your_script.py
+</code></pre></div>
+<p>已知问题：FlashAttention-2 编译过程占用内存较大（参见 <code>相关 issue &lt;https://github.com/Dao-AILab/flash-attention/issues/358&gt;</code>_），可能导致安装 Transformer Engine 时内存不足。可尝试设置 <strong>MAX_JOBS=1</strong> 来规避。</p>
+<p>.. troubleshooting-begin-marker-do-not-remove</p>
+<h4 id="_9">故障排查</h4>
+<p><strong>常见问题与解决方案：</strong></p>
+<ol>
+<li>
+<p><strong>ABI 兼容性问题</strong></p>
+</li>
+<li>
+<p><strong>现象：</strong> 导入 transformer_engine 时出现 <code>ImportError</code>，提示未定义符号</p>
+</li>
+<li><strong>解决方法：</strong> 确认 PyTorch 与 Transformer Engine 使用相同的 C++ ABI 设置。必要时从源码重新编译 PyTorch。</li>
+<li>
+<p><strong>补充说明：</strong> 若 PyTorch 的 C++ ABI 与系统默认不一致（在容器外使用 pip 安装的 PyTorch 时常见），则容易出现此类错误。</p>
+</li>
+<li>
+<p><strong>缺少头文件或库</strong></p>
+</li>
+<li>
+<p><strong>现象：</strong> CMake 报错找不到头文件（如 <code>cudnn.h</code>、<code>cublas_v2.h</code>、<code>filesystem</code> 等）</p>
+</li>
+<li><strong>解决方法：</strong> 安装缺失的开发包或通过环境变量指定路径：</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="w">     </span><span class="nb">export</span><span class="w"> </span><span class="nv">CUDA_PATH</span><span class="o">=</span>/path/to/cuda
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">     </span><span class="nb">export</span><span class="w"> </span><span class="nv">CUDNN_PATH</span><span class="o">=</span>/path/to/cudnn
+</code></pre></div>
+<ul>
+<li>若 CMake 无法找到 C++ 编译器，可设置 <code>CXX</code> 环境变量。</li>
+<li>
+<p>安装前请确认上述路径已正确配置。</p>
+</li>
+<li>
+<p><strong>构建资源问题</strong></p>
+</li>
+<li>
+<p><strong>现象：</strong> 编译卡住、系统假死或内存不足</p>
+</li>
+<li><strong>解决方法：</strong> 限制并行度：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="w">     </span><span class="nv">MAX_JOBS</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">NVTE_BUILD_THREADS_PER_JOB</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>...
+</code></pre></div>
+<ol>
+<li>
+<p><strong>需要详细的构建日志</strong></p>
+</li>
+<li>
+<p><strong>方法：</strong></p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="w">     </span><span class="nb">cd</span><span class="w"> </span>transformer_engine
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">     </span>pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-v<span class="w"> </span>-v<span class="w"> </span>--no-build-isolation<span class="w"> </span>.
+</code></pre></div>
+<p>.. troubleshooting-end-marker-do-not-remove</p>
+<h1 id="_10">破坏性更新</h1>
+<h4 id="v17pytorch-padding-mask">v1.7：PyTorch 的 padding mask 定义变更</h4>
+<p>为统一 Transformer Engine 中三个框架的注意力掩码定义，我们将 PyTorch 实现中的 padding mask 含义改为：<code>True</code> 表示屏蔽对应位置，<code>False</code> 表示参与注意力计算。自 v1.7 起，所有类型的注意力掩码均遵循相同定义。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>  # v1.6 及之前
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  [True,  True,  True, False, False,
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>   True,  True, False, False, False,
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>   True,  True,  True,  True, False]
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>  # v1.7 及之后
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>  [False, False, False,  True,  True,
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>   False, False,  True,  True,  True,
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>   False, False, False, False,  True]
+</code></pre></div>
+<h1 id="fp8">FP8 收敛性</h1>
+<p>我们在多种模型架构与配置上对 FP8 进行了广泛验证，<strong>训练损失曲线与 BF16 几乎没有差异</strong>。FP8 同样已在下游 LLM 任务（如 LAMBADA、WikiText）上验证其精度。以下列举部分跨框架验证过收敛性的模型。</p>
+<p>+------------+------------------+---------------------------------------------------------------------------------------------------------+
+ 模型        框架              来源                                                                                                  <br />
++============+==================+=========================================================================================================+
+ T5-770M      JAX/T5x          https://github.com/NVIDIA/JAX-Toolbox/tree/main/rosetta/rosetta/projects/t5x#convergence-and-performance
++------------+------------------+---------------------------------------------------------------------------------------------------------+
+ MPT-1.3B     Mosaic Composer  https://www.mosaicml.com/blog/coreweave-nvidia-h100-part-1                                            <br />
++------------+------------------+---------------------------------------------------------------------------------------------------------+
+ GPT-5B       JAX/Paxml        https://github.com/NVIDIA/JAX-Toolbox/tree/main/rosetta/rosetta/projects/pax#h100-results             <br />
++------------+------------------+---------------------------------------------------------------------------------------------------------+
+ GPT-5B       NeMo Framework   可按需提供                                                                                            <br />
++------------+------------------+---------------------------------------------------------------------------------------------------------+
+ LLama2-7B    Alibaba Pai      https://mp.weixin.qq.com/s/NQT0uKXLbXyh5031zBdeBQ                                                     <br />
++------------+------------------+---------------------------------------------------------------------------------------------------------+
+ T5-11B       JAX/T5x          可按需提供                                                                                            <br />
++------------+------------------+---------------------------------------------------------------------------------------------------------+
+ MPT-13B      Mosaic Composer  https://www.databricks.com/blog/turbocharged-training-optimizing-databricks-mosaic-ai-stack-fp8       <br />
++------------+------------------+---------------------------------------------------------------------------------------------------------+
+ GPT-22B      NeMo Framework   可按需提供                                                                                            <br />
++------------+------------------+---------------------------------------------------------------------------------------------------------+
+ LLama2-70B   Alibaba Pai      https://mp.weixin.qq.com/s/NQT0uKXLbXyh5031zBdeBQ                                                     <br />
++------------+------------------+---------------------------------------------------------------------------------------------------------+
+ GPT-175B     JAX/Paxml        https://github.com/NVIDIA/JAX-Toolbox/tree/main/rosetta/rosetta/projects/pax#h100-results               |
++------------+------------------+---------------------------------------------------------------------------------------------------------+</p>
+<h1 id="_11">集成方案</h1>
+<p>Transformer Engine 已集成至多款热门 LLM 框架：</p>
+<ul>
+<li><code>DeepSpeed &lt;https://github.com/deepspeedai/DeepSpeed/blob/master/tests/unit/runtime/half_precision/test_fp8.py&gt;</code>_</li>
+<li><code>Hugging Face Accelerate &lt;https://huggingface.co/docs/accelerate/main/en/usage_guides/low_precision_training#configuring-transformersengine&gt;</code>_</li>
+<li><code>Lightning &lt;https://github.com/Lightning-AI/lightning/issues/17172&gt;</code>_</li>
+<li><code>MosaicML Composer &lt;https://github.com/mosaicml/composer/releases/tag/v0.13.1&gt;</code>_</li>
+<li><code>NVIDIA JAX Toolbox &lt;https://github.com/NVIDIA/JAX-Toolbox&gt;</code>_</li>
+<li><code>NVIDIA Megatron-LM &lt;https://github.com/NVIDIA/Megatron-LM&gt;</code>_</li>
+<li><code>NVIDIA NeMo Framework &lt;https://github.com/NVIDIA/NeMo-Megatron-Launcher&gt;</code>_</li>
+<li><code>Amazon SageMaker Model Parallel Library &lt;https://docs.aws.amazon.com/sagemaker/latest/dg/model-parallel-core-features-v2-tensor-parallelism.html&gt;</code>_</li>
+<li><code>Levanter &lt;https://github.com/stanford-crfm/levanter&gt;</code>_</li>
+<li><code>GPT-NeoX &lt;https://github.com/EleutherAI/gpt-neox&gt;</code>_</li>
+<li><code>Hugging Face Nanotron &lt;https://github.com/huggingface/nanotron&gt;</code>_ —— 即将上线！</li>
+<li><code>Colossal-AI &lt;https://github.com/hpcaitech/ColossalAI&gt;</code>_ —— 即将上线！</li>
+<li><code>PeriFlow &lt;https://github.com/friendliai/periflow-python-sdk&gt;</code>_ —— 即将上线！</li>
+</ul>
+<h1 id="_12">参与贡献</h1>
+<p>我们欢迎社区共同完善 Transformer Engine！如需提交贡献与 Pull Request，请遵循 <code>&lt;CONTRIBUTING.rst&gt;</code>_ 指南。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
