@@ -1786,6 +1786,74 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    NCCL
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            NCCL
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nccl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1845,6 +1913,8 @@
 <li>[01/2025] <a href="https://developer.nvidia.com/blog/continued-pretraining-of-state-of-the-art-llms-for-sovereign-ai-and-regulated-industries-with-igenius-and-nvidia-dgx-cloud/">联合 iGenius 与 NVIDIA DGX Cloud 为主权 AI 与受监管行业持续预训练 SOTA LLM</a></li>
 </ul>
 <p><a href="#previous-news">历史动态</a></p>
+<h2 id="previous-news">历史动态</h2>
+<p>更早的里程碑请参阅 <a href="https://docs.nvidia.com/deeplearning/transformer-engine/documentation-archive.html">NVIDIA 文档归档</a> 与 <a href="https://developer.nvidia.com/blog/tag/transformer-engine/">官方博客</a>。</p>
 <h1 id="transformer-engine_1">什么是 Transformer Engine？</h1>
 <!-- overview-begin-marker-do-not-remove -->
 
@@ -1858,7 +1928,7 @@
 <li>支持在 NVIDIA Hopper、Ada、Blackwell GPU 上使用 FP8</li>
 <li>覆盖 NVIDIA Ampere 及更新架构上的各种精度优化（FP16、BF16 等）</li>
 </ul>
-<h1 id="_3">示例</h1>
+<h1 id="examples">示例</h1>
 <h4 id="pytorch">PyTorch</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>
 </code></pre></div>
@@ -1918,8 +1988,8 @@
 <p>完整教程请参阅 <a href="https://github.com/NVIDIA/TransformerEngine/blob/main/docs/examples/quickstart.ipynb">快速上手 Notebook</a>。</p>
 <!-- overview-end-marker-do-not-remove -->
 
-<h1 id="_4">安装指南</h1>
-<h4 id="_5">系统要求</h4>
+<h1 id="installation">安装指南</h1>
+<h4 id="_3">系统要求</h4>
 <ul>
 <li>
 <p><strong>硬件：</strong> Blackwell、Hopper、Grace Hopper/Blackwell、Ada、Ampere</p>
@@ -1945,7 +2015,7 @@
 <p><strong>注意事项：</strong> FP8 功能需要计算能力 8.9+（Ada/Hopper/Blackwell）</p>
 </li>
 </ul>
-<h4 id="_6">安装方式</h4>
+<h4 id="_4">安装方式</h4>
 <h4 id="docker">Docker（推荐）</h4>
 <p>最快的入门方式是使用 <a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch">NVIDIA GPU Cloud (NGC) Catalog</a> 中的 Docker 映像。</p>
 <p>示例：交互式拉起 NGC PyTorch 容器</p>
@@ -1989,9 +2059,9 @@
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># JAX 集成（即将上线）</span>
 </code></pre></div>
-<h4 id="_7">源码安装</h4>
+<h4 id="_5">源码安装</h4>
 <p><a href="https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/installation.html#installation-from-source">参见安装指南</a></p>
-<h4 id="_8">环境变量</h4>
+<h4 id="_6">环境变量</h4>
 <p>安装前可设置以下环境变量自定义构建流程：</p>
 <ul>
 <li><strong>CUDA_PATH</strong>：CUDA 安装路径</li>
@@ -2009,7 +2079,7 @@
 <p>已知问题：FlashAttention-2 编译过程占用内存较大（参见 <a href="https://github.com/Dao-AILab/flash-attention/issues/358">相关 issue</a>），可能导致安装 Transformer Engine 时内存不足。可尝试设置 <strong>MAX_JOBS=1</strong> 来规避。</p>
 <!-- troubleshooting-begin-marker-do-not-remove -->
 
-<h4 id="_9">故障排查</h4>
+<h4 id="_7">故障排查</h4>
 <p><strong>常见问题与解决方案：</strong></p>
 <ol>
 <li>
@@ -2061,7 +2131,7 @@
 </code></pre></div>
 <!-- troubleshooting-end-marker-do-not-remove -->
 
-<h1 id="_10">破坏性更新</h1>
+<h1 id="_8">破坏性更新</h1>
 <h4 id="v17pytorch-padding-mask">v1.7：PyTorch 的 padding mask 定义变更</h4>
 <p>为统一 Transformer Engine 中三个框架的注意力掩码定义，我们将 PyTorch 实现中的 padding mask 含义改为：<code>True</code> 表示屏蔽对应位置，<code>False</code> 表示参与注意力计算。自 v1.7 起，所有类型的注意力掩码均遵循相同定义。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>  # v1.6 及之前
@@ -2073,7 +2143,7 @@
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>   False, False,  True,  True,  True,
 <a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>   False, False, False, False,  True]
 </code></pre></div>
-<h1 id="fp8">FP8 收敛性</h1>
+<h1 id="fp8-convergence">FP8 收敛性</h1>
 <p>我们在多种模型架构与配置上对 FP8 进行了广泛验证，<strong>训练损失曲线与 BF16 几乎没有差异</strong>。FP8 同样已在下游 LLM 任务（如 LAMBADA、WikiText）上验证其精度。以下列举部分跨框架验证过收敛性的模型。</p>
 <table>
 <thead>
@@ -2136,7 +2206,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="_11">集成方案</h1>
+<h1 id="integrations">集成方案</h1>
 <p>Transformer Engine 已集成至多款热门 LLM 框架：</p>
 <ul>
 <li><a href="https://github.com/deepspeedai/DeepSpeed/blob/master/tests/unit/runtime/half_precision/test_fp8.py">DeepSpeed</a></li>
@@ -2153,7 +2223,7 @@
 <li><a href="https://github.com/hpcaitech/ColossalAI">Colossal-AI</a> —— 即将上线！</li>
 <li><a href="https://github.com/friendliai/periflow-python-sdk">PeriFlow</a> —— 即将上线！</li>
 </ul>
-<h1 id="_12">参与贡献</h1>
+<h1 id="_9">参与贡献</h1>
 <p>我们欢迎社区共同完善 Transformer Engine！如需提交贡献与 Pull Request，请遵循 <a href="https://github.com/NVIDIA/TransformerEngine/blob/main/CONTRIBUTING.rst">贡献指南</a>。</p>
 
 
