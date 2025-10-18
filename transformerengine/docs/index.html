@@ -1625,6 +1625,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API 参考
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            API 参考
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    通用配方
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    框架专属 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/pytorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/jax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JAX API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1652,6 +1790,23 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      快速入口
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1666,54 +1821,30 @@
 
 
 
-<p>..
-    Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.</p>
-<div class="highlight"><pre><span></span><code>See LICENSE for license information.
-</code></pre></div>
-<h1 id="transformer-engine">Transformer Engine 文档</h1>
-<p>.. ifconfig:: "dev" in release</p>
 <blockquote>
-<p><strong>警告：</strong> 当前浏览的是开发者预览版文档。若需查看最新稳定版，请参阅：</p>
+<p>Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES.</p>
+<p>See LICENSE for license information.</p>
 </blockquote>
+<h1 id="transformer-engine">Transformer Engine 文档</h1>
+<div class="admonition warning">
+<p class="admonition-title">开发者预览</p>
+<p>当前页面对应开发分支内容。若需最新稳定版，请访问 <a href="https://docs.nvidia.com/deeplearning/transformer-engine/release-notes/index.html">发行说明</a> 与 <a href="https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/index.html">官方开发者指南</a>。</p>
+</div>
+<p>Transformer Engine（TE）是面向 NVIDIA GPU 的 Transformer 加速库，在 Hopper、Ada、Blackwell 等架构上提供 FP8 训练与推理支持。TE 既包含高性能的 Python 模块（PyTorch、JAX 等），也可通过通用 C++ API 集成至其他框架，并内置多种混合精度和调试工具。</p>
+<h2 id="_1">快速入口</h2>
 <ul>
-<li><code>发行说明 &lt;https://docs.nvidia.com/deeplearning/transformer-engine/release-notes/index.html&gt;</code>_</li>
-<li><code>开发者指南 &lt;https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/index.html&gt;</code>_（即本页的稳定版）</li>
+<li><a href="installation/">安装指南</a>：列出系统依赖、容器镜像以及 pip/源码安装方式。</li>
+<li><a href="faq/">常见问题</a>：解答 FP8 检查点兼容性等高频问题。</li>
+<li><a href="debug/">调试工具文档</a>：介绍 Precision Debug 的配置、特性与 API。</li>
+<li><a href="api/framework/">API 索引</a>：按框架整理 PyTorch、JAX 与通用配方模块。</li>
+<li>Jupyter 示例（位于 <code>docs/examples</code> 目录）：</li>
+<li><a href="examples/fp8_primer.ipynb">FP8 入门</a></li>
+<li><a href="examples/advanced_optimizations.ipynb">高级优化实践</a></li>
+<li><a href="examples/te_llama/tutorial_accelerate_hf_llama_with_te.ipynb">TE + Llama 推理加速</a></li>
+<li><a href="examples/te_gemma/tutorial_generation_gemma_with_te.ipynb">TE + Gemma 文本生成</a></li>
+<li><a href="examples/onnx/onnx_export.ipynb">ONNX 导出流程</a></li>
 </ul>
-<p>.. include:: ../README.rst
-   :start-after: overview-begin-marker-do-not-remove
-   :end-before: overview-end-marker-do-not-remove</p>
-<ul>
-<li>
-<p>主页 <self></p>
-</li>
-<li>
-<p>installation</p>
-</li>
-<li>examples/quickstart.ipynb</li>
-<li>
-<p>faq</p>
-</li>
-<li>
-<p>api/common</p>
-</li>
-<li>
-<p>api/framework</p>
-</li>
-<li>
-<p>examples/fp8_primer.ipynb</p>
-</li>
-<li>examples/advanced_optimizations.ipynb</li>
-<li>examples/te_llama/tutorial_accelerate_hf_llama_with_te.ipynb</li>
-<li>examples/te_gemma/tutorial_generation_gemma_with_te.ipynb</li>
-<li>
-<p>examples/onnx/onnx_export.ipynb</p>
-</li>
-<li>
-<p>api/c/index</p>
-</li>
-<li>debug</li>
-<li>examples/attention/attention.ipynb</li>
-</ul>
+<p>更多资源请参阅仓库根目录下的 <code>README.md</code>。</p>
 
 
 

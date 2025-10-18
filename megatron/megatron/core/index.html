@@ -63,6 +63,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#megatron-core" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -553,6 +558,21 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    核心概览
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -565,6 +585,34 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      快速上手
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1636,6 +1684,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API 参考
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            API 参考
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/api/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    通用配方
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    框架专属 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/api/pytorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../transformerengine/docs/api/jax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JAX API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1660,6 +1846,25 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      快速上手
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1675,49 +1880,41 @@
 
 
 
-  <h1>核心概览</h1>
-
 <h1 id="megatron-core">Megatron Core</h1>
 <p>面向生产的定制训练框架构建库</p>
-<h2 id="快速上手">快速上手</h2>
-
+<h2 id="_1">快速上手</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Install Megatron Core with required dependencies</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pip<span class="w"> </span>install<span class="w"> </span>--no-build-isolation<span class="w"> </span>megatron-core<span class="o">[</span>dev<span class="o">]</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Distributed training example (2 GPUs, mock data)</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>torchrun<span class="w"> </span>--nproc_per_node<span class="o">=</span><span class="m">2</span><span class="w"> </span>examples/run_simple_mcore_train_loop.py
 </code></pre></div>
-
-<h2 id="什么是-megatron-core">什么是 Megatron Core？</h2>
-
-**Megatron Core** 是基于 PyTorch 的开源库，聚合了 GPU 优化技术与系统级前沿优化，并封装为可组合、模块化的 API，帮助开发者与研究人员在 NVIDIA 加速计算基础设施上灵活地训练自定义 Transformer。
-
-<h2 id="核心组件">核心组件</h2>
-
-<h3 id="gpu-优化构建模块">GPU 优化构建模块</h3>
-- **Transformer 组件**：注意力机制、MLP、嵌入层
-- **内存管理**：激活重计算
-- **FP8 精度**：针对 NVIDIA Hopper、Ada、Blackwell GPU 优化
-
-<h3 id="并行策略">并行策略</h3>
-- **张量并行 (TP)**：按层拆分（结合序列并行可进一步降低激活内存）
-- **流水线并行 (PP)**：按深度拆分模型并流水化微批处理
-- **上下文并行 (CP)**：处理长序列（[文档](https://docs.nvidia.com/megatron-core/developer-guide/latest/api-guide/context_parallel.html)）
-- **专家并行 (EP)**：在多块 GPU 间拆分 MoE 模型的专家
-
-<h2 id="示例与文档">示例与文档</h2>
-
-**示例：**
-- **[Simple Training Loop](https://github.com/NVIDIA/Megatron-LM/blob/main/examples/run_simple_mcore_train_loop.py)** - 基本用法
-- **[Multimodal Training](https://github.com/NVIDIA/Megatron-LM/blob/main/examples/multimodal/)** - 视觉语言模型
-- **[Mixture-of-Experts](https://github.com/yanring/Megatron-MoE-ModelZoo)** - MoE 示例
-- **[Mamba Models](https://github.com/NVIDIA/Megatron-LM/blob/main/examples/mamba/)** - 状态空间模型
-
-**文档：**
-- **[API Guide](https://docs.nvidia.com/megatron-core/developer-guide/latest/api-guide/index.html)** - 完整 API 文档
-- **[Developer Guide](https://docs.nvidia.com/megatron-core/developer-guide/latest/index.html)** - 定制框架开发指南
-
-<hr>
+<h1 id="megatron-core_1">什么是 Megatron Core？</h1>
+<p><strong>Megatron Core</strong> 是基于 PyTorch 的开源库，聚合了 GPU 优化技术与系统级前沿优化，并封装为可组合、模块化的 API，帮助开发者与研究人员在 NVIDIA 加速计算基础设施上灵活地训练自定义 Transformer。</p>
+<h2 id="_2">核心组件</h2>
+<h3 id="gpu">GPU 优化构建模块</h3>
+<ul>
+<li><strong>Transformer 组件</strong>：注意力机制、MLP、嵌入层</li>
+<li><strong>内存管理</strong>：激活重计算</li>
+<li><strong>FP8 精度</strong>：针对 NVIDIA Hopper、Ada、Blackwell GPU 优化</li>
+</ul>
+<h3 id="_3">并行策略</h3>
+<ul>
+<li><strong>张量并行 (TP)</strong>：按层拆分（结合序列并行可进一步降低激活内存）</li>
+<li><strong>流水线并行 (PP)</strong>：按深度拆分模型并流水化微批处理</li>
+<li><strong>上下文并行 (CP)</strong>：处理长序列（<a href="https://docs.nvidia.com/megatron-core/developer-guide/latest/api-guide/context_parallel.html">文档</a>）</li>
+<li><strong>专家并行 (EP)</strong>：在多块 GPU 间拆分 MoE 模型的专家</li>
+</ul>
+<h2 id="_4">示例与文档</h2>
+<p><strong>示例：</strong>
+- <strong><a href="https://github.com/NVIDIA/Megatron-LM/blob/main/examples/run_simple_mcore_train_loop.py">Simple Training Loop</a></strong> - 基本用法
+- <strong><a href="https://github.com/NVIDIA/Megatron-LM/blob/main/examples/multimodal/">Multimodal Training</a></strong> - 视觉语言模型
+- <strong><a href="https://github.com/yanring/Megatron-MoE-ModelZoo">Mixture-of-Experts</a></strong> - MoE 示例
+- <strong><a href="https://github.com/NVIDIA/Megatron-LM/blob/main/examples/mamba/">Mamba Models</a></strong> - 状态空间模型</p>
+<p><strong>文档：</strong>
+- <strong><a href="https://docs.nvidia.com/megatron-core/developer-guide/latest/api-guide/index.html">API Guide</a></strong> - 完整 API 文档
+- <strong><a href="https://docs.nvidia.com/megatron-core/developer-guide/latest/index.html">Developer Guide</a></strong> - 定制框架开发指南</p>
+<hr />
 <p>完整安装说明、性能基准与生态介绍，请参阅<a href="../README.md">主仓库 README</a>。</p>
 
 

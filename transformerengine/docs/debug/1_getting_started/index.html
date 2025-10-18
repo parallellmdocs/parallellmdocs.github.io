@@ -1720,6 +1720,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API 参考
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            API 参考
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    通用配方
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    框架专属 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/pytorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/jax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JAX API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1814,15 +1952,15 @@
 
 
 
-<p>..
-    Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.</p>
-<div class="highlight"><pre><span></span><code>See LICENSE for license information.
-</code></pre></div>
+<blockquote>
+<p>Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES.</p>
+<p>See LICENSE for license information.</p>
+</blockquote>
 <h1 id="_1">快速入门</h1>
-<p>.. note</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>
-</code></pre></div>
-<p>目前借助 <code>Nvidia-DL-Framework-Inspect &lt;https://github.com/NVIDIA/nvidia-dlfw-inspect&gt;</code>_ 的 Precision Debug 工具仅支持 Transformer Engine 的 PyTorch 接口。</p>
+<div class="admonition note">
+<p class="admonition-title">工具支持范围</p>
+<p>目前借助 <a href="https://github.com/NVIDIA/nvidia-dlfw-inspect">Nvidia-DL-Framework-Inspect</a> 的 Precision Debug 工具仅支持 Transformer Engine 的 PyTorch 接口。</p>
+</div>
 <p>Transformer Engine 提供了一组精度调试工具，可帮助你：</p>
 <ul>
 <li>记录每个矩阵乘（GEMM）算子中各张量的统计量；</li>
@@ -1834,49 +1972,49 @@
 <p>要启用 Transformer Engine 的调试功能，需要完成以下四步：</p>
 <ol>
 <li>编写配置 YAML 文件，声明要启用的功能。</li>
-<li>导入、初始化并安装 <code>Nvidia-DL-Framework-Inspect &lt;https://github.com/NVIDIA/nvidia-dlfw-inspect&gt;</code>_ 工具。</li>
+<li>导入、初始化并安装 <a href="https://github.com/NVIDIA/nvidia-dlfw-inspect">Nvidia-DL-Framework-Inspect</a> 工具。</li>
 <li>在创建 TE 层时，可以传入 <code>name="..."</code> 便于识别层名；若未指定，将自动推断。</li>
 <li>在一次前向-反向流程结束时调用 <code>debug_api.step()</code>。</li>
 </ol>
 <p>调试的第一步是创建配置 YAML 文件，用于声明各层启用的功能。功能分为两类：</p>
 <ul>
-<li>Transformer Engine 内置功能，例如 DisableFP8GEMM、LogTensorStats，详见 :doc:<code>调试功能 API &lt;3_api_features&gt;</code>。</li>
-<li>用户自定义功能。关于如何编写自定义功能，请参考 :doc:<code>Nvidia-DL-Framework-Inspect 调用说明 &lt;3_api_te_calls&gt;</code>。</li>
+<li>Transformer Engine 内置功能，例如 DisableFP8GEMM、LogTensorStats，详见 <a href="../3_api_features/">调试功能 API</a>。</li>
+<li>用户自定义功能。关于如何编写自定义功能，请参考 <a href="../3_api_te_calls/">Nvidia-DL-Framework-Inspect 调用说明</a>。</li>
 </ul>
 <p><img alt="" src="./img/introduction.svg" /></p>
 <p>图 1：Nvidia-DL-Framework-Inspect 对含 3 个 TE Linear 层的训练脚本进行拦截示例。<code>config.yaml</code> 为每个 Linear 层声明要启用的功能。部分功能类由 TE 提供，<code>UserProvidedPrecision</code> 则是用户自定义功能。Nvidia-DL-Framework-Inspect 会按配置将功能注入至对应层。</p>
 <h2 id="_2">示例训练脚本</h2>
 <p>以下展示如何使用 Transformer Engine 以 FP8 精度训练一个 Transformer 层，包括设置层、定义优化器以及使用合成数据运行若干训练迭代。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># train.py</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">transformer_engine.pytorch</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransformerLayer</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch.optim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">optim</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">transformer_engine.pytorch</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">te</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">512</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">num_attention_heads</span> <span class="o">=</span> <span class="mi">8</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">transformer_layer</span> <span class="o">=</span> <span class="n">TransformerLayer</span><span class="p">(</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="n">ffn_hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="n">num_attention_heads</span><span class="o">=</span><span class="n">num_attention_heads</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">dummy_input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">transformer_layer</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">dummy_target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="n">transformer_layer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    <span class="k">with</span> <span class="n">te</span><span class="o">.</span><span class="n">autocast</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>        <span class="n">output</span> <span class="o">=</span> <span class="n">transformer_layer</span><span class="p">(</span><span class="n">dummy_input</span><span class="p">)</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>    <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">dummy_target</span><span class="p">)</span>
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># train.py</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">transformer_engine.pytorch</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransformerLayer</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch.optim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">optim</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">transformer_engine.pytorch</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">te</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">512</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">num_attention_heads</span> <span class="o">=</span> <span class="mi">8</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">transformer_layer</span> <span class="o">=</span> <span class="n">TransformerLayer</span><span class="p">(</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">ffn_hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">num_attention_heads</span><span class="o">=</span><span class="n">num_attention_heads</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="n">dummy_input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">transformer_layer</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="n">dummy_target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">transformer_layer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="k">with</span> <span class="n">te</span><span class="o">.</span><span class="n">autocast</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="n">output</span> <span class="o">=</span> <span class="n">transformer_layer</span><span class="p">(</span><span class="n">dummy_input</span><span class="p">)</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">dummy_target</span><span class="p">)</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 </code></pre></div>
 <p>我们将在上述脚本中展示两个调试功能：</p>
 <ol>
@@ -1885,56 +2023,56 @@
 </ol>
 <h2 id="_3">配置文件</h2>
 <p>准备如下配置 YAML 文件：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># config.yaml</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">fc1_fprop_to_fp8</span><span class="p">:</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">layers</span><span class="p">:</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">layer_types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">fc1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">fc2</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># 名称包含 fc1 或 fc2</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">transformer_engine</span><span class="p">:</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">DisableFP8GEMM</span><span class="p">:</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">      </span><span class="nt">gemms</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">fprop</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="nt">log_tensor_stats</span><span class="p">:</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">  </span><span class="nt">layers</span><span class="p">:</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="nt">layer_types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">layernorm_linear</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># 名称包含 layernorm_linear</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">  </span><span class="nt">transformer_engine</span><span class="p">:</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="nt">LogTensorStats</span><span class="p">:</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">      </span><span class="nt">stats</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">max</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">min</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">mean</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">std</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">l1_norm</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">      </span><span class="nt">tensors</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">activation</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">      </span><span class="nt">freq</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">      </span><span class="nt">start_step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">      </span><span class="nt">end_step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># config.yaml</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">fc1_fprop_to_fp8</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">layers</span><span class="p">:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">layer_types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">fc1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">fc2</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># 名称包含 fc1 或 fc2</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">transformer_engine</span><span class="p">:</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">DisableFP8GEMM</span><span class="p">:</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">      </span><span class="nt">gemms</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">fprop</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nt">log_tensor_stats</span><span class="p">:</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span><span class="nt">layers</span><span class="p">:</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nt">layer_types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">layernorm_linear</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># 名称包含 layernorm_linear</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span><span class="nt">transformer_engine</span><span class="p">:</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="nt">LogTensorStats</span><span class="p">:</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="nt">stats</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">max</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">min</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">mean</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">std</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">l1_norm</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">      </span><span class="nt">tensors</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">activation</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">      </span><span class="nt">freq</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">      </span><span class="nt">start_step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">      </span><span class="nt">end_step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 </code></pre></div>
-<p>关于配置文件的更多说明，请参阅 :doc:<code>下一节 &lt;2_config_file_structure&gt;</code>。</p>
+<p>关于配置文件的更多说明，请参阅 <a href="../2_config_file_structure/">下一节</a>。</p>
 <h2 id="python">调整 Python 脚本</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># (...)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nvdlfw_inspect.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">debug_api</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">debug_api</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">config_file</span><span class="o">=</span><span class="s2">&quot;./config.yaml&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">feature_dirs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/path/to/transformer_engine/debug/features&quot;</span><span class="p">],</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">log_dir</span><span class="o">=</span><span class="s2">&quot;./log&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">default_logging_enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># 初始化带名称的 TransformerLayer</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">transformer_layer</span> <span class="o">=</span> <span class="n">TransformerLayer</span><span class="p">(</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>  <span class="n">name</span><span class="o">=</span><span class="s2">&quot;transformer_layer&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>  <span class="c1"># ...)</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1"># (...)</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>  <span class="c1"># 前向与反向</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>  <span class="c1"># ...</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>  <span class="n">debug_api</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># (...)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nvdlfw_inspect.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">debug_api</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">debug_api</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">config_file</span><span class="o">=</span><span class="s2">&quot;./config.yaml&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">feature_dirs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/path/to/transformer_engine/debug/features&quot;</span><span class="p">],</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">log_dir</span><span class="o">=</span><span class="s2">&quot;./log&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">default_logging_enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># 初始化带名称的 TransformerLayer</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">transformer_layer</span> <span class="o">=</span> <span class="n">TransformerLayer</span><span class="p">(</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>  <span class="n">name</span><span class="o">=</span><span class="s2">&quot;transformer_layer&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>  <span class="c1"># ...)</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c1"># (...)</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>  <span class="c1"># 前向与反向</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>  <span class="c1"># ...</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>  <span class="n">debug_api</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 </code></pre></div>
 <p>上述修改包含以下内容：</p>
 <ol>
 <li>新增 <code>nvdlfw_inspect.api</code> 的导入。</li>
-<li>通过 <code>debug_api.initialize()</code> 初始化 Nvidia-DL-Framework-Inspect，传入配置文件、功能目录与日志目录。其中 Transformer Engine 提供的功能目录位于 <code>此处 &lt;https://github.com/NVIDIA/TransformerEngine/tree/main/transformer_engine/debug/features&gt;</code>_，完整参数说明见 :doc:<code>此文档 &lt;3_api_debug_setup&gt;</code>。</li>
+<li>通过 <code>debug_api.initialize()</code> 初始化 Nvidia-DL-Framework-Inspect，传入配置文件、功能目录与日志目录。其中 Transformer Engine 提供的功能目录位于 <a href="https://github.com/NVIDIA/TransformerEngine/tree/main/transformer_engine/debug/features">此处</a>，完整参数说明见 <a href="../3_api_debug_setup/">此文档</a>。</li>
 <li>在每次前向/反向后调用 <code>debug_api.step()</code>。</li>
 </ol>
 <h2 id="_4">查看日志</h2>
@@ -1945,72 +2083,72 @@
 </ol>
 <p>我们逐一查看。</p>
 <p>主日志文件记录了 Transformer 层各个 GEMM 的详细信息。可以看到 <code>fc1</code> 与 <code>fc2</code> 的 fprop GEMM 已按预期运行在高精度模式下。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a># log/nvdlfw_inspect_logs/nvdlfw_inspect_globalrank-0.log
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>INFO - Default logging to file enabled at ./log
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>INFO - Reading config from ./config.yaml.
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>INFO - Loaded configs for dict_keys([&#39;fc1_fprop_to_fp8&#39;, &#39;log_tensor_stats&#39;]).
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Tensor: activation, gemm fprop - FP8 quantization
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Tensor: activation, gemm wgrad - FP8 quantization
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Tensor: weight, gemm fprop - FP8 quantization
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Tensor: weight, gemm dgrad - FP8 quantization
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Tensor: gradient, gemm dgrad - FP8 quantization
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Tensor: gradient, gemm wgrad - FP8 quantization
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>INFO - transformer_layer.self_attention.proj: Tensor: activation, gemm fprop - FP8 quantization
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>INFO - transformer_layer.self_attention.proj: Tensor: activation, gemm wgrad - FP8 quantization
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>INFO - transformer_layer.self_attention.proj: Tensor: weight, gemm fprop - FP8 quantization
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>INFO - transformer_layer.self_attention.proj: Tensor: weight, gemm dgrad - FP8 quantization
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>INFO - transformer_layer.self_attention.proj: Tensor: gradient, gemm dgrad - FP8 quantization
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>INFO - transformer_layer.self_attention.proj: Tensor: gradient, gemm wgrad - FP8 quantization
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>INFO - transformer_layer.layernorm_mlp.fc1: Tensor: activation, gemm fprop - High precision
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>INFO - transformer_layer.layernorm_mlp.fc1: Tensor: activation, gemm wgrad - FP8 quantization
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>INFO - transformer_layer.layernorm_mlp.fc1: Tensor: weight, gemm fprop - High precision
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>INFO - transformer_layer.layernorm_mlp.fc1: Tensor: weight, gemm dgrad - FP8 quantization
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>INFO - transformer_layer.layernorm_mlp.fc1: Tensor: gradient, gemm dgrad - FP8 quantization
-<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>INFO - transformer_layer.layernorm_mlp.fc1: Tensor: gradient, gemm wgrad - FP8 quantization
-<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>INFO - transformer_layer.layernorm_mlp.fc2: Tensor: activation, gemm fprop - High precision
-<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>INFO - transformer_layer.layernorm_mlp.fc2: Tensor: activation, gemm wgrad - FP8 quantization
-<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>INFO - transformer_layer.layernorm_mlp.fc2: Tensor: weight, gemm fprop - High precision
-<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>INFO - transformer_layer.layernorm_mlp.fc2: Tensor: weight, gemm dgrad - FP8 quantization
-<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>INFO - transformer_layer.layernorm_mlp.fc2: Tensor: gradient, gemm dgrad - FP8 quantization
-<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>INFO - transformer_layer.layernorm_mlp.fc2: Tensor: gradient, gemm wgrad - FP8 quantization
-<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Feature=LogTensorStats, API=look_at_tensor_before_process: activation
-<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>....
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a># log/nvdlfw_inspect_logs/nvdlfw_inspect_globalrank-0.log
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>INFO - Default logging to file enabled at ./log
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>INFO - Reading config from ./config.yaml.
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>INFO - Loaded configs for dict_keys([&#39;fc1_fprop_to_fp8&#39;, &#39;log_tensor_stats&#39;]).
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Tensor: activation, gemm fprop - FP8 quantization
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Tensor: activation, gemm wgrad - FP8 quantization
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Tensor: weight, gemm fprop - FP8 quantization
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Tensor: weight, gemm dgrad - FP8 quantization
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Tensor: gradient, gemm dgrad - FP8 quantization
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Tensor: gradient, gemm wgrad - FP8 quantization
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>INFO - transformer_layer.self_attention.proj: Tensor: activation, gemm fprop - FP8 quantization
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>INFO - transformer_layer.self_attention.proj: Tensor: activation, gemm wgrad - FP8 quantization
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>INFO - transformer_layer.self_attention.proj: Tensor: weight, gemm fprop - FP8 quantization
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>INFO - transformer_layer.self_attention.proj: Tensor: weight, gemm dgrad - FP8 quantization
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>INFO - transformer_layer.self_attention.proj: Tensor: gradient, gemm dgrad - FP8 quantization
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>INFO - transformer_layer.self_attention.proj: Tensor: gradient, gemm wgrad - FP8 quantization
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>INFO - transformer_layer.layernorm_mlp.fc1: Tensor: activation, gemm fprop - High precision
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>INFO - transformer_layer.layernorm_mlp.fc1: Tensor: activation, gemm wgrad - FP8 quantization
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>INFO - transformer_layer.layernorm_mlp.fc1: Tensor: weight, gemm fprop - High precision
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>INFO - transformer_layer.layernorm_mlp.fc1: Tensor: weight, gemm dgrad - FP8 quantization
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>INFO - transformer_layer.layernorm_mlp.fc1: Tensor: gradient, gemm dgrad - FP8 quantization
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>INFO - transformer_layer.layernorm_mlp.fc1: Tensor: gradient, gemm wgrad - FP8 quantization
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>INFO - transformer_layer.layernorm_mlp.fc2: Tensor: activation, gemm fprop - High precision
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>INFO - transformer_layer.layernorm_mlp.fc2: Tensor: activation, gemm wgrad - FP8 quantization
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>INFO - transformer_layer.layernorm_mlp.fc2: Tensor: weight, gemm fprop - High precision
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>INFO - transformer_layer.layernorm_mlp.fc2: Tensor: weight, gemm dgrad - FP8 quantization
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>INFO - transformer_layer.layernorm_mlp.fc2: Tensor: gradient, gemm dgrad - FP8 quantization
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>INFO - transformer_layer.layernorm_mlp.fc2: Tensor: gradient, gemm wgrad - FP8 quantization
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>INFO - transformer_layer.self_attention.layernorm_qkv: Feature=LogTensorStats, API=look_at_tensor_before_process: activation
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>....
 </code></pre></div>
 <p>第二个日志文件（<code>nvdlfw_inspect_statistics_logs/nvdlfw_inspect_globalrank-0.log</code>）则记录了我们在 <code>config.yaml</code> 中请求的张量统计。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a># log/nvdlfw_inspect_statistics_logs/nvdlfw_inspect_globalrank-0.log
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_max                 iteration=000002                  value=4.3188
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_min                 iteration=000002                  value=-4.3386
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_mean                iteration=000002                  value=0.0000
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_std                 iteration=000002                  value=0.9998
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_l1_norm             iteration=000002                  value=130799.6953
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_max                 iteration=000003                  value=4.3184
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_min                 iteration=000003                  value=-4.3381
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_mean                iteration=000003                  value=0.0000
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_std                 iteration=000003                  value=0.9997
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_l1_norm             iteration=000003                  value=130788.1016
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_max                 iteration=000004                  value=4.3181
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_min                 iteration=000004                  value=-4.3377
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_mean                iteration=000004                  value=0.0000
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_std                 iteration=000004                  value=0.9996
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_l1_norm             iteration=000004                  value=130776.7969
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a># log/nvdlfw_inspect_statistics_logs/nvdlfw_inspect_globalrank-0.log
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_max                 iteration=000002                  value=4.3188
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_min                 iteration=000002                  value=-4.3386
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_mean                iteration=000002                  value=0.0000
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_std                 iteration=000002                  value=0.9998
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_l1_norm             iteration=000002                  value=130799.6953
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_max                 iteration=000003                  value=4.3184
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_min                 iteration=000003                  value=-4.3381
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_mean                iteration=000003                  value=0.0000
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_std                 iteration=000003                  value=0.9997
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_l1_norm             iteration=000003                  value=130788.1016
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_max                 iteration=000004                  value=4.3181
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_min                 iteration=000004                  value=-4.3377
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_mean                iteration=000004                  value=0.0000
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_std                 iteration=000004                  value=0.9996
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>INFO - transformer_layer.self_attention.layernorm_qkv_activation_l1_norm             iteration=000004                  value=130776.7969
 </code></pre></div>
 <h2 id="tensorboard">使用 TensorBoard 记录日志</h2>
-<p>Precision Debug 工具支持使用 <code>TensorBoard &lt;https://www.tensorflow.org/tensorboard&gt;</code>_ 展示统计信息。只需在 <code>debug_api.initialize()</code> 中传入 <code>tb_writer</code>。以下对 <code>train.py</code> 做出修改：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># (...)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.tensorboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">SummaryWriter</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">tb_writer</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="s1">&#39;./tensorboard_dir/run1&#39;</span><span class="p">)</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># 在 Debug API 初始化时传入 tb_writer</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">debug_api</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="n">config_file</span><span class="o">=</span><span class="s2">&quot;./config.yaml&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="n">feature_dirs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/path/to/transformer_engine/debug/features&quot;</span><span class="p">],</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    <span class="n">log_dir</span><span class="o">=</span><span class="s2">&quot;./log&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    <span class="n">tb_writer</span><span class="o">=</span><span class="n">tb_writer</span><span class="p">)</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="c1"># (...)</span>
+<p>Precision Debug 工具支持使用 <a href="https://www.tensorflow.org/tensorboard">TensorBoard</a> 展示统计信息。只需在 <code>debug_api.initialize()</code> 中传入 <code>tb_writer</code>。以下对 <code>train.py</code> 做出修改：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># (...)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.tensorboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">SummaryWriter</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">tb_writer</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="s1">&#39;./tensorboard_dir/run1&#39;</span><span class="p">)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># 在 Debug API 初始化时传入 tb_writer</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">debug_api</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="n">config_file</span><span class="o">=</span><span class="s2">&quot;./config.yaml&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="n">feature_dirs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/path/to/transformer_engine/debug/features&quot;</span><span class="p">],</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="n">log_dir</span><span class="o">=</span><span class="s2">&quot;./log&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="n">tb_writer</span><span class="o">=</span><span class="n">tb_writer</span><span class="p">)</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="c1"># (...)</span>
 </code></pre></div>
 <p>运行训练脚本后，通过 <code>tensorboard --logdir=./tensorboard_dir/run1</code> 打开 TensorBoard：</p>
 <p><img alt="" src="./img/tensorboard.png" /></p>

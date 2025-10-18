@@ -1643,6 +1643,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API 参考
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            API 参考
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    通用配方
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    框架专属 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/pytorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/jax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JAX API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1684,17 +1822,19 @@
 
 
 
-<p>..
-    Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.</p>
-<div class="highlight"><pre><span></span><code>See LICENSE for license information.
-</code></pre></div>
+<blockquote>
+<p>Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES.</p>
+<p>See LICENSE for license information.</p>
+</blockquote>
 <h1 id="_1">调试功能列表</h1>
-<p>.. autoapiclass:: transformer_engine.debug.features.log_tensor_stats.LogTensorStats
-.. autoapiclass:: transformer_engine.debug.features.log_fp8_tensor_stats.LogFp8TensorStats
-.. autoapiclass:: transformer_engine.debug.features.disable_fp8_gemm.DisableFP8GEMM
-.. autoapiclass:: transformer_engine.debug.features.disable_fp8_layer.DisableFP8Layer
-.. autoapiclass:: transformer_engine.debug.features.per_tensor_scaling.PerTensorScaling
-.. autoapiclass:: transformer_engine.debug.features.fake_quant.FakeQuant</p>
+<ul>
+<li><code>LogTensorStats</code>：记录每次 GEMM 的输入、权重、输出等张量统计信息（均值、方差、amax）。</li>
+<li><code>LogFp8TensorStats</code>：专门记录 FP8 张量的统计量，便于分析缩放因子与溢出情况。</li>
+<li><code>DisableFP8GEMM</code>：对指定 GEMM 关闭 FP8 精度，强制使用高精度路径以对比结果。</li>
+<li><code>DisableFP8Layer</code>：针对完整层禁用 FP8，适合逐层排查数值问题。</li>
+<li><code>PerTensorScaling</code>：对特定张量启用单张量缩放策略，用于实验新的缩放方式。</li>
+<li><code>FakeQuant</code>：对张量执行假量化，可在不改动主流程的情况下评估低精度方案。</li>
+</ul>
 
 
 

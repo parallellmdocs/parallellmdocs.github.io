@@ -1702,6 +1702,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API 参考
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            API 参考
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../transformerengine/docs/api/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    通用配方
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../transformerengine/docs/api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    框架专属 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../transformerengine/docs/api/pytorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../transformerengine/docs/api/jax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JAX API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1783,7 +1921,7 @@
 <p><img alt="cp_overview" src="../../images/context_parallel/CP_overview.png" /></p>
 <p>图 1：Transformer 层在 TP2CP2 配置下的运行示意。Attention 旁边的通信属于 CP，其余属于 TP。（AG/RS：前向 all-gather、反向 reduce-scatter；RS/AG：前向 reduce-scatter、反向 all-gather；/AG：前向空操作、反向 all-gather）。</p>
 <p>Context Parallelism（简称 “CP”）是一种针对序列长度维度的并行方案。与先前的序列并行（SP）仅拆分 Dropout 与 LayerNorm 激活不同，CP 会沿序列维度切分网络输入及所有激活。使用 CP 时，除注意力模块外的其他算子（如线性层、LayerNorm 等）均无需修改，因为它们没有跨 token 的操作。对于注意力而言，每个 token 的 Q（query）需要与同一序列中所有 token 的 K/V（key/value）计算，因此 CP 需要在多卡之间额外执行 all-gather 来收集完整的 KV 序列，并在反向传播时对 KV 的激活梯度执行 reduce-scatter。为了降低激活占用，每张 GPU 在前向阶段只保存自己负责的序列段对应的 KV，并在反向时重新聚合。KV 的通信发生在不同张量并行组的对应 GPU 之间，其 all-gather 与 reduce-scatter 在底层被转换为环形拓扑上的点对点通信。若采用 MQA/GQA 等方案，只需少量注意力头即可维护 KV，从而进一步降低通信量。</p>
-<p>例如图 1 中，假设序列长度为 8K，每张 GPU 负责 4K 个 token。GPU0 与 GPU2 组成一个 CP 组，需要互相交换 KV；GPU1 与 GPU3 亦然。CP 与 <code>Ring Attention &lt;https://arxiv.org/abs/2310.01889&gt;</code>_ 相似，但通过以下方式取得更好的性能：(1) 利用最新的开源与 cuDNN flash attention 内核；(2) 去除因下三角因果 mask 带来的冗余计算，实现最优负载均衡。</p>
+<p>例如图 1 中，假设序列长度为 8K，每张 GPU 负责 4K 个 token。GPU0 与 GPU2 组成一个 CP 组，需要互相交换 KV；GPU1 与 GPU3 亦然。CP 与 <a href="https://arxiv.org/abs/2310.01889">Ring Attention</a> 相似，但通过以下方式取得更好的性能：(1) 利用最新的开源与 cuDNN flash attention 内核；(2) 去除因下三角因果 mask 带来的冗余计算，实现最优负载均衡。</p>
 <h2 id="context-parallelism_1">Context parallelism 的收益</h2>
 <p><img alt="cp_results" src="../../images/context_parallel/CP_results.png" /></p>
 <p>图 2：175B GPT 在不同 TP+CP 组合下相对于全重计算（TP8CP1）的加速比。</p>

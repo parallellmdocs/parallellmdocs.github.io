@@ -1783,6 +1783,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API 参考
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            API 参考
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../transformerengine/docs/api/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    通用配方
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../transformerengine/docs/api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    框架专属 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../transformerengine/docs/api/pytorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../transformerengine/docs/api/jax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JAX API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1941,7 +2079,7 @@
 
 
 <h1 id="transformer">transformer 模块</h1>
-<p><code>transformer</code> 模块提供可高度定制的 Transformer 架构实现。通过 “spec” 参数，可以在整个层到单个线性层的任意级别替换不同的 PyTorch 模块（详见 <code>此处 &lt;https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/nlp/nemo_megatron/mcore_customization.html&gt;</code>_）。Transformer 的配置（隐藏维度、层数、注意力头数等）由 <code>TransformerConfig</code> 对象统一描述。</p>
+<p><code>transformer</code> 模块提供可高度定制的 Transformer 架构实现。通过 “spec” 参数，可以在整个层到单个线性层的任意级别替换不同的 PyTorch 模块（详见 <a href="https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/nlp/nemo_megatron/mcore_customization.html">此处</a>）。Transformer 的配置（隐藏维度、层数、注意力头数等）由 <code>TransformerConfig</code> 对象统一描述。</p>
 <h2 id="_1">子模块</h2>
 <h2 id="transformerattention">transformer.attention 模块</h2>
 <p>封装 Transformer 层中的注意力部分（自注意力或交叉注意力），包括 Q/K/V 投影、核心注意力计算（如点积注意力）以及最终的输出线性层。</p>

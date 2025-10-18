@@ -11,22 +11,22 @@
       
       
       
-        <link rel="prev" href="../multi_latent_attention/">
+        <link rel="prev" href="../common/">
       
       
-        <link rel="next" href="../dist_optimizer/">
+        <link rel="next" href="../pytorch/">
       
       
-      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
     
     
       
-        <title>多 Token 预测 - Unified Docs (CN)</title>
+        <title>框架专属 API - Unified Docs (CN)</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.84d31ad4.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
       
       
 
@@ -45,7 +45,7 @@
       
     
     
-    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#token-mtp" class="md-skip">
+        <a href="#api" class="md-skip">
           跳转至
         </a>
       
@@ -80,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="../../../../.." title="Unified Docs (CN)" class="md-header__button md-logo" aria-label="Unified Docs (CN)" data-md-component="logo">
+    <a href="../../../.." title="Unified Docs (CN)" class="md-header__button md-logo" aria-label="Unified Docs (CN)" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              多 Token 预测
+              框架专属 API
             
           </span>
         </div>
@@ -178,7 +178,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../.." title="Unified Docs (CN)" class="md-nav__button md-logo" aria-label="Unified Docs (CN)" data-md-component="logo">
+    <a href="../../../.." title="Unified Docs (CN)" class="md-nav__button md-logo" aria-label="Unified Docs (CN)" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -193,20 +193,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
         
           
           <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
@@ -222,7 +220,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
             Megatron
@@ -236,7 +234,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../" class="md-nav__link">
+      <a href="../../../../megatron/" class="md-nav__link">
         
   
   
@@ -297,7 +295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../megatron/core/QuickStart/" class="md-nav__link">
+      <a href="../../../../megatron/megatron/core/QuickStart/" class="md-nav__link">
         
   
   
@@ -320,7 +318,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../megatron/core/datasets/readme/" class="md-nav__link">
+      <a href="../../../../megatron/megatron/core/datasets/readme/" class="md-nav__link">
         
   
   
@@ -343,7 +341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../llama_mistral/" class="md-nav__link">
+      <a href="../../../../megatron/docs/llama_mistral/" class="md-nav__link">
         
   
   
@@ -412,7 +410,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../megatron/core/MSC_Integration/" class="md-nav__link">
+      <a href="../../../../megatron/megatron/core/MSC_Integration/" class="md-nav__link">
         
   
   
@@ -435,7 +433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../megatron/core/README_STRAGGLER/" class="md-nav__link">
+      <a href="../../../../megatron/megatron/core/README_STRAGGLER/" class="md-nav__link">
         
   
   
@@ -458,7 +456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../megatron/core/transformer/moe/" class="md-nav__link">
+      <a href="../../../../megatron/megatron/core/transformer/moe/" class="md-nav__link">
         
   
   
@@ -481,7 +479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../megatron/core/optimizer/cpu_offloading/" class="md-nav__link">
+      <a href="../../../../megatron/megatron/core/optimizer/cpu_offloading/" class="md-nav__link">
         
   
   
@@ -504,7 +502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../megatron/core/models/mimo/" class="md-nav__link">
+      <a href="../../../../megatron/megatron/core/models/mimo/" class="md-nav__link">
         
   
   
@@ -527,7 +525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../megatron/core/distributed/" class="md-nav__link">
+      <a href="../../../../megatron/megatron/core/distributed/" class="md-nav__link">
         
   
   
@@ -550,7 +548,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../megatron/core/" class="md-nav__link">
+      <a href="../../../../megatron/megatron/core/" class="md-nav__link">
         
   
   
@@ -578,20 +576,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" >
         
           
           <label class="md-nav__link" for="__nav_1_4" id="__nav_1_4_label" tabindex="0">
@@ -607,7 +603,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1_4">
             <span class="md-nav__icon md-icon"></span>
             API 指南
@@ -621,7 +617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/" class="md-nav__link">
         
   
   
@@ -644,7 +640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transformer/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/transformer/" class="md-nav__link">
         
   
   
@@ -667,7 +663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tensor_parallel/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/tensor_parallel/" class="md-nav__link">
         
   
   
@@ -690,7 +686,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../pipeline_parallel/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/pipeline_parallel/" class="md-nav__link">
         
   
   
@@ -713,7 +709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../context_parallel/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/context_parallel/" class="md-nav__link">
         
   
   
@@ -736,7 +732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../moe/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/moe/" class="md-nav__link">
         
   
   
@@ -759,7 +755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../multi_latent_attention/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/multi_latent_attention/" class="md-nav__link">
         
   
   
@@ -779,32 +775,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    多 Token 预测
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/multi_token_prediction/" class="md-nav__link">
         
   
   
@@ -815,44 +789,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      相关参数
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      注意事项
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -865,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dist_optimizer/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/dist_optimizer/" class="md-nav__link">
         
   
   
@@ -888,7 +824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../custom_fsdp/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/custom_fsdp/" class="md-nav__link">
         
   
   
@@ -911,7 +847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dist_checkpointing/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/dist_checkpointing/" class="md-nav__link">
         
   
   
@@ -934,7 +870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tokenizers/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/tokenizers/" class="md-nav__link">
         
   
   
@@ -1003,7 +939,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/user-guide/" class="md-nav__link">
         
   
   
@@ -1026,7 +962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../examples/export/" class="md-nav__link">
+      <a href="../../../../megatron/examples/export/" class="md-nav__link">
         
   
   
@@ -1049,7 +985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../examples/inference/" class="md-nav__link">
+      <a href="../../../../megatron/examples/inference/" class="md-nav__link">
         
   
   
@@ -1072,7 +1008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../examples/multimodal/" class="md-nav__link">
+      <a href="../../../../megatron/examples/multimodal/" class="md-nav__link">
         
   
   
@@ -1095,7 +1031,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../tools/retro/" class="md-nav__link">
+      <a href="../../../../megatron/tools/retro/" class="md-nav__link">
         
   
   
@@ -1118,7 +1054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../tools/retro/build_db/" class="md-nav__link">
+      <a href="../../../../megatron/tools/retro/build_db/" class="md-nav__link">
         
   
   
@@ -1141,7 +1077,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../tools/retro/sft/" class="md-nav__link">
+      <a href="../../../../megatron/tools/retro/sft/" class="md-nav__link">
         
   
   
@@ -1210,7 +1146,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../models.bert/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/models.bert/" class="md-nav__link">
         
   
   
@@ -1233,7 +1169,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../models.gpt/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/models.gpt/" class="md-nav__link">
         
   
   
@@ -1256,7 +1192,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../models.t5/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/models.t5/" class="md-nav__link">
         
   
   
@@ -1279,7 +1215,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../optimizer_param_scheduler/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/optimizer_param_scheduler/" class="md-nav__link">
         
   
   
@@ -1302,7 +1238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../optimizer_cpu_offload/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/optimizer_cpu_offload/" class="md-nav__link">
         
   
   
@@ -1325,7 +1261,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../distributed/" class="md-nav__link">
+      <a href="../../../../megatron/docs/source/api-guide/distributed/" class="md-nav__link">
         
   
   
@@ -1360,18 +1296,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -1387,7 +1325,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             TransformerEngine
@@ -1401,7 +1339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/" class="md-nav__link">
+      <a href="../../../" class="md-nav__link">
         
   
   
@@ -1424,7 +1362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/installation/" class="md-nav__link">
+      <a href="../../installation/" class="md-nav__link">
         
   
   
@@ -1447,7 +1385,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/faq/" class="md-nav__link">
+      <a href="../../faq/" class="md-nav__link">
         
   
   
@@ -1508,7 +1446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/debug/" class="md-nav__link">
+      <a href="../../debug/" class="md-nav__link">
         
   
   
@@ -1531,7 +1469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/debug/1_getting_started/" class="md-nav__link">
+      <a href="../../debug/1_getting_started/" class="md-nav__link">
         
   
   
@@ -1554,7 +1492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/debug/2_config_file_structure/" class="md-nav__link">
+      <a href="../../debug/2_config_file_structure/" class="md-nav__link">
         
   
   
@@ -1577,7 +1515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/debug/3_api_debug_setup/" class="md-nav__link">
+      <a href="../../debug/3_api_debug_setup/" class="md-nav__link">
         
   
   
@@ -1600,7 +1538,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/debug/3_api_features/" class="md-nav__link">
+      <a href="../../debug/3_api_features/" class="md-nav__link">
         
   
   
@@ -1623,7 +1561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/debug/3_api_te_calls/" class="md-nav__link">
+      <a href="../../debug/3_api_te_calls/" class="md-nav__link">
         
   
   
@@ -1646,7 +1584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/debug/api/" class="md-nav__link">
+      <a href="../../debug/api/" class="md-nav__link">
         
   
   
@@ -1669,7 +1607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/debug/4_distributed/" class="md-nav__link">
+      <a href="../../debug/4_distributed/" class="md-nav__link">
         
   
   
@@ -1697,18 +1635,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
         
           
           <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
@@ -1724,7 +1664,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             API 参考
@@ -1738,7 +1678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/api/common/" class="md-nav__link">
+      <a href="../common/" class="md-nav__link">
         
   
   
@@ -1758,10 +1698,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/api/framework/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1772,6 +1721,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1784,7 +1734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/api/pytorch/" class="md-nav__link">
+      <a href="../pytorch/" class="md-nav__link">
         
   
   
@@ -1807,7 +1757,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../transformerengine/docs/api/jax/" class="md-nav__link">
+      <a href="../jax/" class="md-nav__link">
         
   
   
@@ -1858,32 +1808,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      相关参数
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      注意事项
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1898,33 +1822,16 @@
 
 
 
-<h1 id="token-mtp">多 Token 预测（MTP）</h1>
-<p>多 Token 预测（Multi-Token Prediction，MTP）会在每个位置扩展预测范围至多个未来 token。一方面，MTP 目标能够让训练信号更加密集，提升数据效率；另一方面，MTP 可能让模型提前规划表示，从而更好地预测后续 token。在本实现中，我们按顺序预测额外的 token，并在每个预测深度保留完整的因果链。下图展示了 MTP 在 <a href="https://github.com/deepseek-ai/DeepSeek-V3/">DeepSeek-V3</a> 中的实现。</p>
-<p><img alt="MTP_implementation" src="../../images/multi_token_prediction/MTP_implementation.png" /></p>
-<p>第 k 个 MTP 模块包含共享嵌入层、投影矩阵、Transformer 块与共享输出头。对于第 (k - 1) 个预测深度中的第 i 个输入 token，我们首先将第 i 个 token 的表示与第 (i + K) 个 token 的嵌入通过线性投影进行组合。组合后的表示作为第 k 个深度的 Transformer 块输入，用于生成新的输出表示。</p>
-<p>更多信息请参阅 <a href="https://github.com/deepseek-ai/DeepSeek-V3/blob/main/DeepSeek_V3.pdf">DeepSeek-V3 技术报告</a>。</p>
-<h2 id="_1">相关参数</h2>
-<p>将 <code>mtp_num_layers</code> 设置为正整数即可让 GPTModel 等模型启用多 Token 预测（MTP）。</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>mtp_num_layers</code></td>
-<td>多 Token 预测层数。MTP 会在每个位置扩展预测范围至多个未来 token。本实现通过串联 D 个模块来顺序预测 D 个额外 token。默认值为 None。</td>
-</tr>
-<tr>
-<td><code>mtp_loss_scaling_factor</code></td>
-<td>多 Token 预测损失的缩放系数。我们会对所有深度上的 MTP 损失求平均，再乘以该系数得到整体 MTP 损失，作为额外的训练目标。默认值为 0.1。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="_2">注意事项</h2>
-<p>启用 MTP 时，请勿使用 Context Parallel (CP)、任意的 AttnMaskType 或学习得到的绝对位置嵌入类型。这些用例当前尚未支持。</p>
+<blockquote>
+<p>Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES.</p>
+<p>See LICENSE for license information.</p>
+</blockquote>
+<h1 id="api">框架专属 API</h1>
+<p>Transformer Engine 针对不同深度学习框架提供了独立的高性能接口。下列页面汇总了各框架的详细 API：</p>
+<ul>
+<li><a href="../pytorch/">PyTorch API</a>：覆盖线性层、注意力模块、FP8 自动混合精度与 MoE 辅助函数。</li>
+<li><a href="../jax/">JAX API</a>：包含逻辑轴规则、检查点策略以及 Flax 集成组件。</li>
+</ul>
 
 
 
@@ -1973,10 +1880,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
     
   </body>

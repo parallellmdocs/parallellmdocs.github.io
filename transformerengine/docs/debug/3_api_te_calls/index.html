@@ -1643,6 +1643,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API 参考
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            API 参考
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    通用配方
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    框架专属 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/pytorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/jax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JAX API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1684,10 +1822,10 @@
 
 
 
-<p>..
-    Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.</p>
-<div class="highlight"><pre><span></span><code>See LICENSE for license information.
-</code></pre></div>
+<blockquote>
+<p>Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES.</p>
+<p>See LICENSE for license information.</p>
+</blockquote>
 <h1 id="nvidia-dl-framework-inspect">调用 Nvidia-DL-Framework-Inspect</h1>
 <p>本节更详细地说明 Transformer Engine 与 Nvidia-DL-Framework-Inspect 的协作方式。TransformerEngine 的各个 GEMM 内部都预留了钩子（hook）。用户可以实现自定义功能类，也可以复用 TE 内置功能。<code>config.yaml</code> 用于描述哪些层需要启用哪些钩子。Nvidia-DL-Framework-Inspect 会结合 TE 训练流程、功能类以及 <code>config.yaml</code>，并负责在正确位置插入钩子。下图给出了示意：</p>
 <p><img alt="" src="./img/api_calls1.svg" /></p>
@@ -1698,13 +1836,52 @@
 <li><strong>路由调用</strong>：在前向传播开始时执行，用于指示是否需要调用 <code>modify_tensor()</code> 等函数。</li>
 </ul>
 <p>若某层的所有路由调用均返回 <code>False</code>，则该层会使用 Transformer Engine 的融合实现，以获得最佳性能。若任意路由调用返回 <code>True</code>，该层将不使用融合，以便访问所有张量。需要注意的是，如果层上未启用任何功能，其性能应与未初始化 <code>debug_api</code> 的情况一致。</p>
-<p>.. autoapifunction:: transformer_engine.debug.features.api.TEDefaultFeatures.modify_tensor</p>
-<p>.. autoapifunction:: transformer_engine.debug.features.api.TEDefaultFeatures.modify_tensor_enabled</p>
-<p>.. autoapifunction:: transformer_engine.debug.features.api.TEDefaultFeatures.fp8_gemm_enabled</p>
-<p>.. autoapifunction:: transformer_engine.debug.features.api.TEDefaultFeatures.inspect_tensor</p>
-<p>.. autoapifunction:: transformer_engine.debug.features.api.TEDefaultFeatures.inspect_tensor_postquantize</p>
-<p>.. autoapifunction:: transformer_engine.debug.features.api.TEDefaultFeatures.inspect_tensor_enabled</p>
-<p>.. autoapifunction:: transformer_engine.debug.features.api.TEDefaultFeatures.inspect_tensor_postquantize_enabled</p>
+<table>
+<thead>
+<tr>
+<th>调用</th>
+<th>触发阶段</th>
+<th>作用说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>modify_tensor</code></td>
+<td>GEMM</td>
+<td>在执行 GEMM 之前修改张量（如替换数值、插入假量化），由功能类具体实现。</td>
+</tr>
+<tr>
+<td><code>modify_tensor_enabled</code></td>
+<td>路由</td>
+<td>返回布尔值，指示是否需要调用 <code>modify_tensor</code>。若为 <code>False</code>，保持融合实现。</td>
+</tr>
+<tr>
+<td><code>fp8_gemm_enabled</code></td>
+<td>路由</td>
+<td>控制是否允许该 GEMM 使用 FP8 精度；当返回 <code>False</code> 时会回退到高精度路径。</td>
+</tr>
+<tr>
+<td><code>inspect_tensor</code></td>
+<td>GEMM</td>
+<td>在 GEMM 前后收集张量信息（例如统计量、导出截断样本）。</td>
+</tr>
+<tr>
+<td><code>inspect_tensor_postquantize</code></td>
+<td>GEMM</td>
+<td>针对量化后的张量执行额外检查或记录。</td>
+</tr>
+<tr>
+<td><code>inspect_tensor_enabled</code></td>
+<td>路由</td>
+<td>判断是否需要执行 <code>inspect_tensor</code>。</td>
+</tr>
+<tr>
+<td><code>inspect_tensor_postquantize_enabled</code></td>
+<td>路由</td>
+<td>判断是否需要执行 <code>inspect_tensor_postquantize</code>。</td>
+</tr>
+</tbody>
+</table>
 
 
 

@@ -1641,6 +1641,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API 参考
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            API 参考
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/api/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    通用配方
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    框架专属 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/api/pytorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/api/jax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JAX API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1682,34 +1820,34 @@
 
 
 
-<p>..
-    Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.</p>
-<div class="highlight"><pre><span></span><code>See LICENSE for license information.
-</code></pre></div>
-<p>License</p>
 <h1 id="transformer-engine">Transformer Engine 概览</h1>
-<p><code>快速上手 &lt;#examples&gt;</code><em>  <code>安装指南 &lt;#installation&gt;</code></em>  <code>用户手册 &lt;https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/index.html&gt;</code><em>  <code>示例 &lt;https://github.com/NVIDIA/TransformerEngine/tree/main/examples&gt;</code></em>  <code>FP8 收敛性 &lt;#fp8-convergence&gt;</code><em>  <code>集成方案 &lt;#integrations&gt;</code></em>  <code>发行说明 &lt;https://docs.nvidia.com/deeplearning/transformer-engine/documentation-archive.html&gt;</code>_</p>
+<blockquote>
+<p>Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES.</p>
+<p>See LICENSE for license information.</p>
+</blockquote>
+<p><a href="#examples">快速上手</a>  <a href="#installation">安装指南</a>  <a href="https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/index.html">用户手册</a>  <a href="https://github.com/NVIDIA/TransformerEngine/tree/main/examples">示例</a>  <a href="#fp8-convergence">FP8 收敛性</a>  <a href="#integrations">集成方案</a>  <a href="https://docs.nvidia.com/deeplearning/transformer-engine/documentation-archive.html">发行说明</a></p>
 <h1 id="_1">最新动态</h1>
 <ul>
-<li>[09/2025] <code>使用 NVFP4 预训练大型语言模型 &lt;https://www.arxiv.org/pdf/2509.25149&gt;</code>_</li>
-<li>[09/2025] <code>Ling 2.0 原生 FP8 混合精度训练已开源 &lt;https://huggingface.co/blog/im0qianqian/ling-mini-2-fp8-mixed-precision-training-solution&gt;</code>_</li>
-<li>[09/2025] <code>借助 NVIDIA NeMo 以 FP8 精度提升训练吞吐 &lt;https://developer.nvidia.com/blog/faster-training-throughput-in-fp8-precision-with-nvidia-nemo/&gt;</code>_</li>
-<li>[08/2025] <code>DeepL 如何以 FP8 打造下一代可训练与推理的 LLM &lt;https://www.deepl.com/en/blog/tech/next-generation-llm-fp8-training&gt;</code>_</li>
-<li>[08/2025] <code>NVFP4：兼具 16 位精度与 4 位速度与效率 &lt;https://developer.nvidia.com/blog/nvfp4-trains-with-precision-of-16-bit-and-speed-and-efficiency-of-4-bit/&gt;</code>_</li>
-<li>[06/2025] <code>浮点 8：高效低精度 AI 训练入门 &lt;https://developer.nvidia.com/blog/floating-point-8-an-introduction-to-efficient-lower-precision-ai-training/&gt;</code>_</li>
-<li>[05/2025] <code>在 NVIDIA Grace Hopper 上训练 LLM 的高级优化策略 &lt;https://developer.nvidia.com/blog/advanced-optimization-strategies-for-llm-training-on-nvidia-grace-hopper/&gt;</code>_</li>
-<li>[03/2025] <code>稳定且可扩展的 FP8 深度学习训练（Blackwell  GTC 2025） &lt;https://www.nvidia.com/en-us/on-demand/session/gtc25-s72778/&gt;</code>_</li>
-<li>[03/2025] <code>借助 NVIDIA DGX Cloud 基准测试衡量与提升 AI 工作负载性能 &lt;https://developer.nvidia.com/blog/measure-and-improve-ai-workload-performance-with-nvidia-dgx-cloud-benchmarking/&gt;</code>_</li>
+<li>[09/2025] <a href="https://www.arxiv.org/pdf/2509.25149">使用 NVFP4 预训练大型语言模型</a></li>
+<li>[09/2025] <a href="https://huggingface.co/blog/im0qianqian/ling-mini-2-fp8-mixed-precision-training-solution">Ling 2.0 原生 FP8 混合精度训练已开源</a></li>
+<li>[09/2025] <a href="https://developer.nvidia.com/blog/faster-training-throughput-in-fp8-precision-with-nvidia-nemo/">借助 NVIDIA NeMo 以 FP8 精度提升训练吞吐</a></li>
+<li>[08/2025] <a href="https://www.deepl.com/en/blog/tech/next-generation-llm-fp8-training">DeepL 如何以 FP8 打造下一代可训练与推理的 LLM</a></li>
+<li>[08/2025] <a href="https://developer.nvidia.com/blog/nvfp4-trains-with-precision-of-16-bit-and-speed-and-efficiency-of-4-bit/">NVFP4：兼具 16 位精度与 4 位速度与效率</a></li>
+<li>[06/2025] <a href="https://developer.nvidia.com/blog/floating-point-8-an-introduction-to-efficient-lower-precision-ai-training/">浮点 8：高效低精度 AI 训练入门</a></li>
+<li>[05/2025] <a href="https://developer.nvidia.com/blog/advanced-optimization-strategies-for-llm-training-on-nvidia-grace-hopper/">在 NVIDIA Grace Hopper 上训练 LLM 的高级优化策略</a></li>
+<li>[03/2025] <a href="https://www.nvidia.com/en-us/on-demand/session/gtc25-s72778/">稳定且可扩展的 FP8 深度学习训练（Blackwell  GTC 2025）</a></li>
+<li>[03/2025] <a href="https://developer.nvidia.com/blog/measure-and-improve-ai-workload-performance-with-nvidia-dgx-cloud-benchmarking/">借助 NVIDIA DGX Cloud 基准测试衡量与提升 AI 工作负载性能</a></li>
 </ul>
 <p><img alt="NVIDIA DGX Cloud Benchmarking Performance Explorer 中 FP8 与 BF16 训练对比" src="docs/examples/comparison-fp8-bf16-training-nvidia-dgx-cloud-benchmarking-performance-explorer.jpg" /></p>
 <ul>
-<li>[02/2025] <code>借助 Evo 2 在新尺度理解生命分子的语言 &lt;https://developer.nvidia.com/blog/understanding-the-language-of-lifes-biomolecules-across-evolution-at-a-new-scale-with-evo-2/&gt;</code>_</li>
-<li>[02/2025] <code>NVIDIA DGX Cloud 推出开箱即用的基准模板 &lt;https://developer.nvidia.com/blog/nvidia-dgx-cloud-introduces-ready-to-use-templates-to-benchmark-ai-platform-performance/&gt;</code>_</li>
-<li>[01/2025] <code>联合 iGenius 与 NVIDIA DGX Cloud 为主权 AI 与受监管行业持续预训练 SOTA LLM &lt;https://developer.nvidia.com/blog/continued-pretraining-of-state-of-the-art-llms-for-sovereign-ai-and-regulated-industries-with-igenius-and-nvidia-dgx-cloud/&gt;</code>_</li>
+<li>[02/2025] <a href="https://developer.nvidia.com/blog/understanding-the-language-of-lifes-biomolecules-across-evolution-at-a-new-scale-with-evo-2/">借助 Evo 2 在新尺度理解生命分子的语言</a></li>
+<li>[02/2025] <a href="https://developer.nvidia.com/blog/nvidia-dgx-cloud-introduces-ready-to-use-templates-to-benchmark-ai-platform-performance/">NVIDIA DGX Cloud 推出开箱即用的基准模板</a></li>
+<li>[01/2025] <a href="https://developer.nvidia.com/blog/continued-pretraining-of-state-of-the-art-llms-for-sovereign-ai-and-regulated-industries-with-igenius-and-nvidia-dgx-cloud/">联合 iGenius 与 NVIDIA DGX Cloud 为主权 AI 与受监管行业持续预训练 SOTA LLM</a></li>
 </ul>
-<p><code>历史动态 &lt;#previous-news&gt;</code>_</p>
+<p><a href="#previous-news">历史动态</a></p>
 <h1 id="transformer-engine_1">什么是 Transformer Engine？</h1>
-<p>.. overview-begin-marker-do-not-remove</p>
+<!-- overview-begin-marker-do-not-remove -->
+
 <p>Transformer Engine（简称 TE）是面向 NVIDIA GPU 的 Transformer 加速库，支持在 Hopper、Ada 与 Blackwell GPU 上使用 8 位浮点（FP8）精度，以在训练与推理中提供更高性能与更低内存占用。TE 提供针对主流 Transformer 架构高度优化的构建模块，以及类似自动混合精度的 API，可无缝融入各框架的代码。同时还包含与框架无关的 C++ API，便于其他深度学习库集成 FP8 支持。</p>
 <p>随着 Transformer 参数规模持续增长，BERT、GPT、T5 等架构在训练与推理阶段对显存与算力的需求也与日俱增。多数深度学习框架默认使用 FP32 训练，但在许多模型中，为获得完整精度并非必须。混合精度训练将单精度（FP32）与更低精度（如 FP16）结合，可在几乎不损失精度的情况下显著提升速度。Hopper GPU 架构引入了 FP8 精度，较 FP16 进一步提升性能且不降低准确性。不过，目前主流框架尚未原生支持 FP8。</p>
 <p>TE 通过提供可与主流大语言模型（LLM）库集成的 API 来解决 FP8 支持问题。它既包含可快速构建 Transformer 层的 Python 模块，也提供框架无关的 C++ 库（包含 FP8 所需的结构体与算子）。TE 模块会在内部维护缩放因子等 FP8 训练所需参数，从而大幅简化混合精度训练流程。</p>
@@ -1777,8 +1915,9 @@
   for _ in range(10):
     loss, (param_grads, other_grads) = fwd_bwd_fn(params, other_variables, inp)
 </code></pre></div>
-<p>完整教程请参阅 <code>快速上手 Notebook &lt;https://github.com/NVIDIA/TransformerEngine/blob/main/docs/examples/quickstart.ipynb&gt;</code>_。</p>
-<p>.. overview-end-marker-do-not-remove</p>
+<p>完整教程请参阅 <a href="https://github.com/NVIDIA/TransformerEngine/blob/main/docs/examples/quickstart.ipynb">快速上手 Notebook</a>。</p>
+<!-- overview-end-marker-do-not-remove -->
+
 <h1 id="_4">安装指南</h1>
 <h4 id="_5">系统要求</h4>
 <ul>
@@ -1808,7 +1947,7 @@
 </ul>
 <h4 id="_6">安装方式</h4>
 <h4 id="docker">Docker（推荐）</h4>
-<p>最快的入门方式是使用 <code>NVIDIA GPU Cloud (NGC) Catalog &lt;https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch&gt;</code>_ 中的 Docker 映像。</p>
+<p>最快的入门方式是使用 <a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch">NVIDIA GPU Cloud (NGC) Catalog</a> 中的 Docker 映像。</p>
 <p>示例：交互式拉起 NGC PyTorch 容器</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>nvcr.io/nvidia/pytorch:25.08-py3
 </code></pre></div>
@@ -1851,7 +1990,7 @@
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># JAX 集成（即将上线）</span>
 </code></pre></div>
 <h4 id="_7">源码安装</h4>
-<p><code>参见安装指南 &lt;https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/installation.html#installation-from-source&gt;</code>_</p>
+<p><a href="https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/installation.html#installation-from-source">参见安装指南</a></p>
 <h4 id="_8">环境变量</h4>
 <p>安装前可设置以下环境变量自定义构建流程：</p>
 <ul>
@@ -1867,8 +2006,9 @@
 <p>可通过以下环境变量检查当前使用的 FlashAttention 版本：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">NVTE_DEBUG</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">NVTE_DEBUG_LEVEL</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>python<span class="w"> </span>your_script.py
 </code></pre></div>
-<p>已知问题：FlashAttention-2 编译过程占用内存较大（参见 <code>相关 issue &lt;https://github.com/Dao-AILab/flash-attention/issues/358&gt;</code>_），可能导致安装 Transformer Engine 时内存不足。可尝试设置 <strong>MAX_JOBS=1</strong> 来规避。</p>
-<p>.. troubleshooting-begin-marker-do-not-remove</p>
+<p>已知问题：FlashAttention-2 编译过程占用内存较大（参见 <a href="https://github.com/Dao-AILab/flash-attention/issues/358">相关 issue</a>），可能导致安装 Transformer Engine 时内存不足。可尝试设置 <strong>MAX_JOBS=1</strong> 来规避。</p>
+<!-- troubleshooting-begin-marker-do-not-remove -->
+
 <h4 id="_9">故障排查</h4>
 <p><strong>常见问题与解决方案：</strong></p>
 <ol>
@@ -1890,8 +2030,8 @@
 </li>
 <li><strong>解决方法：</strong> 安装缺失的开发包或通过环境变量指定路径：</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="w">     </span><span class="nb">export</span><span class="w"> </span><span class="nv">CUDA_PATH</span><span class="o">=</span>/path/to/cuda
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">     </span><span class="nb">export</span><span class="w"> </span><span class="nv">CUDNN_PATH</span><span class="o">=</span>/path/to/cudnn
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CUDA_PATH</span><span class="o">=</span>/path/to/cuda
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CUDNN_PATH</span><span class="o">=</span>/path/to/cudnn
 </code></pre></div>
 <ul>
 <li>若 CMake 无法找到 C++ 编译器，可设置 <code>CXX</code> 环境变量。</li>
@@ -1906,7 +2046,7 @@
 </li>
 <li><strong>解决方法：</strong> 限制并行度：</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="w">     </span><span class="nv">MAX_JOBS</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">NVTE_BUILD_THREADS_PER_JOB</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">MAX_JOBS</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">NVTE_BUILD_THREADS_PER_JOB</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>...
 </code></pre></div>
 <ol>
 <li>
@@ -1916,10 +2056,11 @@
 <p><strong>方法：</strong></p>
 </li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="w">     </span><span class="nb">cd</span><span class="w"> </span>transformer_engine
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">     </span>pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-v<span class="w"> </span>-v<span class="w"> </span>--no-build-isolation<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">cd</span><span class="w"> </span>transformer_engine
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-v<span class="w"> </span>-v<span class="w"> </span>--no-build-isolation<span class="w"> </span>.
 </code></pre></div>
-<p>.. troubleshooting-end-marker-do-not-remove</p>
+<!-- troubleshooting-end-marker-do-not-remove -->
+
 <h1 id="_10">破坏性更新</h1>
 <h4 id="v17pytorch-padding-mask">v1.7：PyTorch 的 padding mask 定义变更</h4>
 <p>为统一 Transformer Engine 中三个框架的注意力掩码定义，我们将 PyTorch 实现中的 padding mask 含义改为：<code>True</code> 表示屏蔽对应位置，<code>False</code> 表示参与注意力计算。自 v1.7 起，所有类型的注意力掩码均遵循相同定义。</p>
@@ -1934,48 +2075,86 @@
 </code></pre></div>
 <h1 id="fp8">FP8 收敛性</h1>
 <p>我们在多种模型架构与配置上对 FP8 进行了广泛验证，<strong>训练损失曲线与 BF16 几乎没有差异</strong>。FP8 同样已在下游 LLM 任务（如 LAMBADA、WikiText）上验证其精度。以下列举部分跨框架验证过收敛性的模型。</p>
-<p>+------------+------------------+---------------------------------------------------------------------------------------------------------+
- 模型        框架              来源                                                                                                  <br />
-+============+==================+=========================================================================================================+
- T5-770M      JAX/T5x          https://github.com/NVIDIA/JAX-Toolbox/tree/main/rosetta/rosetta/projects/t5x#convergence-and-performance
-+------------+------------------+---------------------------------------------------------------------------------------------------------+
- MPT-1.3B     Mosaic Composer  https://www.mosaicml.com/blog/coreweave-nvidia-h100-part-1                                            <br />
-+------------+------------------+---------------------------------------------------------------------------------------------------------+
- GPT-5B       JAX/Paxml        https://github.com/NVIDIA/JAX-Toolbox/tree/main/rosetta/rosetta/projects/pax#h100-results             <br />
-+------------+------------------+---------------------------------------------------------------------------------------------------------+
- GPT-5B       NeMo Framework   可按需提供                                                                                            <br />
-+------------+------------------+---------------------------------------------------------------------------------------------------------+
- LLama2-7B    Alibaba Pai      https://mp.weixin.qq.com/s/NQT0uKXLbXyh5031zBdeBQ                                                     <br />
-+------------+------------------+---------------------------------------------------------------------------------------------------------+
- T5-11B       JAX/T5x          可按需提供                                                                                            <br />
-+------------+------------------+---------------------------------------------------------------------------------------------------------+
- MPT-13B      Mosaic Composer  https://www.databricks.com/blog/turbocharged-training-optimizing-databricks-mosaic-ai-stack-fp8       <br />
-+------------+------------------+---------------------------------------------------------------------------------------------------------+
- GPT-22B      NeMo Framework   可按需提供                                                                                            <br />
-+------------+------------------+---------------------------------------------------------------------------------------------------------+
- LLama2-70B   Alibaba Pai      https://mp.weixin.qq.com/s/NQT0uKXLbXyh5031zBdeBQ                                                     <br />
-+------------+------------------+---------------------------------------------------------------------------------------------------------+
- GPT-175B     JAX/Paxml        https://github.com/NVIDIA/JAX-Toolbox/tree/main/rosetta/rosetta/projects/pax#h100-results               |
-+------------+------------------+---------------------------------------------------------------------------------------------------------+</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>框架</th>
+<th>参考链接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T5-770M</td>
+<td>JAX / T5x</td>
+<td>https://github.com/NVIDIA/JAX-Toolbox/tree/main/rosetta/rosetta/projects/t5x#convergence-and-performance</td>
+</tr>
+<tr>
+<td>MPT-1.3B</td>
+<td>Mosaic Composer</td>
+<td>https://www.mosaicml.com/blog/coreweave-nvidia-h100-part-1</td>
+</tr>
+<tr>
+<td>GPT-5B</td>
+<td>JAX / Paxml</td>
+<td>https://github.com/NVIDIA/JAX-Toolbox/tree/main/rosetta/rosetta/projects/pax#h100-results</td>
+</tr>
+<tr>
+<td>GPT-5B</td>
+<td>NVIDIA NeMo Framework</td>
+<td>可按需提供</td>
+</tr>
+<tr>
+<td>Llama2-7B</td>
+<td>Alibaba Pai</td>
+<td>https://mp.weixin.qq.com/s/NQT0uKXLbXyh5031zBdeBQ</td>
+</tr>
+<tr>
+<td>T5-11B</td>
+<td>JAX / T5x</td>
+<td>可按需提供</td>
+</tr>
+<tr>
+<td>MPT-13B</td>
+<td>Mosaic Composer</td>
+<td>https://www.databricks.com/blog/turbocharged-training-optimizing-databricks-mosaic-ai-stack-fp8</td>
+</tr>
+<tr>
+<td>GPT-22B</td>
+<td>NVIDIA NeMo Framework</td>
+<td>可按需提供</td>
+</tr>
+<tr>
+<td>Llama2-70B</td>
+<td>Alibaba Pai</td>
+<td>https://mp.weixin.qq.com/s/NQT0uKXLbXyh5031zBdeBQ</td>
+</tr>
+<tr>
+<td>GPT-175B</td>
+<td>JAX / Paxml</td>
+<td>https://github.com/NVIDIA/JAX-Toolbox/tree/main/rosetta/rosetta/projects/pax#h100-results</td>
+</tr>
+</tbody>
+</table>
 <h1 id="_11">集成方案</h1>
 <p>Transformer Engine 已集成至多款热门 LLM 框架：</p>
 <ul>
-<li><code>DeepSpeed &lt;https://github.com/deepspeedai/DeepSpeed/blob/master/tests/unit/runtime/half_precision/test_fp8.py&gt;</code>_</li>
-<li><code>Hugging Face Accelerate &lt;https://huggingface.co/docs/accelerate/main/en/usage_guides/low_precision_training#configuring-transformersengine&gt;</code>_</li>
-<li><code>Lightning &lt;https://github.com/Lightning-AI/lightning/issues/17172&gt;</code>_</li>
-<li><code>MosaicML Composer &lt;https://github.com/mosaicml/composer/releases/tag/v0.13.1&gt;</code>_</li>
-<li><code>NVIDIA JAX Toolbox &lt;https://github.com/NVIDIA/JAX-Toolbox&gt;</code>_</li>
-<li><code>NVIDIA Megatron-LM &lt;https://github.com/NVIDIA/Megatron-LM&gt;</code>_</li>
-<li><code>NVIDIA NeMo Framework &lt;https://github.com/NVIDIA/NeMo-Megatron-Launcher&gt;</code>_</li>
-<li><code>Amazon SageMaker Model Parallel Library &lt;https://docs.aws.amazon.com/sagemaker/latest/dg/model-parallel-core-features-v2-tensor-parallelism.html&gt;</code>_</li>
-<li><code>Levanter &lt;https://github.com/stanford-crfm/levanter&gt;</code>_</li>
-<li><code>GPT-NeoX &lt;https://github.com/EleutherAI/gpt-neox&gt;</code>_</li>
-<li><code>Hugging Face Nanotron &lt;https://github.com/huggingface/nanotron&gt;</code>_ —— 即将上线！</li>
-<li><code>Colossal-AI &lt;https://github.com/hpcaitech/ColossalAI&gt;</code>_ —— 即将上线！</li>
-<li><code>PeriFlow &lt;https://github.com/friendliai/periflow-python-sdk&gt;</code>_ —— 即将上线！</li>
+<li><a href="https://github.com/deepspeedai/DeepSpeed/blob/master/tests/unit/runtime/half_precision/test_fp8.py">DeepSpeed</a></li>
+<li><a href="https://huggingface.co/docs/accelerate/main/en/usage_guides/low_precision_training#configuring-transformersengine">Hugging Face Accelerate</a></li>
+<li><a href="https://github.com/Lightning-AI/lightning/issues/17172">Lightning</a></li>
+<li><a href="https://github.com/mosaicml/composer/releases/tag/v0.13.1">MosaicML Composer</a></li>
+<li><a href="https://github.com/NVIDIA/JAX-Toolbox">NVIDIA JAX Toolbox</a></li>
+<li><a href="https://github.com/NVIDIA/Megatron-LM">NVIDIA Megatron-LM</a></li>
+<li><a href="https://github.com/NVIDIA/NeMo-Megatron-Launcher">NVIDIA NeMo Framework</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-parallel-core-features-v2-tensor-parallelism.html">Amazon SageMaker Model Parallel Library</a></li>
+<li><a href="https://github.com/stanford-crfm/levanter">Levanter</a></li>
+<li><a href="https://github.com/EleutherAI/gpt-neox">GPT-NeoX</a></li>
+<li><a href="https://github.com/huggingface/nanotron">Hugging Face Nanotron</a> —— 即将上线！</li>
+<li><a href="https://github.com/hpcaitech/ColossalAI">Colossal-AI</a> —— 即将上线！</li>
+<li><a href="https://github.com/friendliai/periflow-python-sdk">PeriFlow</a> —— 即将上线！</li>
 </ul>
 <h1 id="_12">参与贡献</h1>
-<p>我们欢迎社区共同完善 Transformer Engine！如需提交贡献与 Pull Request，请遵循 <code>&lt;CONTRIBUTING.rst&gt;</code>_ 指南。</p>
+<p>我们欢迎社区共同完善 Transformer Engine！如需提交贡献与 Pull Request，请遵循 <a href="https://github.com/NVIDIA/TransformerEngine/blob/main/CONTRIBUTING.rst">贡献指南</a>。</p>
 
 
 
