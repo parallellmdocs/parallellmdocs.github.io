@@ -6162,10 +6162,10 @@
 <p>使用 [<code>IterableDataset.shuffle</code>] 可打乱流式数据。<code>buffer_size</code> 控制缓冲区大小，默认 1000：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">shuffled_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">buffer_size</span><span class="o">=</span><span class="mi">10_000</span><span class="p">)</span>
 </code></pre></div>
-<blockquote>
-<p>[!TIP]
-若数据集按多文件分片，<code>shuffle</code> 还会打乱分片顺序。</p>
-</blockquote>
+<div class="admonition tip">
+<p class="admonition-title">提示</p>
+<p>若数据集按多文件分片，<code>shuffle</code> 还会打乱分片顺序。</p>
+</div>
 <h2 id="_3">重新打乱</h2>
 <p>可在每个 epoch 后调用 [<code>IterableDataset.set_epoch</code>] 设置不同种子（真实种子为 <code>初始种子 + 当前 epoch</code>）：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>

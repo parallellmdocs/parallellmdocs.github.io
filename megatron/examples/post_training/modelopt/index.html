@@ -6142,10 +6142,10 @@
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nv">MLM_MODEL_SAVE</span><span class="o">=</span>Qwen3-8B-Pruned<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>./prune.sh<span class="w"> </span>qwen/Qwen3-8B
 </code></pre></div>
-<blockquote>
-<p>[!TIP]
-若模型层数无法被流水线并行度整除，可通过 <code>MLM_EXTRA_ARGS="--decoder-first-pipeline-num-layers &lt;X&gt; --decoder-last-pipeline-num-layers &lt;Y&gt;"</code> 设置不均匀 PP。</p>
-</blockquote>
+<div class="admonition tip">
+<p class="admonition-title">提示</p>
+<p>若模型层数无法被流水线并行度整除，可通过 <code>MLM_EXTRA_ARGS="--decoder-first-pipeline-num-layers &lt;X&gt; --decoder-last-pipeline-num-layers &lt;Y&gt;"</code> 设置不均匀 PP。</p>
+</div>
 <h2 id="_5">高级用法</h2>
 <p>待补充。</p>
 
