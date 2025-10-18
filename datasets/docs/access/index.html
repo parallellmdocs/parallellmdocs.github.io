@@ -5279,7 +5279,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#切片" class="md-nav__link">
     <span class="md-ellipsis">
       切片
     </span>
@@ -5303,7 +5303,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       索引
     </span>
@@ -5312,7 +5312,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       创建子集
     </span>
@@ -5326,7 +5326,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       接下来？
     </span>
@@ -6700,7 +6700,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#切片" class="md-nav__link">
     <span class="md-ellipsis">
       切片
     </span>
@@ -6724,7 +6724,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       索引
     </span>
@@ -6733,7 +6733,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       创建子集
     </span>
@@ -6747,7 +6747,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       接下来？
     </span>
@@ -6821,7 +6821,7 @@
 <a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Elapsed time: </span><span class="si">{</span><span class="n">end_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
 <a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="n">Elapsed</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.0042</span> <span class="n">seconds</span>
 </code></pre></div>
-<h3 id="_3">切片</h3>
+<h3 id="切片">切片</h3>
 <p>切片返回数据集的子集，便于一次查看多行。使用 <code>:</code> 指定范围即可：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># 前三行</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">dataset</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
@@ -6854,7 +6854,7 @@
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">iterable_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">to_iterable_dataset</span><span class="p">()</span>
 </code></pre></div>
 <p>[<code>IterableDataset</code>] 会逐个样本地迭代数据集，因此无需等待完整下载即可开始使用，对超大数据集尤为实用。</p>
-<h3 id="_4">索引</h3>
+<h3 id="_3">索引</h3>
 <p>[<code>IterableDataset</code>] 的行为不同于常规 [<code>Dataset</code>]：它不支持随机访问，而是通过 <code>next(iter())</code> 或 <code>for</code> 循环按序返回样本：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">iterable_dataset</span><span class="p">))</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">{</span><span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">PIL</span><span class="o">.</span><span class="n">JpegImagePlugin</span><span class="o">.</span><span class="n">JpegImageFile</span> <span class="n">image</span> <span class="n">mode</span><span class="o">=</span><span class="n">RGB</span> <span class="n">size</span><span class="o">=</span><span class="mi">384</span><span class="n">x512</span> <span class="n">at</span> <span class="mh">0x7F0681F59B50</span><span class="o">&gt;</span><span class="p">,</span>
@@ -6869,7 +6869,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">iterable_dataset</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]))</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="mi">6</span>
 </code></pre></div>
-<h3 id="_5">创建子集</h3>
+<h3 id="_4">创建子集</h3>
 <p>使用 [<code>IterableDataset.take</code>] 可以返回特定数量样本组成的子集：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 取前三个样本</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterable_dataset</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
@@ -6881,7 +6881,7 @@
 <a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>  <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}]</span>
 </code></pre></div>
 <p>与<a href="./#切片">切片</a>不同，[<code>IterableDataset.take</code>] 会返回一个全新的 [<code>IterableDataset</code>]。</p>
-<h2 id="_6">接下来？</h2>
+<h2 id="_5">接下来？</h2>
 <p>想要更深入了解两种数据集的差异，请阅读<a href="../about_mapstyle_vs_iterable/">《<code>Dataset</code> 与 <code>IterableDataset</code> 的区别》</a>。</p>
 <p>若希望亲手实践数据预处理，可查看 <a href="../process/">Process</a> 指南学习如何处理 [<code>Dataset</code>]，或阅读 <a href="../stream/">Stream</a> 指南掌握 [<code>IterableDataset</code>] 的预处理方法。</p>
 

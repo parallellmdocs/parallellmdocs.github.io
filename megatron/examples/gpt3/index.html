@@ -1530,7 +1530,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-training-setup" class="md-nav__link">
     <span class="md-ellipsis">
       1. 训练环境
     </span>
@@ -1539,7 +1539,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-configurations" class="md-nav__link">
     <span class="md-ellipsis">
       2. 配置参数
     </span>
@@ -1568,6 +1568,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-training-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 训练结果
+    </span>
+  </a>
   
 </li>
       
@@ -6664,7 +6673,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-training-setup" class="md-nav__link">
     <span class="md-ellipsis">
       1. 训练环境
     </span>
@@ -6673,7 +6682,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-configurations" class="md-nav__link">
     <span class="md-ellipsis">
       2. 配置参数
     </span>
@@ -6705,6 +6714,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#3-training-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 训练结果
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -6728,8 +6746,7 @@
 <li><a href="#2-configurations">2. 配置参数</a></li>
 <li><a href="#3-training-results">3. 训练结果</a></li>
 </ul>
-<h2 id="1">1. 训练环境</h2>
-<p><a id="markdown-training-setup" name="training-setup"></a></p>
+<h2 id="1-training-setup">1. 训练环境</h2>
 <p>若使用 Docker 运行模型，可按以下方式执行：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="l l-Scalar l-Scalar-Plain">PYTORCH_IMAGE=nvcr.io/nvidia/pytorch:24.01-py3</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="l l-Scalar l-Scalar-Plain">CHECKPOINT_PATH=&quot;&quot;</span><span class="w"> </span><span class="c1">#&lt;Specify path&gt;</span>
@@ -6748,8 +6765,7 @@
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">bash examples/gpt3/train_gpt3_175b_distributed.sh $CHECKPOINT_PATH $TENSORBOARD_LOGS_PATH $VOCAB_FILE $MERGE_FILE $DATA_PATH &quot;</span>
 </code></pre></div>
 <p>注意：根据具体环境，该命令可能需要调整。</p>
-<h2 id="2">2. 配置参数</h2>
-<p><a id="markdown-configurations" name="configurations"></a></p>
+<h2 id="2-configurations">2. 配置参数</h2>
 <p>示例默认演示 175B 模型的训练，除此之外还可使用以下配置:</p>
 <h3 id="345m">345M</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>--num-layers 12 \
@@ -6767,6 +6783,8 @@
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>--tensor-model-parallel-size 1 \
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>--pipeline-model-parallel-size 1 \
 </code></pre></div>
+<h2 id="3-training-results">3. 训练结果</h2>
+<p>目前示例脚本主要展示训练配置与命令行流程。实际吞吐与收敛指标会因集群规模、网络拓扑及并行策略不同而变化，建议在本地记录 TensorBoard 日志并结合 <code>nsys</code>/<code>ncu</code> 等工具评估性能。</p>
 
 
 

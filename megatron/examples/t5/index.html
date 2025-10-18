@@ -1553,7 +1553,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-training-setup" class="md-nav__link">
     <span class="md-ellipsis">
       1. 训练环境
     </span>
@@ -1562,7 +1562,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-configurations" class="md-nav__link">
     <span class="md-ellipsis">
       2. 配置参数
     </span>
@@ -1586,7 +1586,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-training-results" class="md-nav__link">
     <span class="md-ellipsis">
       3. 训练结果
     </span>
@@ -6664,7 +6664,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-training-setup" class="md-nav__link">
     <span class="md-ellipsis">
       1. 训练环境
     </span>
@@ -6673,7 +6673,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-configurations" class="md-nav__link">
     <span class="md-ellipsis">
       2. 配置参数
     </span>
@@ -6697,7 +6697,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-training-results" class="md-nav__link">
     <span class="md-ellipsis">
       3. 训练结果
     </span>
@@ -6728,8 +6728,7 @@
 <li><a href="#2-configurations">2. 配置参数</a></li>
 <li><a href="#3-training-results">3. 训练结果</a></li>
 </ul>
-<h2 id="1">1. 训练环境</h2>
-<p><a id="markdown-training-setup" name="training-setup"></a></p>
+<h2 id="1-training-setup">1. 训练环境</h2>
 <p>在 Slurm 集群上运行示例：
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="l l-Scalar l-Scalar-Plain">PYTORCH_IMAGE=nvcr.io/nvidia/pytorch:23.09-py3</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="l l-Scalar l-Scalar-Plain">ACCOUNT_NAME=&quot;&quot;</span><span class="w"> </span>
@@ -6745,8 +6744,7 @@
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">cd /workspace/megatron-lm</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">./examples/t5/train_t5_220m_distributed.sh $CHECKPOINT_PATH $TENSORBOARD_LOGS_PATH $VOCAB_FILE $DATA_PATH&quot;</span>
 </code></pre></div></p>
-<h2 id="2">2. 配置参数</h2>
-<p><a id="markdown-configurations" name="configurations"></a></p>
+<h2 id="2-configurations">2. 配置参数</h2>
 <p>以下参数对应 T5 220M 模型：</p>
 <h3 id="220m">220M</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>--num-layers 12 \
@@ -6760,8 +6758,7 @@
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>--tensor-model-parallel-size 1 \
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>--pipeline-model-parallel-size 1 \
 </code></pre></div>
-<h2 id="3">3. 训练结果</h2>
-<p><a id="markdown-training-results" name="training-results"></a></p>
+<h2 id="3-training-results">3. 训练结果</h2>
 <p>下图展示了 220M 模型在 Pile 数据集上的训练曲线。使用 32 张 GPU，批大小 2048，训练约 4 天。</p>
 <p>在 SQUAD 数据集上微调后，验证集准确率约为 63.44%。  </p>
 <p align="center">

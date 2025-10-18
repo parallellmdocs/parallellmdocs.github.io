@@ -1576,7 +1576,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-overview" class="md-nav__link">
     <span class="md-ellipsis">
       1. 概览
     </span>
@@ -1585,7 +1585,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       2. 前置准备
     </span>
@@ -1594,7 +1594,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-training-setup" class="md-nav__link">
     <span class="md-ellipsis">
       3. 训练环境
     </span>
@@ -1627,7 +1627,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#4-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       4. 配置说明
     </span>
@@ -1651,7 +1651,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#5-test-datasets" class="md-nav__link">
     <span class="md-ellipsis">
       5. 测试数据集
     </span>
@@ -1660,7 +1660,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-fp8" class="md-nav__link">
+  <a href="#6-fp8-training-considerations" class="md-nav__link">
     <span class="md-ellipsis">
       6. FP8 训练注意事项
     </span>
@@ -6715,7 +6715,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-overview" class="md-nav__link">
     <span class="md-ellipsis">
       1. 概览
     </span>
@@ -6724,7 +6724,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       2. 前置准备
     </span>
@@ -6733,7 +6733,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-training-setup" class="md-nav__link">
     <span class="md-ellipsis">
       3. 训练环境
     </span>
@@ -6766,7 +6766,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#4-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       4. 配置说明
     </span>
@@ -6790,7 +6790,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#5-test-datasets" class="md-nav__link">
     <span class="md-ellipsis">
       5. 测试数据集
     </span>
@@ -6799,7 +6799,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-fp8" class="md-nav__link">
+  <a href="#6-fp8-training-considerations" class="md-nav__link">
     <span class="md-ellipsis">
       6. FP8 训练注意事项
     </span>
@@ -6833,11 +6833,9 @@
 <li><a href="#5-test-datasets">5. 测试数据集</a></li>
 <li><a href="#6-fp8-training-considerations">6. FP8 训练注意事项</a></li>
 </ul>
-<h2 id="1">1. 概览</h2>
-<p><a id="overview" name="overview"></a></p>
+<h2 id="1-overview">1. 概览</h2>
 <p>使用 Megatron-Core 以 FP8 精度训练 Llama 模型。</p>
-<h2 id="2">2. 前置准备</h2>
-<p><a id="prerequisites" name="prerequisites"></a></p>
+<h2 id="2-prerequisites">2. 前置准备</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Clone repository</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">HOST_MEGATRON_LM_DIR</span><span class="o">=</span><span class="s2">&quot;/path/to/your/host/megatron-lm&quot;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/NVIDIA/Megatron-LM.git<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HOST_MEGATRON_LM_DIR</span><span class="s2">&quot;</span>
@@ -6852,8 +6850,7 @@
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># export HOST_TOKENIZER_MODEL_PATH=&quot;/path/to/host/tokenizer.model&quot;</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1"># export HOST_DATA_PREFIX=&quot;/path/to/host/mydata_prefix&quot;</span>
 </code></pre></div>
-<h2 id="3">3. 训练环境</h2>
-<p><a id="training-setup" name="training-setup"></a></p>
+<h2 id="3-training-setup">3. 训练环境</h2>
 <h3 id="_2">使用模拟数据</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">PYTORCH_IMAGE</span><span class="o">=</span><span class="s2">&quot;nvcr.io/nvidia/pytorch:25.03-py3&quot;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
@@ -6886,8 +6883,7 @@
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="s2">&quot;/workspace/data_dir/</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_DATA_PREFIX</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">  </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_TENSORBOARD_LOGS_PATH</span><span class="si">}</span><span class="s2">/training_custom_</span><span class="k">$(</span>date<span class="w"> </span>+<span class="s1">&#39;%y-%m-%d_%H-%M-%S&#39;</span><span class="k">)</span><span class="s2">.log&quot;</span>
 </code></pre></div>
-<h2 id="4">4. 配置说明</h2>
-<p><a id="configuration" name="configuration"></a></p>
+<h2 id="4-configuration">4. 配置说明</h2>
 <p>默认并行策略：
 - 张量并行：1
 - 流水线并行：1
@@ -6985,8 +6981,7 @@
 - EP：专家并行度
 - GA：梯度累积步数</p>
 <p>NeMo 基于 Megatron-Core，实现最新性能指标请参考官方 <a href="https://docs.nvidia.com/nemo-framework/user-guide/latest/performance/performance_summary.html">NeMo 文档</a>。</p>
-<h2 id="5">5. 测试数据集</h2>
-<p><a id="test-datasets" name="test-datasets"></a></p>
+<h2 id="5-test-datasets">5. 测试数据集</h2>
 <p>推荐数据集：
 1. <strong>WikiText-103</strong>：https://huggingface.co/datasets/Salesforce/wikitext</p>
 <p>预处理示例：
@@ -6997,8 +6992,7 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">       </span>--tokenizer-model<span class="w"> </span>/path/to/tokenizer.model<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">       </span>--append-eod
 </code></pre></div></p>
-<h2 id="6-fp8">6. FP8 训练注意事项</h2>
-<p><a id="fp8-training-considerations" name="fp8-training-considerations"></a></p>
+<h2 id="6-fp8-training-considerations">6. FP8 训练注意事项</h2>
 <ul>
 <li>
 <p><strong>硬件要求</strong>：需使用 NVIDIA Hopper、Ada 或 Blackwell GPU 才能启用 FP8。</p>

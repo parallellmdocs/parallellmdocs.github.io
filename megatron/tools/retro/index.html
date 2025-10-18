@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#retro-instructretro" class="md-skip">
+        <a href="#retro-与-instructretro" class="md-skip">
           跳转至
         </a>
       
@@ -6579,7 +6579,7 @@
 
 
 
-<h1 id="retro-instructretro">Retro 与 InstructRetro</h1>
+<h1 id="retro-与-instructretro">Retro 与 InstructRetro</h1>
 <p>Retro <a href="https://arxiv.org/abs/2112.04426">(Borgeaud et al., 2022)</a> 是一种采用检索增强预训练的自回归解码器式语言模型。
 借助检索能力，Retro 可以从万亿级别的标注语料中检索，从零开始完成大规模预训练，并在实际部署中具备良好的扩展性。
 与仅依赖模型参数隐式存储事实知识的标准 GPT 相比，引入检索可以更高效地存储事实知识，从而在显著降低参数量的同时实现更低的困惑度。
@@ -6588,7 +6588,7 @@
 经过指令微调的 InstructRetro 在零样本场景下显著优于同等规模的 GPT：在 8 个短文本问答任务上平均提升 7%，在 4 个高难度长文本问答任务上提升 10%，在 3 个摘要任务上提升 16%。
 我们还发现，移除 InstructRetro 的编码器并直接将其解码器骨架作为 GPT 使用，仍可获得与原模型相当的效果。</p>
 <p>本文档提供了一个复现 Retro 与 InstructRetro 的端到端教程。</p>
-<h1 id="_1">目录</h1>
+<h1 id="目录">目录</h1>
 <ul>
 <li><a href="#检查点">检查点</a></li>
 <li><a href="#端到端复现指南">端到端复现指南</a><ul>
@@ -6606,7 +6606,7 @@
 </li>
 <li><a href="#引用">引用</a></li>
 </ul>
-<h1 id="_2">检查点</h1>
+<h1 id="检查点">检查点</h1>
 <p>下表给出了 Retro 与 InstructRetro 的预训练检查点，可通过以下链接下载：</p>
 <table>
 <thead>
@@ -6654,14 +6654,14 @@
 </tr>
 </tbody>
 </table>
-<h1 id="_3">端到端复现指南</h1>
+<h1 id="端到端复现指南">端到端复现指南</h1>
 <p>本教程覆盖了 InstructRetro 端到端复现的各个环节：包括大规模检索构建、预训练、困惑度评估、指令微调以及下游任务评估。</p>
 <p>如果你只关注评估，可直接下载我们<a href="#检查点">公开的检查点</a>，并跳到 <a href="#step-5-eval">步骤 5</a> 进行下游任务评估。</p>
 <h2 id="step-0-setup">步骤 0：环境准备</h2>
 <p>建议在 Docker 环境中运行以下流程。</p>
-<h3 id="docker">Docker 镜像</h3>
+<h3 id="docker-镜像">Docker 镜像</h3>
 <p>我们在 <a href="examples/Dockerfile">tools/retro/examples/Dockerfile</a> 提供了用于复现的 Docker 构建文件，基于 <a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch/tags">NGC Docker</a> <code>nvcr.io/nvidia/pytorch:23.09-py3</code> 镜像。</p>
-<h3 id="_4">安装依赖</h3>
+<h3 id="安装依赖">安装依赖</h3>
 <p>克隆 Megatron 仓库：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>--branch<span class="w"> </span>InstructRetro<span class="w"> </span>https://github.com/NVIDIA/Megatron-LM.git
 </code></pre></div>
@@ -6702,7 +6702,7 @@
 <h2 id="step-4-sft">步骤 4：指令微调</h2>
 <p>在该步骤中，我们使用指令数据对预训练模型进行微调，并提供示例脚本微调 8.43 亿参数的 Retro。</p>
 <p>我们还开源了一套可混合使用的指令微调数据集，可在<a href="https://drive.google.com/file/d/1nzKwwYf8lYb9gN3P4YO8pFNU_B2nMYe1/view?usp=sharing">此链接</a>下载。该数据集包含以下开源指令调优语料：</p>
-<h3 id="_5">指令微调数据集构成</h3>
+<h3 id="_1">指令微调数据集构成</h3>
 <table>
 <thead>
 <tr>
@@ -6771,7 +6771,7 @@
 </table>
 <p>如需了解各指令数据集的更多细节，请参阅上表所列论文。</p>
 <p><em>请注意，上述指令数据集均来自公开资源，与 <a href="https://arxiv.org/abs/2310.07713">InstructRetro</a> 使用的数据集略有差异；后者包含部分私有与商业数据集，因此在下游任务上可能存在 1-2% 的精度差异。</em></p>
-<h3 id="_6">指令微调脚本</h3>
+<h3 id="_2">指令微调脚本</h3>
 <p>将<a href="https://drive.google.com/file/d/1nzKwwYf8lYb9gN3P4YO8pFNU_B2nMYe1/view?usp=sharing">混合指令数据集</a>下载到数据目录 <code>$DATA_HOME</code>，并修改 <code>tools/retro/sft/sft_retro_lm.sh</code> 示例脚本。</p>
 <p>以下示例命令演示了如何在 8.43 亿参数的 Retro 上进行指令微调：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">                                      </span><span class="o">[</span>blend-dataset-name<span class="o">]</span><span class="w"> </span><span class="o">[</span>model-size<span class="o">]</span><span class="w"> </span><span class="o">[</span>batch-size<span class="o">]</span><span class="w">  </span><span class="o">[</span>lr<span class="o">]</span><span class="w">    </span><span class="o">[</span>checkpoints<span class="o">]</span>
@@ -6790,7 +6790,7 @@
 <p>如果需要计算 F1 / Exact Match (EM) 分数，可运行以下脚本（请根据任务与检查点更新数据集路径）：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>python3<span class="w"> </span>tools/retro/text_generation/evaluate.py
 </code></pre></div>
-<h1 id="_7">引用</h1>
+<h1 id="引用">引用</h1>
 <p>更多技术细节可参阅以下论文：</p>
 <p><a href="https://arxiv.org/abs/2304.06762">Shall we Pretrain Autoregressive Language Models with Retrieval? A Comprehensive Study.</a></p>
 <p><em>Boxin Wang, Wei Ping, Peng Xu, Lawrence McAfee, Zihan Liu, Mohammad Shoeybi, Yi Dong, Oleksii Kuchaiev, Bo Li, Chaowei Xiao, Anima Anandkumar, Bryan Catanzaro.</em>（EMNLP 2023）</p>

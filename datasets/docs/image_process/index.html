@@ -6677,8 +6677,8 @@
 <p>缓存能够避免重复执行同一变换。因此 [<code>~Dataset.map</code>] 更适合每次训练只需运行一次的操作，例如调整大小；而不是每个 epoch 都执行的数据增强。</p>
 <p>[<code>~Dataset.map</code>] 会占用一定内存，可通过以下参数控制：</p>
 <ul>
-<li><a href="../package_reference/main_classes/#datasets.DatasetDict.map.batch_size"><code>batch_size</code></a>：每次传入变换函数的样本数量。</li>
-<li><a href="../package_reference/main_classes/#datasets.DatasetDict.map.writer_batch_size"><code>writer_batch_size</code></a>：写入磁盘前保存在内存中的处理结果数量。</li>
+<li><code>batch_size</code>：每次传入变换函数的样本数量。</li>
+<li><code>writer_batch_size</code>：写入磁盘前保存在内存中的处理结果数量。</li>
 </ul>
 <p>默认值均为 1000，若存储图像会占用不少空间，可适当调低。</p>
 <h2 id="_2">应用数据增强</h2>

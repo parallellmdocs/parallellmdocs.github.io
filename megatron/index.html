@@ -6751,7 +6751,7 @@
 <li><strong><a href="https://github.com/NVIDIA/TensorRT-Model-Optimizer">TensorRT Model Optimizer (ModelOpt)</a></strong> - 用于量化、剪枝、蒸馏的模型优化工具包</li>
 </ul>
 <p><strong>兼容生态：</strong> <a href="https://github.com/huggingface/accelerate">Hugging Face Accelerate</a>、<a href="https://github.com/hpcaitech/ColossalAI">Colossal-AI</a>、<a href="https://github.com/microsoft/DeepSpeed">DeepSpeed</a></p>
-<h1 id="_5">安装</h1>
+<h1 id="安装">安装</h1>
 <h2 id="docker">Docker（推荐）</h2>
 <p>建议优先使用 <a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch">PyTorch NGC Container</a> 的上一版本，以确保与 Megatron Core 的版本与测试匹配。我们的发布始终基于前一个月的 NGC 容器，以保证兼容性与稳定性。</p>
 <p><strong>注意：</strong> NGC PyTorch 容器通过 <code>PIP_CONSTRAINT</code> 全局约束 Python 环境。以下示例会解除该变量。</p>
@@ -6794,20 +6794,20 @@
 <p>若仅需包含 torch 的 Megatron Core，可执行：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pip<span class="w"> </span>install<span class="w"> </span>megatron-core
 </code></pre></div>
-<h2 id="_6">系统需求</h2>
-<h3 id="_7">硬件需求</h3>
+<h2 id="_5">系统需求</h2>
+<h3 id="_6">硬件需求</h3>
 <ul>
 <li><strong>FP8 支持</strong>：NVIDIA Hopper、Ada、Blackwell GPU</li>
 <li><strong>推荐</strong>：NVIDIA Turing 架构或更新产品</li>
 </ul>
-<h3 id="_8">软件需求</h3>
+<h3 id="_7">软件需求</h3>
 <ul>
 <li><strong>CUDA/cuDNN/NCCL</strong>：最新稳定版</li>
 <li><strong>PyTorch</strong>：最新稳定版</li>
 <li><strong>Transformer Engine</strong>：最新稳定版</li>
 <li><strong>Python</strong>：推荐 3.12</li>
 </ul>
-<h1 id="_9">性能基准</h1>
+<h1 id="_8">性能基准</h1>
 <p>最新性能基准详见 <a href="https://docs.nvidia.com/nemo-framework/user-guide/latest/performance/performance_summary.html">NVIDIA NeMo Framework Performance Summary</a>。</p>
 <p>我们的代码库可在数千块 GPU 上高效训练 20 亿到 4620 亿参数的模型，在 H100 集群上实现最高 <strong>47% Model FLOP Utilization (MFU)</strong>。</p>
 <p><img alt="模型表" src="images/model_table.png" /></p>
@@ -6826,15 +6826,15 @@
 <li><strong>可用于生产</strong>：训练流程包含检查点与容错机制</li>
 <li><em>说明：性能结果在未训练收敛的情况下测得</em></li>
 </ul>
-<h2 id="_10">弱扩展结果</h2>
+<h2 id="_9">弱扩展结果</h2>
 <p>弱扩展结果展示了超线性扩展（最小模型 MFU 为 41%，最大模型提升至 47%-48%），原因在于更大的 GEMM 具备更高的算术强度，执行效率更高。</p>
 <p><img alt="弱扩展" src="images/weak_scaling.png" /></p>
-<h2 id="_11">强扩展结果</h2>
+<h2 id="_10">强扩展结果</h2>
 <p>我们还对标准 GPT-3 模型进行了强扩展（由于词表更大，我们的版本参数略多于 1750 亿），在 96 至 4608 块 H100 GPU 上保持 1152 序列的批大小。随着规模增大，通信开销更加突出，MFU 从 47% 降至 42%。</p>
 <p><img alt="强扩展" src="images/strong_scaling.png" /></p>
-<h1 id="_12">训练</h1>
-<h2 id="_13">快速入门</h2>
-<h3 id="_14">简单训练示例</h3>
+<h1 id="_11">训练</h1>
+<h2 id="_12">快速入门</h2>
+<h3 id="_13">简单训练示例</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Distributed training example (2 GPUs, mock data)</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>torchrun<span class="w"> </span>--nproc_per_node<span class="o">=</span><span class="m">2</span><span class="w"> </span>examples/run_simple_mcore_train_loop.py
 </code></pre></div>
@@ -6842,12 +6842,12 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 8 GPUs, FP8 precision, mock data</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>./examples/llama/train_llama3_8b_fp8.sh
 </code></pre></div>
-<h2 id="_15">数据准备</h2>
+<h2 id="_14">数据准备</h2>
 <h3 id="jsonl">JSONL 数据格式</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Your training text here...&quot;</span><span class="p">}</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Another training sample...&quot;</span><span class="p">}</span>
 </code></pre></div>
-<h3 id="_16">基础预处理</h3>
+<h3 id="基础预处理">基础预处理</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python<span class="w"> </span>tools/preprocess_data.py<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span>--input<span class="w"> </span>data.jsonl<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span>--output-prefix<span class="w"> </span>processed_data<span class="w"> </span><span class="se">\</span>
@@ -6856,7 +6856,7 @@
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span>--workers<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span>--append-eod
 </code></pre></div>
-<h3 id="_17">核心参数</h3>
+<h3 id="_15">核心参数</h3>
 <ul>
 <li><code>--input</code>：输入 JSON/JSONL 文件路径</li>
 <li><code>--output-prefix</code>：输出二进制文件（.bin 与 .idx）的前缀</li>
@@ -6867,9 +6867,9 @@
 </ul>
 <!-- **-> [数据准备完整指南](./docs/data-preparation.md)** - 涵盖高级预处理、数据集采集、去重与优化策略的完整指南 -->
 
-<h1 id="_18">并行策略</h1>
+<h1 id="_16">并行策略</h1>
 <h2 id="dp">数据并行（DP）</h2>
-<h3 id="_19">标准数据并行</h3>
+<h3 id="_17">标准数据并行</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Standard DDP: replicate model on each GPU</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>torchrun<span class="w"> </span>--nproc_per_node<span class="o">=</span><span class="m">8</span><span class="w"> </span>pretrain_gpt.py<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span>--data-parallel-sharding-strategy<span class="w"> </span>no_shard
@@ -6908,8 +6908,8 @@
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>--num-experts<span class="w"> </span><span class="m">8</span><span class="w">                 </span><span class="c1"># 8 experts per MoE layer</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>--moe-grouped-gemm<span class="w">              </span><span class="c1"># Optimize expert computation</span>
 </code></pre></div>
-<h2 id="_20">组合并行策略</h2>
-<h3 id="_21">并行策略选型指南</h3>
+<h2 id="_18">组合并行策略</h2>
+<h3 id="_19">并行策略选型指南</h3>
 <p>基于 <a href="https://github.com/NVIDIA/NeMo/tree/main/scripts/performance/recommended_model_configs">NVIDIA NeMo 生产配置</a>：</p>
 <table>
 <thead>
@@ -6999,7 +6999,7 @@
 </table>
 <h3 id="moe">MoE 特殊要求</h3>
 <p><strong>重要：</strong> 将专家并行（EP）与张量并行（TP）结合时，必须启用 <strong>序列并行（SP）</strong>。</p>
-<h2 id="_22">性能优化</h2>
+<h2 id="_20">性能优化</h2>
 <table>
 <thead>
 <tr>
@@ -7039,12 +7039,12 @@
 <p><strong>-&gt; <a href="https://docs.nvidia.com/nemo-framework/user-guide/latest/performance/performance-guide.html#performance-tuning-guide">NVIDIA NeMo Framework Performance Tuning Guide</a></strong> - 深入的性能调优指南，涵盖通信重叠、内存优化与分析调试选项。</p>
 <h3 id="flashattention">FlashAttention</h3>
 <p><a href="https://github.com/Dao-AILab/flash-attention">FlashAttention</a> 是高效的注意力算法。推荐默认配置，即通过 Transformer Engine 调用 cuDNN，实现前向最高 50%、反向最高 84% 的加速，并支持 FP8 内核。也可通过 <code>--use-flash-attn</code> 使用 <code>flash-attn</code> 包。</p>
-<h3 id="_23">混合精度训练</h3>
+<h3 id="_21">混合精度训练</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>--fp16<span class="w">                    </span><span class="c1"># Standard FP16</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>--bf16<span class="w">                    </span><span class="c1"># BFloat16 (recommended for large models)</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>--fp8-hybrid<span class="w">              </span><span class="c1"># FP8 training (Hopper, Ada, Blackwell GPUs)</span>
 </code></pre></div>
-<h3 id="_24">激活检查点与重计算</h3>
+<h3 id="_22">激活检查点与重计算</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># For limited memory</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>--recompute-activations
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
@@ -7052,27 +7052,27 @@
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>--recompute-granularity<span class="w"> </span>full<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>--recompute-method<span class="w"> </span>uniform
 </code></pre></div>
-<h3 id="_25">数据并行通信重叠</h3>
+<h3 id="_23">数据并行通信重叠</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>--overlap-grad-reduce
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>--overlap-param-gather
 </code></pre></div>
-<h3 id="_26">分布式优化器</h3>
+<h3 id="_24">分布式优化器</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>--use-distributed-optimizer
 </code></pre></div>
-<h1 id="_27">路线图</h1>
+<h1 id="_25">路线图</h1>
 <p>及时了解最新的开发路线图与计划特性：</p>
 <ul>
 <li><strong><a href="https://github.com/NVIDIA/Megatron-LM/issues/1729">MoE Q3-Q4 2025 Roadmap</a></strong> - 涵盖 DeepSeek-V3、Qwen3、高级并行策略、FP8 优化及 Blackwell 增强</li>
 <li><strong><a href="https://github.com/NVIDIA/Megatron-LM/issues/1739">GPT-OSS Implementation Tracker</a></strong> - 集成 YaRN RoPE 缩放、注意力 sink、自定义激活函数等高级特性</li>
 </ul>
 <p><em>更多路线图跟踪即将发布。</em></p>
-<h1 id="_28">社区与支持</h1>
-<h2 id="_29">获取帮助</h2>
+<h1 id="_26">社区与支持</h1>
+<h2 id="_27">获取帮助</h2>
 <ul>
 <li>文档：<strong><a href="https://docs.nvidia.com/Megatron-Core/">Documentation</a></strong> - 官方文档</li>
 <li>问题追踪：<strong><a href="https://github.com/NVIDIA/Megatron-LM/issues">Issues</a></strong> - 提交缺陷或功能请求</li>
 </ul>
-<h2 id="_30">贡献方式</h2>
+<h2 id="_28">贡献方式</h2>
 <p>我们非常欢迎贡献！您可以：</p>
 <ul>
 <li>报告缺陷 - 帮助提升可靠性</li>
@@ -7081,7 +7081,7 @@
 <li>提交 PR - 贡献代码改进</li>
 </ul>
 <p><strong>-&gt; <a href="CONTRIBUTING/">贡献指南</a></strong></p>
-<h2 id="_31">引用</h2>
+<h2 id="_29">引用</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nc">@article</span><span class="p">{</span><span class="nl">megatron-lm</span><span class="p">,</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism}</span><span class="p">,</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Shoeybi, Mohammad and Patwary, Mostofa and Puri, Raul and LeGresley, Patrick and Casper, Jared and Catanzaro, Bryan}</span><span class="p">,</span>

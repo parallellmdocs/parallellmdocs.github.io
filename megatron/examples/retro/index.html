@@ -2036,7 +2036,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-training-setup" class="md-nav__link">
     <span class="md-ellipsis">
       1. 训练环境
     </span>
@@ -2045,7 +2045,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-data-preprocessing" class="md-nav__link">
     <span class="md-ellipsis">
       2. 数据预处理
     </span>
@@ -2054,7 +2054,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-configurations" class="md-nav__link">
     <span class="md-ellipsis">
       3. 配置参数
     </span>
@@ -6673,7 +6673,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-training-setup" class="md-nav__link">
     <span class="md-ellipsis">
       1. 训练环境
     </span>
@@ -6682,7 +6682,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-data-preprocessing" class="md-nav__link">
     <span class="md-ellipsis">
       2. 数据预处理
     </span>
@@ -6691,7 +6691,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-configurations" class="md-nav__link">
     <span class="md-ellipsis">
       3. 配置参数
     </span>
@@ -6746,8 +6746,7 @@
 <li><a href="#2-data-preprocessing">2. 数据预处理</a></li>
 <li><a href="#3-configurations">3. 配置参数</a></li>
 </ul>
-<h2 id="1">1. 训练环境</h2>
-<p><a id="markdown-training-setup" name="training-setup"></a></p>
+<h2 id="1-training-setup">1. 训练环境</h2>
 <p>若通过 Docker 运行模型，可执行：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="l l-Scalar l-Scalar-Plain">PYTORCH_IMAGE=nvcr.io/nvidia/pytorch:23.09-py3</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="l l-Scalar l-Scalar-Plain">CHECKPOINT_PATH=&quot;&quot;</span><span class="w"> </span><span class="c1">#&lt;Specify path&gt;</span>
@@ -6778,11 +6777,9 @@
 <li><code>--seq-length</code></li>
 <li><code>--train-samples</code></li>
 </ul>
-<h2 id="2">2. 数据预处理</h2>
-<p><a id="markdown-data-preprocessing" name="data-preprocessing"></a></p>
+<h2 id="2-data-preprocessing">2. 数据预处理</h2>
 <p>Retro 会先建立检索库并为每个样本查询邻居 ID，预处理脚本可参考 <code>preprocess_data.sh</code>。详细文档见 <a href="../../tools/retro/">tools/retro/README.md</a>。</p>
-<h2 id="3">3. 配置参数</h2>
-<p><a id="markdown-configurations" name="configurations"></a></p>
+<h2 id="3-configurations">3. 配置参数</h2>
 <p>当前示例展示 20 亿参数模型。其他配置示例如下：</p>
 <h3 id="857m">857M</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>--num-layers 24 \

@@ -5717,6 +5717,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#specify-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      指定特征
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7006,6 +7015,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#specify-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      指定特征
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7262,6 +7280,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">class_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sadness&quot;</span><span class="p">,</span> <span class="s2">&quot;joy&quot;</span><span class="p">,</span> <span class="s2">&quot;love&quot;</span><span class="p">,</span> <span class="s2">&quot;anger&quot;</span><span class="p">,</span> <span class="s2">&quot;fear&quot;</span><span class="p">,</span> <span class="s2">&quot;surprise&quot;</span><span class="p">]</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">emotion_features</span> <span class="o">=</span> <span class="n">Features</span><span class="p">({</span><span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="n">Value</span><span class="p">(</span><span class="s1">&#39;string&#39;</span><span class="p">),</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">ClassLabel</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="n">class_names</span><span class="p">)})</span>
 </code></pre></div>
+<h3 id="specify-features">指定特征</h3>
 <p>在 [<code>load_dataset</code>] 中通过 <code>features</code> 指定：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="n">data_files</span><span class="o">=</span><span class="n">file_dict</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">],</span> <span class="n">features</span><span class="o">=</span><span class="n">emotion_features</span><span class="p">)</span>
 </code></pre></div>

@@ -6583,18 +6583,18 @@
 
 <h1 id="llama-31-nemotron-nano-vl-8b-v1">Llama-3.1-Nemotron-Nano-VL-8B-V1</h1>
 <p>详细信息可参考 <a href="https://huggingface.co/nvidia/Llama-3.1-Nemotron-Nano-VL-8B-V1">Hugging Face</a>。</p>
-<h1 id="_1">检查点</h1>
+<h1 id="检查点">检查点</h1>
 <p><a href="https://huggingface.co/nvidia/Llama-3.1-Nemotron-Nano-VL-8B-V1">HuggingFace 版本</a></p>
 <p><a href="https://huggingface.co/nvidia/Llama-3.1-Nemotron-Nano-VL-8B-V1-mcore">Megatron-Core 版本</a></p>
-<h1 id="_2">环境准备</h1>
+<h1 id="环境准备">环境准备</h1>
 <h2 id="docker">Docker 镜像</h2>
 <p>参见 <code>examples/multimodal/llama_3p1_nemotron_nano_vl_8b_v1/Dockerfile</code>。</p>
-<h2 id="_3">数据集准备</h2>
+<h2 id="_1">数据集准备</h2>
 <p>多模态数据加载使用 <a href="https://github.com/NVIDIA/Megatron-Energon">Megatron Energon</a>。</p>
-<h2 id="_4">模型</h2>
+<h2 id="模型">模型</h2>
 <p>可直接从 <a href="https://huggingface.co/nvidia/Llama-3.1-Nemotron-Nano-VL-8B-V1-mcore">此处</a> 下载张量并行度 1 或 4 的 Megatron 检查点。也可参照下文的 <a href="#模型转换">模型转换</a> 与 <a href="#训练">训练</a> 步骤，从零开始预训练与微调。</p>
-<h3 id="_5">模型转换</h3>
-<h4 id="_6">语言模型转换</h4>
+<h3 id="模型转换">模型转换</h3>
+<h4 id="_2">语言模型转换</h4>
 <p>起始模型为 HuggingFace 的 <a href="https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct">meta-llama/Llama-3.1-8B-Instruct</a>。下载后执行：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">LLAMA_DOWNLOAD_DIR</span><span class="o">=</span>&lt;downloaded<span class="w"> </span>hf<span class="w"> </span>model<span class="w"> </span>directory&gt;
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">CUDA_DEVICE_MAX_CONNECTIONS</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>python<span class="w"> </span>tools/checkpoint/convert.py<span class="w"> </span>--bf16<span class="w"> </span>--model-type<span class="w"> </span>GPT<span class="w"> </span>--loader<span class="w"> </span>llama_mistral<span class="w"> </span>--saver<span class="w"> </span>core<span class="w"> </span><span class="se">\</span>
@@ -6602,21 +6602,21 @@
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span>--load-dir<span class="w"> </span><span class="nv">$LLAMA_DOWNLOAD_DIR</span><span class="w"> </span>--save-dir<span class="w"> </span>llama3p1<span class="w"> </span>--tokenizer-model<span class="w"> </span><span class="nv">$LLAMA_DOWNLOAD_DIR</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span>--saver-transformer-impl<span class="w"> </span>transformer_engine<span class="w"> </span>--model-size<span class="w"> </span>llama3
 </code></pre></div>
-<h4 id="_7">视觉模型转换</h4>
+<h4 id="_3">视觉模型转换</h4>
 <p>通过以下命令将 RADIO 模型转换为 mcore 可用格式：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>examples/multimodal/model_converter/radio_converter.py<span class="w"> </span>--output<span class="w"> </span>radio_tp_4<span class="w"> </span>--tensor-parallel-size<span class="w"> </span><span class="m">4</span><span class="w"> </span>--use-te<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span>--version<span class="w"> </span>c-radio_v2-vlm-h<span class="w"> </span>--model-type<span class="w"> </span>radio_v2.5-h
 </code></pre></div>
-<h4 id="_8">合并检查点</h4>
+<h4 id="_4">合并检查点</h4>
 <p>运行脚本合并语言与视觉模型：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>examples/multimodal/combine_lm_vision_checkpoints.sh &lt;language model directory&gt; &lt;vision model directory&gt; &lt;output directory&gt;
 </code></pre></div>
-<h1 id="_9">训练</h1>
+<h1 id="训练">训练</h1>
 <ol>
 <li>预训练脚本：<code>examples/multimodal/llama_3p1_nemotron_nano_vl_8b_v1/pretraining_llama_3p1_nemotron_nano_vl_8b_v1.sh</code></li>
 <li>指令微调脚本：<code>examples/multimodal/llama_3p1_nemotron_nano_vl_8b_v1/sft_llama_3p1_nemotron_nano_vl_8b_v1.sh</code></li>
 </ol>
-<h1 id="_10">推理与评估</h1>
+<h1 id="推理与评估">推理与评估</h1>
 <p>简单推理示例：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">LLAMA_NEMOTRON_NANO_VL_PATH</span><span class="o">=</span>&lt;path<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>megatron<span class="w"> </span><span class="nv">tp</span><span class="o">=</span><span class="m">4</span><span class="w"> </span>checkpoint&gt;
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>examples/multimodal/llama_3p1_nemotron_nano_vl_8b_v1/text_generation.sh<span class="w"> </span>--model-path<span class="w"> </span><span class="nv">$LLAMA_NEMOTRON_NANO_VL_PATH</span><span class="w"> </span><span class="se">\</span>

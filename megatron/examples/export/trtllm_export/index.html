@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#megatron-core-trtllm" class="md-skip">
+        <a href="#megatron-core-到-trtllm-的导出指南" class="md-skip">
           跳转至
         </a>
       
@@ -1452,7 +1452,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#目录" class="md-nav__link">
     <span class="md-ellipsis">
       目录
     </span>
@@ -1462,7 +1462,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-快速开始" class="md-nav__link">
     <span class="md-ellipsis">
       1. 快速开始
     </span>
@@ -1472,7 +1472,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11" class="md-nav__link">
+  <a href="#11-代码结构" class="md-nav__link">
     <span class="md-ellipsis">
       1.1 代码结构
     </span>
@@ -1481,7 +1481,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12" class="md-nav__link">
+  <a href="#12-运行示例" class="md-nav__link">
     <span class="md-ellipsis">
       1.2 运行示例
     </span>
@@ -1495,7 +1495,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-gpu" class="md-nav__link">
+  <a href="#2-gpu-导出" class="md-nav__link">
     <span class="md-ellipsis">
       2. GPU 导出
     </span>
@@ -1504,7 +1504,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-后续规划" class="md-nav__link">
     <span class="md-ellipsis">
       3. 后续规划
     </span>
@@ -6670,7 +6670,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#目录" class="md-nav__link">
     <span class="md-ellipsis">
       目录
     </span>
@@ -6680,7 +6680,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-快速开始" class="md-nav__link">
     <span class="md-ellipsis">
       1. 快速开始
     </span>
@@ -6690,7 +6690,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11" class="md-nav__link">
+  <a href="#11-代码结构" class="md-nav__link">
     <span class="md-ellipsis">
       1.1 代码结构
     </span>
@@ -6699,7 +6699,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12" class="md-nav__link">
+  <a href="#12-运行示例" class="md-nav__link">
     <span class="md-ellipsis">
       1.2 运行示例
     </span>
@@ -6713,7 +6713,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-gpu" class="md-nav__link">
+  <a href="#2-gpu-导出" class="md-nav__link">
     <span class="md-ellipsis">
       2. GPU 导出
     </span>
@@ -6722,7 +6722,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-后续规划" class="md-nav__link">
     <span class="md-ellipsis">
       3. 后续规划
     </span>
@@ -6751,9 +6751,9 @@
 
 
 
-<h1 id="megatron-core-trtllm">Megatron Core 到 TRTLLM 的导出指南</h1>
+<h1 id="megatron-core-到-trtllm-的导出指南">Megatron Core 到 TRTLLM 的导出指南</h1>
 <p>本文介绍如何使用 Megatron Core 的导出工具，将模型转换为 TRT-LLM 格式。</p>
-<h3 id="_1">目录</h3>
+<h3 id="目录">目录</h3>
 <ul>
 <li><a href="#megatron-core-到-trtllm-的导出指南">Megatron Core 到 TRTLLM 的导出指南</a></li>
 <li><a href="#目录">目录</a></li>
@@ -6765,11 +6765,11 @@
 <li><a href="#2-gpu-导出">2. GPU 导出</a></li>
 <li><a href="#3-后续规划">3. 后续规划</a></li>
 </ul>
-<h4 id="1">1. 快速开始</h4>
+<h4 id="1-快速开始">1. 快速开始</h4>
 <p>以下示例展示如何在单设备模式下，将 mcore GPT 模型转换为 TRT-LLM 格式。示例脚本位于 <code>single_device_export/gpt_single_device_cpu_export.py</code>。</p>
 <p>注意：若模型可完全装入 GPU 内存，可先将 state_dict 预加载到 GPU，再调用 <code>get_trtllm_pretrained_config_and_model_weights</code>。</p>
 <p><br></p>
-<h5 id="11">1.1 代码结构</h5>
+<h5 id="11-代码结构">1.1 代码结构</h5>
 <p><strong><em>步骤 1：初始化模型并行及默认参数</em></strong><br />
 我们将 TP 与 PP 均设置为 1，以便在 CPU 上获取完整的 state_dict：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">initialize_distributed</span><span class="p">(</span><span class="n">tensor_model_parallel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pipeline_model_parallel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -6860,7 +6860,7 @@
 <a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>    <span class="p">)</span>
 </code></pre></div>
 <p><br></p>
-<h5 id="12">1.2 运行示例</h5>
+<h5 id="12-运行示例">1.2 运行示例</h5>
 <p>示例运行脚本如下：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a># 在工作站上
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>MLM_PATH=/path/to/megatron-lm
@@ -6875,14 +6875,14 @@
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>CUDA_VISIBLE_DEVICES=0 torchrun --nproc-per-node 1  examples/export/trtllm_export/single_device_export/gpt_single_device_cpu_export.py
 </code></pre></div>
 <p><br></p>
-<h4 id="2-gpu">2. GPU 导出</h4>
+<h4 id="2-gpu-导出">2. GPU 导出</h4>
 <p>若需在设备上高效导出，可使用 <code>distributed_export/gpt_distributed_gpu_export.py</code>，内部调用 <code>megatron/core/export/trtllm/trtllm_weights_converter/distributed_trtllm_model_weights_converter.py</code> 中的 <code>distributed_converter</code> 在 GPU 上转换权重。</p>
 <p>单设备版本会将模型权重聚集到 CPU/GPU，上转换后再写回磁盘；GPU 版本则在各 GPU 上分别加载分片，将其转换并写回磁盘。</p>
 <p>运行方式示例：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="m">0</span>,1<span class="w"> </span>torchrun<span class="w"> </span>--nproc-per-node<span class="w"> </span><span class="m">2</span><span class="w">  </span>examples/export/trtllm_export/distributed_export/gpt_distributed_gpu_export.py
 </code></pre></div>
 <p><br></p>
-<h4 id="3">3. 后续规划</h4>
+<h4 id="3-后续规划">3. 后续规划</h4>
 <p>预计在未来版本提供：
 * 导出流程支持流水线并行（开发中）
 * 更多模型的 GPU 导出（部分模型开发中）
