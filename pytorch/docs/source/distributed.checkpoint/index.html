@@ -3826,7 +3826,43 @@
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      进一步阅读
+      入门资料
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      核心函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statefull" class="md-nav__link">
+    <span class="md-ellipsis">
+      状态字典与 Statefull 对象
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      存储后端
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fsdpddp" class="md-nav__link">
+    <span class="md-ellipsis">
+      与 FSDP/DDP 的配合
     </span>
   </a>
   
@@ -4084,7 +4120,43 @@
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      进一步阅读
+      入门资料
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      核心函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#statefull" class="md-nav__link">
+    <span class="md-ellipsis">
+      状态字典与 Statefull 对象
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      存储后端
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fsdpddp" class="md-nav__link">
+    <span class="md-ellipsis">
+      与 FSDP/DDP 的配合
     </span>
   </a>
   
@@ -4106,130 +4178,51 @@
 
 
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>.. role:: hidden
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    :class: hidden-section
-</code></pre></div>
-<h1 id="torchdistributedcheckpoint">分布式检查点 —— torch.distributed.checkpoint</h1>
-<p>分布式检查点（Distributed Checkpoint，简称 DCP）支持多个 rank 并行地保存和加载模型，
-同时可以在加载阶段自动重新切分张量，从而允许在一个集群拓扑中保存、在另一个拓扑中恢复。</p>
-<p>DCP 与 <code>torch.save</code> / <code>torch.load</code> 的主要差异包括：</p>
+<h1 id="torchdistributedcheckpoint">分布式检查点 —— <code>torch.distributed.checkpoint</code></h1>
+<p>分布式检查点（Distributed Checkpoint，简称 DCP）支持多个 rank 并行地保存或加载模型参数。与传统的 <code>torch.save</code> / <code>torch.load</code> 相比，它具备如下特点：</p>
 <ul>
-<li>生成的检查点包含多个文件，至少每个 rank 一个文件；</li>
-<li>采用就地操作，模型需要先分配好数据缓冲区，DCP 会复用这些存储空间。</li>
+<li><strong>多文件输出</strong>：每个 rank 至少生成一个检查点文件，便于在大规模集群中并行写入。</li>
+<li><strong>就地操作</strong>：模型需要先分配好参数缓冲区，DCP 会直接写入这些缓冲区，避免额外的内存复制。</li>
+<li><strong>拓扑无关</strong>：保存和加载可以在不同的集群拓扑上完成，加载时可自动重新切分张量。</li>
 </ul>
-<p>用于保存和加载检查点的入口如下：</p>
-<h2 id="_1">进一步阅读</h2>
+<h2 id="_1">入门资料</h2>
 <ul>
-<li><a href="https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html">分布式检查点入门</a></li>
-<li><a href="https://pytorch.org/tutorials/recipes/distributed_async_checkpoint_recipe.html">分布式检查点的异步保存</a></li>
-<li><a href="https://github.com/pytorch/torchtitan/blob/main/docs/checkpoint.md">TorchTitan 检查点文档</a></li>
-<li><a href="https://github.com/pytorch/torchtitan/blob/main/torchtitan/components/checkpoint.py">TorchTitan 中的 DCP 实现</a></li>
+<li><a href="https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html">Getting Started with Distributed Checkpoint</a></li>
+<li><a href="https://pytorch.org/tutorials/recipes/distributed_async_checkpoint_recipe.html">Asynchronous Saving with Distributed Checkpoint</a></li>
+<li><a href="https://github.com/pytorch/torchtitan/blob/main/torchtitan/components/checkpoint.py">TorchTitan 中的使用示例</a></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.. automodule:: torch.distributed.checkpoint
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>.. currentmodule:: torch.distributed.checkpoint.state_dict_saver
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>.. autoclass:: torch.distributed.checkpoint.state_dict_saver.AsyncCheckpointerType
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>.. autoclass:: torch.distributed.checkpoint.state_dict_saver.AsyncSaveResponse
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>.. autofunction::  save
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>.. autofunction::  async_save
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>.. autofunction::  save_state_dict
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>.. currentmodule:: torch.distributed.checkpoint.state_dict_loader
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>.. autofunction::  load
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>.. autofunction::  load_state_dict
-</code></pre></div>
-<p>以下模块用于自定义异步检查点（<code>torch.distributed.checkpoint.async_save</code>）所采用的 staging 机制：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>.. automodule:: torch.distributed.checkpoint.staging
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>.. autoclass:: torch.distributed.checkpoint.staging.AsyncStager
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>.. autoclass:: torch.distributed.checkpoint.staging.DefaultStager
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>.. autoclass:: torch.distributed.checkpoint.staging.StagingOptions
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>.. autoclass:: torch.distributed.checkpoint.staging.BlockingAsyncStager
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>  :members:
-</code></pre></div>
-<p>除此之外，下述 <code>Stateful</code> 对象也可在保存/加载过程中提供更多自定义能力：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>.. automodule:: torch.distributed.checkpoint.stateful
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>   :noindex:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>.. autoclass:: torch.distributed.checkpoint.stateful.Stateful
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>  :members:
-</code></pre></div>
-<p>这一<a href="https://github.com/pytorch/pytorch/blob/main/torch/distributed/checkpoint/examples/fsdp_checkpoint_example.py">示例</a>
-演示了如何使用分布式检查点保存 FSDP 模型。</p>
-<p>以下类型定义了检查点过程中使用的 IO 接口：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>.. autoclass:: torch.distributed.checkpoint.StorageReader
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>.. autoclass:: torch.distributed.checkpoint.StorageWriter
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>  :members:
-</code></pre></div>
-<p>以下类型定义了检查点过程中使用的计划器接口：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>.. autoclass:: torch.distributed.checkpoint.LoadPlanner
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>.. autoclass:: torch.distributed.checkpoint.LoadPlan
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>.. autoclass:: torch.distributed.checkpoint.ReadItem
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>.. autoclass:: torch.distributed.checkpoint.SavePlanner
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>.. autoclass:: torch.distributed.checkpoint.SavePlan
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>.. autoclass:: torch.distributed.checkpoint.planner.WriteItem
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>.. autoclass:: torch.distributed.checkpoint.planner.BytesIOWriteData
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>  :members:
-</code></pre></div>
-<p>我们提供了基于文件系统的存储层：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>.. autoclass:: torch.distributed.checkpoint.FileSystemReader
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>.. autoclass:: torch.distributed.checkpoint.FileSystemWriter
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>  :members:
-</code></pre></div>
-<p>同时提供了其他存储实现，包括与 HuggingFace safetensors 交互的版本：</p>
-<p>.. autoclass:: torch.distributed.checkpoint.HuggingFaceStorageReader
-  :members:</p>
-<p>.. autoclass:: torch.distributed.checkpoint.HuggingFaceStorageWriter
-  :members:</p>
-<p>.. autoclass:: torch.distributed.checkpoint.QuantizedHuggingFaceStorageReader
-  :members:</p>
-<p>我们还提供了 <code>LoadPlanner</code> 与 <code>SavePlanner</code> 的默认实现，能够处理 PyTorch 分布式的各类结构（FSDP、DDP、ShardedTensor、DistributedTensor 等）。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>.. autoclass:: torch.distributed.checkpoint.DefaultSavePlanner
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>  :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>.. autoclass:: torch.distributed.checkpoint.DefaultLoadPlanner
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>  :members:
-</code></pre></div>
-<p>由于历史原因，<code>FSDP</code> 和 <code>DDP</code> 的 state_dict 可能拥有不同的键（例如 <code>layer1.weight</code>），
-即便原始未并行的模型完全一致。此外，<code>FSDP</code> 支持多种模型 state_dict（完整版本、分片版本等）。
-优化器的 state_dict 则使用参数 ID 而非全限定名称，当结合多种并行方式（例如流水线并行）时，这可能带来额外问题。</p>
-<p>为解决这些挑战，我们提供了一组方便管理 state_dict 的 API。<code>get_model_state_dict()</code> 返回的模型 state_dict
-键名与未并行模型保持一致；类似地，<code>get_optimizer_state_dict()</code> 返回的优化器 state_dict
-对所有并行方式均使用一致的键名。<code>get_optimizer_state_dict()</code> 会将参数 ID 转换为与未并行模型 state_dict
-相同的全限定名称。使用这些 API 得到的结果可直接传递给 <code>torch.distributed.checkpoint.save()</code> 与
-<code>torch.distributed.checkpoint.load()</code>，无需额外转换。</p>
-<p><code>set_model_state_dict()</code> 和 <code>set_optimizer_state_dict()</code> 则用于加载由上述 getter API 生成的 state_dict。</p>
+<h2 id="_2">核心函数</h2>
+<ul>
+<li><code>torch.distributed.checkpoint.save()</code> / <code>async_save()</code>：保存模型或优化器 state_dict。</li>
+<li><code>torch.distributed.checkpoint.load()</code>：加载分布式检查点。</li>
+<li><code>torch.distributed.checkpoint.save_state_dict()</code> 与 <code>load_state_dict()</code>：面向分布式 state_dict 的简化包装。</li>
+</ul>
+<p>对于异步保存，可使用 <code>async_save()</code> 返回的 <code>AsyncSaveResponse</code> 对象查询状态或等待完成。</p>
+<h2 id="statefull">状态字典与 Statefull 对象</h2>
+<p>部分模块或优化器可能需要自定义保存/加载逻辑。可以继承 <code>torch.distributed.checkpoint.stateful.Stateful</code> 并实现相应方法，以便在分布式场景下管理自定义状态。</p>
+<p>常见的辅助类型包括：</p>
+<ul>
+<li><code>AsyncCheckpointerType</code>：枚举不同的异步保存实现。</li>
+<li><code>StorageReader</code> / <code>StorageWriter</code>：定义底层存储接口，可实现自定义的文件系统或对象存储写入逻辑。</li>
+<li><code>LoadPlanner</code> / <code>SavePlanner</code> 与对应的 <code>Plan</code>、<code>ReadItem</code>、<code>WriteItem</code>：用于描述加载/保存时的张量切分、传输计划。</li>
+</ul>
+<p>PyTorch 提供了默认实现 <code>DefaultSavePlanner</code> 与 <code>DefaultLoadPlanner</code>，可直接配合 FSDP、DDP、ShardedTensor、DistributedTensor 等结构使用。</p>
+<h2 id="_3">存储后端</h2>
+<p>DCP 自带以下存储实现：</p>
+<ul>
+<li><code>FileSystemReader</code> / <code>FileSystemWriter</code>：基于标准文件系统的读写。</li>
+<li>HuggingFace 相关的存储层，用于与 safetensors 互操作。</li>
+</ul>
+<p>用户也可以通过继承 <code>StorageReader</code> / <code>StorageWriter</code> 实现自定义的对象存储、云存储等后端。</p>
+<h2 id="fsdpddp">与 FSDP/DDP 的配合</h2>
+<p>由于历史原因，FSDP 与 DDP 的 state_dict 键名可能不同。为了统一键名并便于在多种并行方式间迁移，建议使用：</p>
+<ul>
+<li><code>torch.distributed.checkpoint.get_model_state_dict()</code></li>
+<li><code>torch.distributed.checkpoint.get_optimizer_state_dict()</code></li>
+</ul>
+<p>它们会返回与未并行模型一致的键名，便于直接搭配 DCP 的保存/加载函数。对应的 <code>set_model_state_dict()</code>、<code>set_optimizer_state_dict()</code> 可用于恢复模型与优化器状态。</p>
+<hr />
+<p>分布式检查点让大模型的保存与恢复更加高效。结合默认计划器与存储实现，即可在保持易用性的同时获得良好的扩展性。</p>
 
 
 

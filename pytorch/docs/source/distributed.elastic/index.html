@@ -3849,7 +3849,7 @@
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      快速开始
+      主要组件
     </span>
   </a>
   
@@ -3858,7 +3858,16 @@
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      文档
+      常见用法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      推荐阅读
     </span>
   </a>
   
@@ -4093,7 +4102,7 @@
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      快速开始
+      主要组件
     </span>
   </a>
   
@@ -4102,7 +4111,16 @@
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      文档
+      常见用法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      推荐阅读
     </span>
   </a>
   
@@ -4124,42 +4142,31 @@
 
 
 
-<h1 id="torch-distributed-elastic">Torch Distributed Elastic</h1>
-<p>让分布式 PyTorch 具有容错与弹性能力。</p>
-<h2 id="_1">快速开始</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>:caption: 用法
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>:maxdepth: 1
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>elastic/quickstart
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>elastic/train_script
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>elastic/examples
-</code></pre></div>
-<h2 id="_2">文档</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>:caption: API
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>:maxdepth: 1
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>elastic/run
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>elastic/agent
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>elastic/multiprocessing
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>elastic/errors
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>elastic/rendezvous
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>elastic/timer
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>elastic/metrics
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>elastic/events
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>elastic/subprocess_handler
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>elastic/control_plane
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>elastic/numa
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>:caption: 进阶
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>:maxdepth: 1
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>elastic/customization
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>:caption: 插件
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>:maxdepth: 1
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>elastic/kubernetes
-</code></pre></div>
+<h1 id="torch-distributed-elastic">弹性训练（Torch Distributed Elastic）</h1>
+<p>Torch Distributed Elastic 旨在为分布式训练提供容错、弹性扩缩容的能力，可在训练过程中动态加入或剔除节点，自动重试失败的 worker。</p>
+<h2 id="_1">主要组件</h2>
+<ul>
+<li><strong>elastic-agent</strong>：负责监控各个 worker 的状态，处理节点加入、退出以及失败重启。</li>
+<li><strong>elastic/multiprocessing</strong>：提供与 <code>torch.multiprocessing</code> 类似的接口，封装弹性训练常见的启动流程。</li>
+<li><strong>rendezvous（集合点）</strong>：用于在弹性环境下协调 rank 分配与世界规模变化。支持多种后端（如 etcd、C10d）。</li>
+<li><strong>metrics / events</strong>：记录训练过程中的事件与指标，便于诊断问题。</li>
+</ul>
+<h2 id="_2">常见用法</h2>
+<ol>
+<li>编写可弹性的训练脚本，确保在节点恢复时可以重新加载最新检查点并继续训练。</li>
+<li>使用 <code>torch.distributed.elastic.multiprocessing.run</code> 或命令行工具 <code>torchrun --standalone --max-restarts=...</code> 启动训练。</li>
+<li>结合 Kubernetes、Slurm 等集群管理器，通过相应插件实现自动扩缩容与故障恢复。</li>
+</ol>
+<h2 id="_3">推荐阅读</h2>
+<ul>
+<li><code>elastic/quickstart</code>: 快速体验弹性训练。</li>
+<li><code>elastic/train_script</code>: 如何编写支持自动恢复的训练脚本。</li>
+<li><code>elastic/examples</code>: 端到端示例。</li>
+<li>进阶主题：<code>elastic/customization</code>。</li>
+<li>插件：<code>elastic/kubernetes</code>。</li>
+</ul>
+<hr />
+<p>借助 Distributed Elastic，可以在不牺牲训练进度的情况下应对节点故障或动态扩容需求，是构建鲁棒分布式训练系统的关键工具。</p>
 
 
 

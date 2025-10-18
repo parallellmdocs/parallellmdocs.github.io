@@ -3898,6 +3898,19 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    张量并行
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -3909,6 +3922,43 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      入口函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用建议
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -4034,6 +4084,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      入口函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用建议
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -4048,59 +4124,36 @@
 
 
 
-<p>:::{role} hidden
-    :class: hidden-section
-:::</p>
-<h1 id="torchdistributedtensorparallel">张量并行 —— torch.distributed.tensor.parallel</h1>
-<p>张量并行（TP）基于 PyTorch DistributedTensor（<a href="https://github.com/pytorch/pytorch/blob/main/torch/distributed/tensor/README.md">DTensor</a>）实现，提供列并行、行并行与序列并行等多种模式。</p>
-<p>:::{warning}
-张量并行 API 仍属实验性，未来可能调整。
-:::</p>
-<p>使用张量并行改写 <code>nn.Module</code> 的入口函数如下：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>.. automodule:: torch.distributed.tensor.parallel
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.. currentmodule:: torch.distributed.tensor.parallel
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>.. autofunction::  parallelize_module
-</code></pre></div>
-<p>张量并行支持以下并行风格：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>.. autoclass:: torch.distributed.tensor.parallel.ColwiseParallel
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  :members:
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  :undoc-members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>.. autoclass:: torch.distributed.tensor.parallel.RowwiseParallel
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  :members:
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  :undoc-members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>.. autoclass:: torch.distributed.tensor.parallel.SequenceParallel
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  :members:
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  :undoc-members:
-</code></pre></div>
-<p>如果仅需为模块的输入与输出指定 DTensor 布局，并执行必要的布局重分布，而无需将模块参数转换为 DTensor，可在调用
-<code>parallelize_module</code> 时在 <code>parallelize_plan</code> 中使用以下 <code>ParallelStyle</code>：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>.. autoclass:: torch.distributed.tensor.parallel.PrepareModuleInput
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  :members:
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  :undoc-members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>.. autoclass:: torch.distributed.tensor.parallel.PrepareModuleOutput
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  :members:
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  :undoc-members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>.. autoclass:: torch.distributed.tensor.parallel.PrepareModuleInputOutput
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  :members:
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>  :undoc-members:
-</code></pre></div>
-<p>:::{note}
-当上述 <code>ParallelStyle</code> 的输入/输出布局使用 <code>Shard(dim)</code> 时，默认假设输入/输出激活在张量维度 <code>dim</code> 上已均匀分片，并且该分片工作在张量并行所使用的 <code>DeviceMesh</code> 上。
-例如 <code>RowwiseParallel</code> 期望输入在最后一个维度上分片，因此默认输入张量已在最后一个维度均匀分片。若激活分片不均，可直接向分区模块传入 DTensor，并通过 <code>use_local_output=False</code> 让每个 <code>ParallelStyle</code> 返回 DTensor，DTensor 会记录不均匀的分片信息。
-:::</p>
-<p>对于 Transformer 等模型，建议在 <code>parallelize_plan</code> 中同时使用 <code>ColwiseParallel</code> 与 <code>RowwiseParallel</code>，以便在注意力与 MLP 等模块上实现合适的分片方式。</p>
-<p>并行化的交叉熵损失（损失并行）可以通过以下上下文管理器实现：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>.. autofunction:: torch.distributed.tensor.parallel.loss_parallel
-</code></pre></div>
-<p>:::{warning}
-<code>loss_parallel</code> API 仍属实验性，未来可能调整。
-:::</p>
+<h1 id="torchdistributedtensorparallel">张量并行 —— <code>torch.distributed.tensor.parallel</code></h1>
+<p><code>torch.distributed.tensor.parallel</code> 在 DTensor 之上实现不同风格的张量并行，适用于将大型模型拆分到多个设备上执行。主要支持以下模式：</p>
+<ul>
+<li><strong>列并行（ColwiseParallel）</strong>：沿权重矩阵列方向切分，常用于线性层的输出投影。</li>
+<li><strong>行并行（RowwiseParallel）</strong>：沿权重矩阵行方向切分，适合处理输入方向的分片。</li>
+<li><strong>序列并行（SequenceParallel）</strong>：沿序列长度或批次维度切分，降低跨设备通信。</li>
+</ul>
+<h2 id="_1">入口函数</h2>
+<ul>
+<li><code>parallelize_module(module, parallelize_plan, device_mesh)</code>：根据给定的 <code>parallelize_plan</code>（包含若干 <code>ParallelStyle</code>）对 <code>nn.Module</code> 执行张量并行改写。</li>
+</ul>
+<p>常用的 <code>ParallelStyle</code> 包括：</p>
+<ul>
+<li><code>ColwiseParallel</code></li>
+<li><code>RowwiseParallel</code></li>
+<li><code>SequenceParallel</code></li>
+<li><code>PrepareModuleInput</code> / <code>PrepareModuleOutput</code> / <code>PrepareModuleInputOutput</code>：只调整输入或输出张量的 DTensor 布局，而不修改模块参数。</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">分片要求</p>
+<p>当 <code>ParallelStyle</code> 指定输入/输出布局为 <code>Shard(dim)</code> 时，默认假设相应激活张量已经在维度 <code>dim</code> 上均匀分片。若存在不均匀分片，请直接传入 DTensor，并将 <code>use_local_output=False</code> 以保留 DTensor 的分片信息。</p>
+</div>
+<h2 id="_2">使用建议</h2>
+<ol>
+<li>在 Transformer 等模型中，可在同一层内组合 <code>ColwiseParallel</code> 与 <code>RowwiseParallel</code>，分别处理注意力和 MLP 部分。</li>
+<li>对于损失计算，可使用 <code>torch.distributed.tensor.parallel.loss_parallel()</code> 上下文管理器，实现交叉熵等 loss 的并行化。</li>
+<li>张量并行可与数据并行、管道并行、FSDP2 等方案组合，构建“3D 并行”训练流程。</li>
+</ol>
+<hr />
+<p>张量并行 API 仍处于实验阶段。若需要更细粒度的控制或自定义分片策略，可在 <code>parallelize_plan</code> 中组合多种 <code>ParallelStyle</code>，或直接使用 DTensor 提供的低层接口。</p>
 
 
 

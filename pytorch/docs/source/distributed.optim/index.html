@@ -3829,6 +3829,19 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    分布式优化器
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -3840,6 +3853,52 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      关键类
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用流程概述
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -4034,6 +4093,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      关键类
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用流程概述
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -4048,16 +4142,33 @@
 
 
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>.. role:: hidden
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    :class: hidden-section
-</code></pre></div>
 <h1 id="_1">分布式优化器</h1>
-<p>:::{warning}
-当前分布式优化器尚不支持 CUDA 张量。
-:::</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.. automodule:: torch.distributed.optim
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    :members: DistributedOptimizer, PostLocalSGDOptimizer, ZeroRedundancyOptimizer
-</code></pre></div>
+<p><code>torch.distributed.optim</code> 模块提供了在多机场景下封装本地优化器的工具，简化梯度聚合和参数更新流程。</p>
+<div class="admonition warning">
+<p class="admonition-title">限制</p>
+<p>这些优化器目前只支持 CPU 张量。如果需要在 CUDA 上使用，应先将梯度同步回 CPU。</p>
+</div>
+<h2 id="_2">关键类</h2>
+<ul>
+<li><strong><code>DistributedOptimizer</code></strong>：接受一组 <code>RRef</code>（远程或本地参数引用），在每个参数所属的 worker 上创建底层优化器实例，并在 <code>step(context_id)</code> 时分布式地应用梯度。梯度值从 <code>torch.distributed.autograd</code> 的上下文中获取。</li>
+<li><strong><code>PostLocalSGDOptimizer</code></strong>：在训练后期将本地 SGD 更新与全局梯度同步结合使用，以减少通信开销。</li>
+<li><strong><code>ZeroRedundancyOptimizer</code></strong>：在多个进程之间分片优化器状态，避免冗余副本，常用于大规模模型训练。</li>
+</ul>
+<h2 id="_3">使用流程概述</h2>
+<ol>
+<li>为模型参数创建 <code>RRef</code>（远程引用）。本地参数也可以通过本地 <code>RRef</code> 包装。</li>
+<li>构造分布式优化器，例如：
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">dist_optim</span> <span class="o">=</span> <span class="n">DistributedOptimizer</span><span class="p">(</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="p">[</span><span class="n">model_parameter_rref1</span><span class="p">,</span> <span class="n">model_parameter_rref2</span><span class="p">],</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">)</span>
+</code></pre></div></li>
+<li>在分布式 autograd 上下文中执行前向和反向运算，得到 <code>context_id</code>。</li>
+<li>调用 <code>dist_optim.step(context_id)</code>，分布式优化器会在各自的 worker 上执行底层优化器步骤。</li>
+</ol>
+<h2 id="_4">参考</h2>
+<p>完整示例可参见本项目的 <a href="../rpc/distributed_autograd/">RPC/分布式 Autograd</a> 章节，或 PyTorch 官方分布式优化器文档。</p>
 
 
 

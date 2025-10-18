@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#role-hidden" class="md-skip">
+        <a href="#join" class="md-skip">
           跳转至
         </a>
       
@@ -3734,6 +3734,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -3766,6 +3768,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -3774,18 +3778,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#role-hidden" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      ```{role} hidden
+      主要类
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#class-hidden-section" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      class: hidden-section
+      使用建议
     </span>
   </a>
   
@@ -4077,6 +4081,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -4085,18 +4091,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#role-hidden" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      ```{role} hidden
+      主要类
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#class-hidden-section" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      class: hidden-section
+      使用建议
     </span>
   </a>
   
@@ -4118,26 +4124,30 @@
 
 
 
-  <h1>分布式 Join 上下文</h1>
-
-<h2 id="role-hidden">```{role} hidden</h2>
-<h2 id="class-hidden-section">class: hidden-section</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># 通用 Join 上下文管理器
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>通用 join 上下文管理器可用于解决分布式训练中输入大小不一致的问题。本页介绍相关类的
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>API：{class}`Join`、{class}`Joinable` 与 {class}`JoinHook`。教程示例请参阅
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>[使用 Join 上下文管理器处理不均匀输入的分布式训练](https://pytorch.org/tutorials/advanced/generic_join.html)。
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>```{eval-rst}
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>.. autoclass:: torch.distributed.algorithms.Join
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    :members:
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>.. autoclass:: torch.distributed.algorithms.Joinable
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    :members:
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>.. autoclass:: torch.distributed.algorithms.JoinHook
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    :members:
-</code></pre></div>
+<h1 id="join">分布式 Join 上下文管理器</h1>
+<p>通用 Join 上下文管理器可用于处理分布式训练中输入批次大小不一致的问题。本页对核心类进行简要说明，完整示例可参考官方教程：<a href="https://pytorch.org/tutorials/advanced/generic_join.html">Distributed Training with Uneven Inputs Using the Join Context Manager</a>。</p>
+<h2 id="_1">主要类</h2>
+<ul>
+<li>
+<p><strong><code>torch.distributed.algorithms.Join</code></strong><br />
+  提供通用上下文管理器，负责协调各个参与进程的前向/反向执行。当部分进程提前完成计算时，可通过 Join 确保剩余进程安全地退出或继续执行。</p>
+</li>
+<li>
+<p><strong><code>torch.distributed.algorithms.Joinable</code></strong><br />
+  所有可参与 Join 的模块需继承该基类，实现 <code>join_hook()</code> 等接口，以定义当进程退出 join 时的具体行为。</p>
+</li>
+<li>
+<p><strong><code>torch.distributed.algorithms.JoinHook</code></strong><br />
+  封装用户自定义的钩子逻辑。Join 触发时，会调用对应的钩子以执行同步、清理或额外通信。</p>
+</li>
+</ul>
+<h2 id="_2">使用建议</h2>
+<ol>
+<li>在分布式训练的循环中使用 <code>with Join([...])</code> 将所有 Joinable 模块纳入上下文管理。</li>
+<li>为每个 Joinable 模块实现合适的 <code>join_hook</code>，例如广播剩余梯度、同步状态或执行额外的 barrier。</li>
+<li>当模型包含多种并行策略（流水线并行、ZeRO 等）时，可结合 JoinHook 实现更细粒度的退出策略。</li>
+</ol>
+<p>通过 Join，可以在保持数值正确性的同时解决不同进程耗时不一致的问题，避免死锁或梯度不同步。</p>
 
 
 

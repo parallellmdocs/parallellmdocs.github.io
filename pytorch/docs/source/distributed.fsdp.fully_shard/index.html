@@ -3801,9 +3801,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#pytorch-fsdp2fully_shard" class="md-nav__link">
+  <a href="#fsdp1" class="md-nav__link">
     <span class="md-ellipsis">
-      PyTorch FSDP2（fully_shard）
+      与 FSDP1 的主要差异
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fully_shardmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      fully_shard(model) 的使用约定
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      相关 API
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
     </span>
   </a>
   
@@ -4082,9 +4109,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#pytorch-fsdp2fully_shard" class="md-nav__link">
+  <a href="#fsdp1" class="md-nav__link">
     <span class="md-ellipsis">
-      PyTorch FSDP2（fully_shard）
+      与 FSDP1 的主要差异
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fully_shardmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      fully_shard(model) 的使用约定
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      相关 API
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
     </span>
   </a>
   
@@ -4106,74 +4160,41 @@
 
 
 
-<h1 id="torchdistributedfsdpfully_shard">torch.distributed.fsdp.fully_shard</h1>
-<h2 id="pytorch-fsdp2fully_shard">PyTorch FSDP2（<code>fully_shard</code>）</h2>
-<p>PyTorch FSDP2（参见 <a href="https://github.com/pytorch/pytorch/issues/114299">RFC</a>）提供了一套面向 eager 模式的全分片数据并行实现，通过按参数分片提升易用性并兼顾性能。</p>
+<h1 id="torchdistributedfsdpfully_shard"><code>torch.distributed.fsdp.fully_shard</code></h1>
+<p>FSDP2（Fully Sharded Data Parallel v2）基于 DTensor 提供全新的分布式并行实现，通过逐参数分片实现高效的内存利用和更易理解的语义。<a href="https://github.com/pytorch/pytorch/issues/114299">RFC 讨论</a> 介绍了其设计背景。</p>
+<h2 id="fsdp1">与 FSDP1 的主要差异</h2>
 <ul>
-<li>参阅 <a href="https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html">FSDP2 入门教程</a> 了解更多信息。</li>
-<li>如果当前使用的是 FSDP1，可按照我们的<a href="https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html#fsdp1-to-fsdp2-migration-guide">迁移指南</a> 迁移到 FSDP2。</li>
+<li><strong>按参数分片</strong>：FSDP2 沿着维度 0 对每个参数分片，而 FSDP1 会将若干张量展平再切分，FSDP2 因而更直观，也便于支持冻结参数与分片 state_dict。</li>
+<li><strong>改进的内存管理</strong>：避免使用 <code>record_stream</code>，无需像 FSDP1 中的 <code>limit_all_gathers=True</code> 那样阻塞 CPU。</li>
+<li><strong>可定制的预取与调度</strong>：通过 FSDPModule 的接口，用户可自定义集合通信顺序与预取策略。</li>
+<li><strong>更简化的 API</strong>：FSDP2 不直接提供完整 state_dict，而是推荐结合 DTensor API 或 Distributed Checkpoint 构建需要的表示。</li>
 </ul>
-<p><code>fully_shard(model)</code> 的使用约定如下：</p>
+<h2 id="fully_shardmodel"><code>fully_shard(model)</code> 的使用约定</h2>
+<ol>
+<li>模型初始化后，调用 <code>fully_shard(model)</code>。该函数会就地将 <code>model.parameters()</code> 转换为 DTensor，并根据设备 mesh 将参数移动到目标设备。</li>
+<li>FSDP2 会注册前向/反向钩子，在每次前向前 all-gather 参数，在反向结束后释放未分片副本。</li>
+<li>优化器需要基于 DTensor 形式的参数构建；更新时同样在 DTensor 上执行。</li>
+<li>需要调用 <code>model(input)</code> 而非直接调用 <code>model.forward</code>，以触发钩子。若确实需要调用 <code>forward</code>，可使用 <code>model.unshard()</code> 或注册 <code>register_fsdp_forward_method</code>。</li>
+<li>在层级化模型（如 Transformer）中，建议自底向上依次调用 <code>fully_shard</code>，这样可按层分组 all-gather。</li>
+<li>应用后模块类型会被“合并”为 <code>FSDPModule</code>，例如原本的 <code>nn.Linear</code> 变为 <code>FSDPLinear</code>，同时保留线性层与 <code>FSDPModule</code> 的方法（如 <code>reshard()</code>、<code>unshard()</code>）。</li>
+<li>参数的全限定名称（FQN）不会变化，调用 <code>model.state_dict()</code> 时仍能得到与原模型一致的键名。</li>
+</ol>
+<h2 id="api">相关 API</h2>
 <ul>
-<li>在模型初始化阶段，<code>fully_shard</code> 会就地将 <code>model.parameters()</code> 从普通 <code>torch.Tensor</code>
-  转换成 <code>DTensor</code>，并按照设备 mesh 将参数移动到相应设备上。</li>
-<li>在前向与反向执行前，前向/反向钩子负责 all-gather 参数，并将 <code>model.parameters()</code> 从
-  <code>DTensor</code> 转回普通 <code>torch.Tensor</code>。</li>
-<li>在前向与反向执行后，后置钩子会释放未分片参数（无需通信），并把
-  <code>model.parameters()</code> 从普通 <code>torch.Tensor</code> 恢复为 <code>DTensor</code>。</li>
-<li>优化器必须使用 <code>DTensor</code> 形式的 <code>model.parameters()</code> 初始化，并在 <code>DTensor</code> 参数上执行优化步骤。</li>
-<li>需要调用 <code>model(input)</code> 而非 <code>model.forward(input)</code>，以便触发前向钩子完成 all-gather。
-  如需直接调用 <code>model.forward(input)</code>，应显式调用 <code>model.unshard()</code>，或使用
-  <code>register_fsdp_forward_method(model, "forward")</code> 注册前向方法。</li>
-<li><code>fully_shard</code> 会将多个参数归为一个 all-gather 组，建议以自底向上的顺序应用。
-  例如 Transformer 中应先对每一层调用 <code>fully_shard</code>，再作用于根模块。
-  在根模块上调用时，<code>fully_shard</code> 会排除各层的参数，并将剩余参数（如 embedding、输出投影）归为一个 all-gather 组。</li>
-<li>模块类型会就地与 <code>FSDPModule</code> 合并。例如原本类型为 <code>nn.Linear</code> 的模块，在调用 <code>fully_shard</code>
-  后其类型会变为 <code>FSDPLinear</code>。<code>FSDPLinear</code> 同时是 <code>nn.Linear</code> 与 <code>FSDPModule</code> 的实例，
-  保留了 <code>nn.Linear</code> 的全部方法，并额外暴露 <code>FSDPModule</code> 下的 FSDP2 专属接口，例如 <code>reshard()</code> 与 <code>unshard()</code>。</li>
-<li>参数的全限定名称（FQN）保持不变。调用 <code>model.state_dict()</code> 时，应用 <code>fully_shard</code> 前后参数名一致，
-  因为 <code>fully_shard</code> 仅在原模块上注册钩子而不会包装模块本身。</li>
+<li><code>torch.distributed.fsdp.fully_shard()</code>：对模块应用 FSDP2。</li>
+<li><code>torch.distributed.fsdp.FSDPModule</code>：FSDP2 的基础类，包含 <code>reshard()</code>、<code>unshard()</code> 等方法。</li>
+<li><code>torch.distributed.fsdp.UnshardHandle</code>：记录解除分片时的上下文。</li>
+<li><code>torch.distributed.fsdp.register_fsdp_forward_method()</code>：注册需要 Hook 的前向函数。</li>
+<li><code>MixedPrecisionPolicy</code>、<code>OffloadPolicy</code>、<code>CPUOffloadPolicy</code>：用于配置混合精度及 CPU offload 策略。</li>
+<li><code>share_comm_ctx()</code>：共享通信上下文以降低开销。</li>
 </ul>
-<p>与 PyTorch FSDP1（<code>FullyShardedDataParallel</code>）相比：</p>
+<h2 id="_1">参考资料</h2>
 <ul>
-<li>FSDP2 基于 <code>DTensor</code> 实现按维度 0 的逐参数分片，相比 FSDP1 的扁平化分片方式更易理解，同时维持类似的吞吐性能。
-  更具体地说，FSDP2 会沿着维度 0 将每个参数切分到数据并行的各个 worker
-  （使用 <code>torch.chunk(dim=0)</code>），而 FSDP1 会将一组张量展平、拼接、再切分，这让分析每个 worker 上的数据以及跨并行度重新分片变得复杂。
-  按参数分片带来更直观的使用体验，放宽了冻结参数的限制，并支持无需通信（即分片状态）的 state dict，
-  而在 FSDP1 中需要执行 all-gather 才能获取。</li>
-<li>FSDP2 采用了不同的内存管理策略来处理多 stream 的使用场景，不再依赖 <code>torch.Tensor.record_stream</code>。
-  这确保了确定性的内存占用，也无需像 FSDP1 的 <code>limit_all_gathers=True</code> 那样阻塞 CPU。</li>
-<li>FSDP2 暴露了用于手动控制预取和集合通信调度的接口，方便高阶用户自定义。参见下文 <code>FSDPModule</code> 上的方法。</li>
-<li>FSDP2 简化了部分 API：例如不直接支持完整 state dict，而是让用户通过 <code>DTensor</code> API（如 <code>DTensor.full_tensor()</code>）
-  或更高层的 <a href="https://pytorch.org/docs/stable/distributed.checkpoint.html">PyTorch Distributed Checkpoint</a> 分布式 state dict API
-  来将分片 state dict 转换为完整 state dict。此外，一些参数也被移除，详情见
-  <a href="https://github.com/pytorch/torchtitan/blob/main/docs/fsdp.md">此处</a>。</li>
+<li><a href="https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html">FSDP2 教程</a></li>
+<li><a href="https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html#fsdp1-to-fsdp2-migration-guide">FSDP1 → FSDP2 迁移指南</a></li>
+<li><a href="https://github.com/pytorch/torchtitan/blob/main/docs/fsdp.md">TorchTitan 关于 FSDP 的文档</a></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>.. currentmodule:: torch.distributed.fsdp
-</code></pre></div>
-<p>前端 API 为 <code>fully_shard</code>，可直接作用于任意 <code>module</code>：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.. autofunction:: fully_shard
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>.. autoclass:: FSDPModule
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    :members:
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    :member-order: bysource
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>.. autoclass:: UnshardHandle
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>.. autofunction:: register_fsdp_forward_method
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>.. autoclass:: MixedPrecisionPolicy
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>.. autoclass:: OffloadPolicy
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>.. autoclass:: CPUOffloadPolicy
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>.. autofunction:: share_comm_ctx
-</code></pre></div>
+<p>FSDP2 旨在在保证性能的前提下提供更直观的 API 与可组合性，适合与 DTensor、张量并行、分布式检查点等功能联合使用。</p>
 
 
 

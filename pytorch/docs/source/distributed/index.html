@@ -3765,18 +3765,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pytorch" class="md-nav__link">
-    <span class="md-ellipsis">
-      PyTorch 自带的后端
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      选择哪个后端？
+      后端选择建议
     </span>
   </a>
   
@@ -3785,24 +3776,18 @@
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      网络接口
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="网络接口">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#nccl" class="md-nav__link">
-    <span class="md-ellipsis">
-      其他 NCCL 环境变量
+      网络接口设置
     </span>
   </a>
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他常用环境变量
+    </span>
+  </a>
   
 </li>
         
@@ -3812,7 +3797,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       基础概念
     </span>
@@ -3821,37 +3806,19 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      初始化
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="初始化">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tcp" class="md-nav__link">
-    <span class="md-ellipsis">
-      TCP 初始化
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
-      共享文件系统初始化
+      初始化与常用工具
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="初始化与常用工具">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
-      环境变量初始化
+      初始化方式
     </span>
   </a>
   
@@ -3860,7 +3827,7 @@
           <li class="md-nav__item">
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
-      缩短初始化时间
+      常用检测函数
     </span>
   </a>
   
@@ -3868,62 +3835,20 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      初始化之后
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      关闭
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="关闭">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      重新初始化
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#groups" class="md-nav__link">
-    <span class="md-ellipsis">
-      分组（Groups）
-    </span>
-  </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#devicemesh" class="md-nav__link">
     <span class="md-ellipsis">
-      DeviceMesh
+      进程组与 DeviceMesh
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       点对点通信
     </span>
@@ -3932,20 +3857,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
-      同步与异步集合通信
+      集合通信
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="集合通信">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      多 GPU（单线程多设备）接口
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
-    <span class="md-ellipsis">
-      错误处理
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3959,36 +3890,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
-      集合通信的性能分析
+      性能分析与调试
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu" class="md-nav__link">
+  <a href="#experimental" class="md-nav__link">
     <span class="md-ellipsis">
-      多 GPU 集合通信
+      对象级集合通信（Experimental）
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
-      对象级集合通信
+      其他常用函数
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
-      第三方后端
+      关闭与资源释放
     </span>
   </a>
   
@@ -4323,18 +4254,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pytorch" class="md-nav__link">
-    <span class="md-ellipsis">
-      PyTorch 自带的后端
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      选择哪个后端？
+      后端选择建议
     </span>
   </a>
   
@@ -4343,24 +4265,18 @@
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      网络接口
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="网络接口">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#nccl" class="md-nav__link">
-    <span class="md-ellipsis">
-      其他 NCCL 环境变量
+      网络接口设置
     </span>
   </a>
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他常用环境变量
+    </span>
+  </a>
   
 </li>
         
@@ -4370,7 +4286,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       基础概念
     </span>
@@ -4379,37 +4295,19 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      初始化
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="初始化">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tcp" class="md-nav__link">
-    <span class="md-ellipsis">
-      TCP 初始化
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
-      共享文件系统初始化
+      初始化与常用工具
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="初始化与常用工具">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
-      环境变量初始化
+      初始化方式
     </span>
   </a>
   
@@ -4418,7 +4316,7 @@
           <li class="md-nav__item">
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
-      缩短初始化时间
+      常用检测函数
     </span>
   </a>
   
@@ -4426,62 +4324,20 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      初始化之后
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      关闭
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="关闭">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      重新初始化
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#groups" class="md-nav__link">
-    <span class="md-ellipsis">
-      分组（Groups）
-    </span>
-  </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#devicemesh" class="md-nav__link">
     <span class="md-ellipsis">
-      DeviceMesh
+      进程组与 DeviceMesh
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       点对点通信
     </span>
@@ -4490,20 +4346,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
-      同步与异步集合通信
+      集合通信
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="集合通信">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      多 GPU（单线程多设备）接口
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
-    <span class="md-ellipsis">
-      错误处理
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4517,36 +4379,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
-      集合通信的性能分析
+      性能分析与调试
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu" class="md-nav__link">
+  <a href="#experimental" class="md-nav__link">
     <span class="md-ellipsis">
-      多 GPU 集合通信
+      对象级集合通信（Experimental）
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
-      对象级集合通信
+      其他常用函数
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
-      第三方后端
+      关闭与资源释放
     </span>
   </a>
   
@@ -4568,377 +4430,162 @@
 
 
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>.. role:: hidden
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    :class: hidden-section
-</code></pre></div>
-<h1 id="torchdistributed">分布式通信包 —— torch.distributed</h1>
-<p>:::{note}
-如需快速了解分布式训练的全部功能，请参阅
-<a href="https://pytorch.org/tutorials/beginner/dist_overview.html">PyTorch 分布式概览</a>。
-:::</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.. automodule:: torch.distributed
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>.. currentmodule:: torch.distributed
-</code></pre></div>
+<h1 id="torchdistributed">分布式通信包 —— <code>torch.distributed</code></h1>
+<div class="admonition note">
+<p class="admonition-title">提示</p>
+<p>如需快速了解分布式训练的整体特性，请参考官方教程：<a href="https://pytorch.org/tutorials/beginner/dist_overview.html">PyTorch Distributed Overview</a>。</p>
+</div>
+<p><code>torch.distributed</code> 为多进程并行提供通信原语，可在多机多卡环境中完成模型训练、推理与状态同步。它支持多种通信后端，并提供了用于初始化、分组、点对点通信、集合通信等操作的 API。</p>
 <h2 id="_1">后端</h2>
-<p><code>torch.distributed</code> 提供四种内置后端，它们各自具有不同的能力。下表列出了每个后端在 CPU
-或 GPU 上可以使用的函数。对于 NCCL，GPU 指 CUDA GPU；对于 XCCL，GPU 指 XPU GPU。</p>
-<p>MPI 是否支持 CUDA 取决于构建 PyTorch 的 MPI 实现。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>+----------------+-----------+-----------+-----------+-----------+
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>| Backend        | ``gloo``  | ``mpi``   | ``nccl``  | ``xccl``  |
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>| Device         | CPU | GPU | CPU | GPU | CPU | GPU | CPU | GPU |
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>+================+=====+=====+=====+=====+=====+=====+=====+=====+
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>| send           | ✓   | ✘   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>| recv           | ✓   | ✘   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>| broadcast      | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>| all_reduce     | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>| reduce         | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>| all_gather     | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>| gather         | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>| scatter        | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>| reduce_scatter | ✓   | ✓   | ✘   | ✘   | ✘   | ✓   | ✘   | ✓   |
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>| all_to_all     | ✘   | ✘   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>| barrier        | ✓   | ✘   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<p>PyTorch 当前内置四种通信后端，它们针对不同硬件环境提供不同的能力。下表列出了各后端在 CPU/GPU 上支持的主要接口；对于 NCCL，GPU 指 CUDA 设备；对于 XCCL，GPU 指 XPU 设备。MPI 是否支持 CUDA 取决于构建 PyTorch 时的 MPI 实现。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>+----------------+-----------+-----------+-----------+-----------+
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>| Backend        | ``gloo``  | ``mpi``   | ``nccl``  | ``xccl``  |
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>| Device         | CPU | GPU | CPU | GPU | CPU | GPU | CPU | GPU |
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>+================+=====+=====+=====+=====+=====+=====+=====+=====+
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>| send           | ✓   | ✘   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>| recv           | ✓   | ✘   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>| broadcast      | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>| all_reduce     | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>| reduce         | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>| all_gather     | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>| gather         | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>| scatter        | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>| reduce_scatter | ✓   | ✓   | ✘   | ✘   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>| all_to_all     | ✘   | ✘   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>| barrier        | ✓   | ✘   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
 </code></pre></div>
-<h3 id="pytorch">PyTorch 自带的后端</h3>
-<p>PyTorch 分布式包在 Linux（稳定版）、macOS（稳定版）和 Windows（原型）上受支持。
-在 Linux 上默认构建并包含 Gloo 和 NCCL 后端（仅当启用 CUDA 时才构建 NCCL）。MPI
-属于可选后端，需要从源码编译 PyTorch 时手动启用（例如在安装了 MPI 的主机上构建）。</p>
-<p>:::{note}
-自 PyTorch v1.8 起，Windows 支持除 NCCL 之外的所有通信后端。
-如果 {func}<code>init_process_group</code> 的 <code>init_method</code> 参数指向某个文件，该文件路径必须符合以下模式：</p>
+<h3 id="_2">后端选择建议</h3>
 <ul>
-<li>本地文件系统：<code>init_method="file:///d:/tmp/some_file"</code></li>
-<li>共享文件系统：<code>init_method="file://////{machine_name}/{share_folder_name}/some_file"</code></li>
+<li><strong>Gloo</strong>：适用于 CPU 环境或需要跨主机通信的 GPU 训练。</li>
+<li><strong>NCCL</strong>：推荐用于单机或多机多 GPU 训练。</li>
+<li><strong>MPI</strong>：在已有 MPI 基础设施时可选，但需要自行编译支持 CUDA 的版本。</li>
+<li><strong>XCCL</strong>：面向 XPU 等异构硬件。</li>
 </ul>
-<p>与 Linux 平台相同，可以通过设置环境变量 MASTER_ADDR 和 MASTER_PORT 启用 TcpStore。
-:::</p>
-<h3 id="_2">选择哪个后端？</h3>
-<p>某些后端只支持特定的部署环境。例如：Gloo 适用于多 CPU 训练，NCCL 支持多 GPU
-训练，MPI 则需要正确配置的 MPI 实现。需要同时考虑可用硬件、部署环境以及运维成本。</p>
-<h3 id="_3">网络接口</h3>
-<p>在拥有多个网络接口的环境（例如多个网卡或 Infiniband）中，需要显式设置以下环境变量：</p>
+<p>PyTorch 在 Linux 平台默认构建 Gloo 和 NCCL 后端（仅在开启 CUDA 时包含 NCCL）。Windows 自 v1.8 起支持除 NCCL 外的所有后端。</p>
+<h3 id="_3">网络接口设置</h3>
+<p>在存在多个网络接口的环境中，可以设置以下环境变量指定通信接口：</p>
 <ul>
-<li><strong>NCCL_SOCKET_IFNAME</strong>，例如 <code>export NCCL_SOCKET_IFNAME=eth0</code></li>
-<li><strong>GLOO_SOCKET_IFNAME</strong>，例如 <code>export GLOO_SOCKET_IFNAME=eth0</code></li>
+<li><code>NCCL_SOCKET_IFNAME=eth0</code></li>
+<li><code>GLOO_SOCKET_IFNAME=eth0</code> 或 <code>eth0,eth1,eth2</code></li>
 </ul>
-<p>对于 Gloo，可以使用逗号分隔多个接口，例如 <code>export GLOO_SOCKET_IFNAME=eth0,eth1,eth2,eth3</code>。
-Gloo 会以轮询方式在这些接口之间分发操作。所有进程必须保证在该变量中指定相同数量的接口。</p>
-<h4 id="nccl">其他 NCCL 环境变量</h4>
-<p><strong>调试</strong> —— 当 NCCL 出现错误时，可设置 <code>NCCL_DEBUG=INFO</code> 输出警告信息和初始化日志。</p>
-<p>也可以使用 <code>NCCL_DEBUG_SUBSYS</code> 定位特定子系统。例如，<code>NCCL_DEBUG_SUBSYS=COLL</code> 会打印
-集合通信日志，便于排查通信类型或消息大小不匹配导致的阻塞；若拓扑检测失败，可以设置
-<code>NCCL_DEBUG_SUBSYS=GRAPH</code> 查看详细的拓扑检测结果，必要时可作为反馈信息提供给 NCCL 团队。</p>
-<p><strong>性能调优</strong> —— NCCL 会基于自动拓扑检测进行调优，无需用户手动配置。在某些基于 socket
-的系统中，可以尝试调节 <code>NCCL_SOCKET_NTHREADS</code> 和 <code>NCCL_NSOCKS_PERTHREAD</code>
-以提升网络带宽。NCCL 已针对部分云厂商（例如 AWS、GCP）预调优这两个变量。</p>
-<p>完整的 NCCL 环境变量列表请参考
-<a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html">NVIDIA NCCL 官方文档</a>。</p>
-<p>你还可以通过 <code>torch.distributed.ProcessGroupNCCL.NCCLConfig</code> 和
-<code>torch.distributed.ProcessGroupNCCL.Options</code> 进一步调节 NCCL 通信器，可在解释器中使用
-<code>help</code>（例如 <code>help(torch.distributed.ProcessGroupNCCL.NCCLConfig)</code>）查阅更详细的说明。</p>
-<p>(distributed-basics)=</p>
-<h2 id="_4">基础概念</h2>
-<p><code>torch.distributed</code> 为多进程并行提供通信原语，可运行在一台或多台机器上。
-{func}<code>torch.nn.parallel.DistributedDataParallel</code> 基于这些原语实现同步分布式训练，
-可以封装任意 PyTorch 模型。与 {doc}<code>multiprocessing</code> 或
-{func}<code>torch.nn.DataParallel</code> 不同，该模块支持多台网络互联的机器，同时需要显式为每个
-进程启动一份主训练脚本。</p>
-<p>在单机同步场景下，<code>torch.distributed</code> 或
-{func}<code>torch.nn.parallel.DistributedDataParallel</code> 相比其他数据并行方式（例如
-{func}<code>torch.nn.DataParallel</code>）依然具备优势：</p>
+<p>对于 Gloo，可一次指定多个接口，后端会对这些接口轮询发送数据。务必保证所有进程设置相同数量的接口。</p>
+<h3 id="_4">其他常用环境变量</h3>
 <ul>
-<li>每个进程维护自己的优化器，并在每次迭代执行完整的优化步骤。虽然梯度已经在各进程间聚合和平均，
-  但这种方式无需额外的参数广播，从而减少节点之间的张量传输。</li>
-<li>每个进程拥有独立的 Python 解释器，避免了单个 Python 进程驱动多个执行线程、模型副本或 GPU 时的额外开销和 GIL 争用。
-  这对于大量使用 Python 运行时的模型尤为重要，例如包含循环层或大量小模块的模型。</li>
+<li><code>NCCL_DEBUG=INFO</code>：在 NCCL 失败时输出调试信息。</li>
+<li><code>NCCL_DEBUG_SUBSYS=COLL</code> 或 <code>GRAPH</code>：分别用于调试集合通信或拓扑自动探测。</li>
+<li><code>NCCL_SOCKET_NTHREADS</code>、<code>NCCL_NSOCKS_PERTHREAD</code>：在部分机型上可调节以提高带宽。</li>
 </ul>
-<h2 id="_5">初始化</h2>
-<p>在调用其他方法之前，需要先调用 {func}<code>torch.distributed.init_process_group</code>
-或 {func}<code>torch.distributed.device_mesh.init_device_mesh</code> 进行初始化。两者都会阻塞，直到所有进程加入。</p>
-<p>:::{warning}
-初始化不是线程安全的。创建进程组时必须在单线程中进行，避免因 UUID 分配不一致或初始化过程中的竞争条件而导致阻塞。
-:::</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>.. autofunction:: is_available
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>.. autofunction:: init_process_group
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>.. autofunction:: torch.distributed.device_mesh.init_device_mesh
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>.. autofunction:: is_initialized
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>.. autofunction:: is_mpi_available
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>.. autofunction:: is_nccl_available
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>.. autofunction:: is_gloo_available
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>.. autofunction:: torch.distributed.distributed_c10d.is_xccl_available
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>.. autofunction:: torch.distributed.distributed_c10d.batch_isend_irecv
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>.. autofunction:: torch.distributed.distributed_c10d.destroy_process_group
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>.. autofunction:: torch.distributed.distributed_c10d.is_backend_available
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>.. autofunction:: torch.distributed.distributed_c10d.irecv
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>.. autofunction:: torch.distributed.distributed_c10d.is_gloo_available
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>.. autofunction:: torch.distributed.distributed_c10d.is_initialized
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>.. autofunction:: torch.distributed.distributed_c10d.is_mpi_available
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>.. autofunction:: torch.distributed.distributed_c10d.is_nccl_available
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>.. autofunction:: torch.distributed.distributed_c10d.is_torchelastic_launched
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>.. autofunction:: torch.distributed.distributed_c10d.is_ucc_available
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>.. autofunction:: is_torchelastic_launched
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>.. autofunction:: get_default_backend_for_device
-</code></pre></div>
-<hr />
-<p>目前支持三种初始化方式：</p>
-<h3 id="tcp">TCP 初始化</h3>
-<p>使用 TCP 初始化需要一个所有进程都可访问的网络地址和期望的 <code>world_size</code>。
-第一种方式需要指定 rank 0 进程的地址，并且所有进程的 rank 必须手动指定。</p>
-<p>请注意，最新版本的分布式包不再支持多播地址，<code>group_name</code> 也已弃用。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>import torch.distributed as dist
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a># 使用任意一台机器的地址
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>dist.init_process_group(backend, init_method=&#39;tcp://10.1.1.20:23456&#39;,
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>                        rank=args.rank, world_size=4)
-</code></pre></div>
-<h3 id="_6">共享文件系统初始化</h3>
-<p>另一种初始化方法依赖所有机器都可访问的共享文件系统，并结合期望的 <code>world_size</code>。URL
-需要以 <code>file://</code> 开头，并指向共享文件系统上一个不存在的文件（所在目录必须存在）。
-若文件不存在，初始化过程会自动创建，但不会自动删除，因此在下一次调用
-{func}<code>init_process_group</code> 之前需要自行清理。</p>
-<p>同样地，自动分配 rank 的方式已经被移除，<code>group_name</code> 也已弃用。</p>
-<p>:::{warning}
-该方法依赖文件系统支持 <code>fcntl</code> 锁。大多数本地文件系统和 NFS 都支持。
-:::</p>
-<p>:::{warning}
-此方法会在初始化时创建文件，并尽力在程序结束时删除。也就是说，每次使用文件系统初始化都需要一个全新的空文件。
-如果重复使用上一轮遗留的文件（未能成功删除），很容易导致死锁或失败。因此，即使自动删除失败，用户也必须确保文件在训练结束时被清理，
-尤其是在同一个文件名上多次调用 {func}<code>init_process_group</code> 时。规则很简单：每次调用前都要确保文件不存在或为空。
-:::</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>import torch.distributed as dist
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a># 必须显式传入 rank
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>dist.init_process_group(backend, init_method=&#39;file:///mnt/nfs/sharedfile&#39;,
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>                        world_size=4, rank=args.rank)
-</code></pre></div>
-<h3 id="_7">环境变量初始化</h3>
-<p>这种方式通过读取环境变量获取配置信息，方便用户自定义信息来源。需要设置的变量有：</p>
+<p>更多变量请参考 <a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html">NVIDIA NCCL 官方文档</a>。</p>
+<h2 id="_5">基础概念</h2>
+<p><code>torch.distributed</code> 与 {class}<code>torch.nn.parallel.DistributedDataParallel</code>（DDP）共同提供了多机多卡训练框架。与 {func}<code>torch.nn.DataParallel</code> 相比，DDP/<code>torch.distributed</code> 具有以下优势：</p>
 <ul>
-<li><code>MASTER_PORT</code> —— 必填，为 rank 0 机器上的一个空闲端口；</li>
-<li><code>MASTER_ADDR</code> —— 必填（rank 0 可省略），为 rank 0 节点的地址；</li>
-<li><code>WORLD_SIZE</code> —— 必填，可以在环境变量或初始化函数中指定；</li>
-<li><code>RANK</code> —— 必填，可以在环境变量或初始化函数中指定。</li>
+<li>每个进程维护自己的优化器并执行完整的优化步骤，避免额外的参数广播。</li>
+<li>每个进程独立运行 Python 解释器，减少 GIL 竞争，适合 RNN 等大量依赖 Python 运行时的模型。</li>
 </ul>
-<p>rank 0 节点会用来建立所有连接。该方式是默认选项，即 <code>init_method</code> 可省略或设为 <code>env://</code>。</p>
-<h3 id="_8">缩短初始化时间</h3>
+<h2 id="_6">初始化与常用工具</h2>
+<p>调用任何通信函数前必须初始化进程组。推荐使用 <code>torchrun</code> 启动脚本，每个进程均执行同一段代码：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch.distributed</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dist</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">dist</span><span class="o">.</span><span class="n">init_process_group</span><span class="p">(</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;nccl&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">init_method</span><span class="o">=</span><span class="s2">&quot;env://&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">world_size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;WORLD_SIZE&quot;</span><span class="p">]),</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">rank</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;RANK&quot;</span><span class="p">]),</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="_7">初始化方式</h3>
 <ul>
-<li><code>TORCH_GLOO_LAZY_INIT</code> —— 按需建立连接，而不是一次性构建全互连拓扑，对于非 all2all
-  操作可显著缩短初始化时间。</li>
+<li><strong>环境变量（默认）</strong>：使用 <code>env://</code> 时需设置 <code>MASTER_ADDR</code>、<code>MASTER_PORT</code>、<code>WORLD_SIZE</code>、<code>RANK</code>。</li>
+<li><strong>TCP 地址</strong>：通过 <code>tcp://host:port</code> 指定 rank0 所在机器的地址。</li>
+<li><strong>共享文件系统</strong>：使用 <code>file://</code> 指定所有节点可见的文件路径。</li>
 </ul>
-<h2 id="_9">初始化之后</h2>
-<p>运行 {func}<code>torch.distributed.init_process_group</code> 后，可以调用以下函数。可通过
-{func}<code>torch.distributed.is_initialized</code> 检查进程组是否已初始化。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>.. autoclass:: Backend
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    :members:
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>.. autofunction:: get_backend
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>.. autofunction:: get_rank
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>.. autofunction:: get_world_size
-</code></pre></div>
-<h2 id="_10">关闭</h2>
-<p>训练结束时务必调用 {func}<code>destroy_process_group</code> 释放资源。</p>
-<p>最简单的方式是在脚本中所有通信都完成后（通常是 <code>main()</code> 接近尾部）调用一次
-{func}<code>destroy_process_group()</code>，并保持 <code>group</code> 参数为默认值 None。每个训练进程调用一次即可，
-无需在启动器进程中调用。</p>
-<p>如果应用中存在多个进程组（例如 N 维并行），且不是所有 rank 都在超时时间内调用
-{func}<code>destroy_process_group</code>，程序可能会在退出时挂起。这是因为
-ProcessGroupNCCL 的析构函数内部会调用 <code>ncclCommAbort</code>，而该函数需要全体成员统一调用。
-Python GC 的析构顺序不可预测，因此显式调用 {func}<code>destroy_process_group</code> 能保证
-各个 rank 上的 <code>ncclCommAbort</code> 调用顺序一致，从而避免在析构函数中触发。</p>
-<h3 id="_11">重新初始化</h3>
-<p><code>destroy_process_group</code> 也可以用于销毁单个进程组。例如容错训练场景中，可能需要在运行时销毁旧的进程组并创建新的。
-此时必须确保在调用 <code>destroy</code> 之后、重新初始化之前使用 torch.distributed 以外的方式对训练进程进行同步。
-该行为目前尚未得到充分验证，属于已知限制。如有相关需求请在 GitHub 提交 issue 或 RFC。</p>
-<hr />
-<h2 id="groups">分组（Groups）</h2>
-<p>默认情况下，集合通信运行在默认组（也称 world 上），并要求所有进程进入调用。
-某些工作负载需要更细粒度的通信，这时可以通过 {func}<code>~torch.distributed.new_group</code>
-创建包含任意进程子集的新分组。该函数返回一个不透明的组句柄，可在集合通信函数中通过 <code>group</code>
-参数传入（集合通信即是按照常见模式交换信息的分布式函数）。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>.. autofunction:: new_group
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>.. autofunction:: get_group_rank
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>.. autofunction:: get_global_rank
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>.. autofunction:: get_process_group_ranks
-</code></pre></div>
-<h2 id="devicemesh">DeviceMesh</h2>
-<p>DeviceMesh 是对进程组（或 NCCL 通信器）的更高层抽象。它可以方便地创建跨节点和节点内的进程组，
-无需手动为不同的子进程组设置 rank；同时也便于统一管理这些分布式进程组。
-可使用 {func}<code>~torch.distributed.device_mesh.init_device_mesh</code> 创建新的 DeviceMesh，
-并通过 mesh 形状描述设备拓扑。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>.. autoclass:: torch.distributed.device_mesh.DeviceMesh
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>    :members:
-</code></pre></div>
-<h2 id="_12">点对点通信</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>.. autofunction:: send
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>.. autofunction:: recv
-</code></pre></div>
-<p>{func}<code>~torch.distributed.isend</code> 与 {func}<code>~torch.distributed.irecv</code> 会返回分布式请求对象。
-该对象的类型并未公开（不应手动创建），但一定支持以下方法：</p>
+<p>若使用共享文件系统，请确保每次运行前删除旧文件，并保证文件系统支持 <code>fcntl</code> 锁。</p>
+<h3 id="_8">常用检测函数</h3>
 <ul>
-<li><code>is_completed()</code> —— 操作完成时返回 True；</li>
-<li><code>wait()</code> —— 阻塞当前进程直到操作完成；一旦返回，<code>is_completed()</code> 保证为 True。</li>
+<li><code>torch.distributed.is_available()</code></li>
+<li><code>torch.distributed.is_initialized()</code></li>
+<li><code>torch.distributed.get_backend()</code></li>
+<li><code>torch.distributed.get_rank()</code> / <code>get_world_size()</code></li>
+<li><code>torch.distributed.destroy_process_group()</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>.. autofunction:: isend
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>.. autofunction:: irecv
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>.. autofunction:: send_object_list
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>.. autofunction:: recv_object_list
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>.. autofunction:: batch_isend_irecv
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>.. autoclass:: P2POp
-</code></pre></div>
-<h2 id="_13">同步与异步集合通信</h2>
-<p>所有集合通信函数都支持以下两种模式，通过 <code>async_op</code> 参数进行控制：</p>
-<p><strong>同步模式</strong> —— 默认模式，即 <code>async_op=False</code>。函数返回时保证集合通信已执行完成。
-对于 CPU 集合通信，可立即安全地使用输出结果。对于 CUDA 集合通信，由于 CUDA
-操作是异步的，函数返回并不代表 CUDA 指令已经完成；在同一 CUDA stream 上使用输出结果是安全的。
-若需要跨 stream 使用输出，用户必须自行同步。有关 CUDA 语义和 stream 同步的更多说明，参见
-<a href="https://pytorch.org/docs/stable/notes/cuda.html">CUDA 语义</a>。CPU 与 CUDA 行为的差异可参考下方示例脚本。</p>
-<p><strong>异步模式</strong> —— 当 <code>async_op=True</code> 时，集合通信函数返回一个分布式请求对象。该对象同样提供
-<code>is_completed()</code> 与 <code>wait()</code> 方法：</p>
+<h2 id="devicemesh">进程组与 DeviceMesh</h2>
 <ul>
-<li><code>is_completed()</code> —— 对于 CPU 操作，若完成则返回 <code>True</code>；对于 CUDA 操作，
-  只有当底层 CUDA 指令完成时才返回 <code>True</code>。此外，该调用不会自动触发同步。</li>
-<li><code>wait()</code> —— 阻塞当前进程直到操作完成。<code>is_completed()</code> 在 <code>wait()</code> 返回后一定为 True。</li>
+<li>使用 <code>torch.distributed.new_group()</code> 可以创建子进程组，只在指定进程之间执行集合通信。</li>
+<li><code>torch.distributed.device_mesh.DeviceMesh</code> 提供了描述集群拓扑的高层抽象，可与 DTensor、张量并行等组合使用。</li>
 </ul>
-<p>异步接口允许与其他计算重叠，或在单线程中顺序调度多个集合通信。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>.. autofunction:: all_reduce
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>.. autofunction:: reduce
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>.. autofunction:: all_gather
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>.. autofunction:: all_gather_into_tensor
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>.. autofunction:: all_reduce_coalesced
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>.. autofunction:: all_to_all
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>.. autofunction:: all_to_all_single
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>.. autofunction:: reduce_scatter
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>.. autofunction:: gather_object
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>.. autofunction:: broadcast
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>.. autofunction:: torch.distributed.broadcast_object_list
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>.. autofunction:: torch.distributed.isend
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>.. autofunction:: torch.distributed.irecv
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>.. autofunction:: torch.distributed.scatter_object_list
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>.. autofunction:: torch.distributed.gather_object
-</code></pre></div>
-<h2 id="_14">错误处理</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>.. autoclass:: ProcessGroup
-<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>    :members:
-</code></pre></div>
+<h2 id="_9">点对点通信</h2>
+<p>常用接口包括：</p>
+<ul>
+<li><code>torch.distributed.send()</code> / <code>recv()</code></li>
+<li><code>torch.distributed.isend()</code> / <code>irecv()</code> （返回异步请求对象，支持 <code>is_completed()</code>、<code>wait()</code>）</li>
+<li><code>torch.distributed.batch_isend_irecv()</code></li>
+<li><code>torch.distributed.send_object_list()</code> / <code>recv_object_list()</code></li>
+</ul>
+<h2 id="_10">集合通信</h2>
+<p>所有集合通信函数均支持 <code>async_op</code> 参数以决定是否异步执行。常用集合通信包括：</p>
+<ul>
+<li><code>torch.distributed.all_reduce()</code></li>
+<li><code>torch.distributed.reduce()</code></li>
+<li><code>torch.distributed.broadcast()</code></li>
+<li><code>torch.distributed.all_gather()</code> / <code>gather()</code> / <code>scatter()</code></li>
+<li><code>torch.distributed.reduce_scatter()</code></li>
+<li><code>torch.distributed.all_to_all()</code> / <code>all_to_all_single()</code></li>
+<li><code>torch.distributed.barrier()</code></li>
+</ul>
+<h3 id="gpu">多 GPU（单线程多设备）接口</h3>
+<div class="admonition warning">
+<p class="admonition-title">注意</p>
+<p>多 GPU 接口（单个 CPU 线程控制多个 GPU）已被弃用，推荐使用“一线程一设备”的编程模型。</p>
+</div>
 <h2 id="key-value-store">Key-Value Store</h2>
-<p>Key-Value Store 是一个键值存储，用于在组内进程之间共享信息，也可以在
-{func}<code>torch.distributed.init_process_group</code> 初始化时显式构造并传入（作为 <code>init_method</code>
-的替代方案）。可用的存储类型包括 {class}<code>~torch.distributed.TCPStore</code>、
-{class}<code>~torch.distributed.FileStore</code> 和 {class}<code>~torch.distributed.HashStore</code>。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>.. autoclass:: Store
-<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>    :members:
-<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>    :special-members:
+<p>后端内部依赖键值存储来初始化和共享状态。PyTorch 提供以下实现：</p>
+<ul>
+<li><code>torch.distributed.TCPStore</code></li>
+<li><code>torch.distributed.FileStore</code></li>
+<li><code>torch.distributed.HashStore</code></li>
+<li><code>torch.distributed.PrefixStore</code></li>
+</ul>
+<h2 id="_11">性能分析与调试</h2>
+<p>可以使用 <code>torch.profiler</code> 或 <code>torch.autograd.profiler</code> 记录通信操作。例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">profiler</span><span class="o">.</span><span class="n">profile</span><span class="p">():</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">dist</span><span class="o">.</span><span class="n">all_reduce</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>.. autoclass:: TCPStore
-<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>    :members:
-<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>    :special-members: __init__
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>.. autoclass:: HashStore
-<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>    :members:
-<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>    :special-members: __init__
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>.. autoclass:: FileStore
-<a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>    :members:
-<a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a>    :special-members: __init__
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>.. autoclass:: PrefixStore
-<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>    :members:
-<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a>    :special-members: __init__
-</code></pre></div>
-<h2 id="_15">集合通信的性能分析</h2>
-<p>可以使用 <code>torch.profiler</code>（推荐，1.8.1 及以上版本提供）或 <code>torch.autograd.profiler</code>
-对集合通信和点对点通信接口进行性能分析。所有内置后端（<code>gloo</code>、<code>nccl</code>、<code>mpi</code>）
-均受到支持，相关调用会在分析结果/日志中按预期展示。使用方式与分析普通 torch 运算相同：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>import torch
-<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>import torch.distributed as dist
-<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>with torch.profiler():
-<a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>    tensor = torch.randn(20, 10)
-<a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a>    dist.all_reduce(tensor)
-</code></pre></div>
-<p>更多 profiler 功能请参阅
-<a href="https://pytorch.org/docs/main/profiler.html">Profiler 文档</a>。</p>
-<h2 id="gpu">多 GPU 集合通信</h2>
-<p>:::{warning}
-多 GPU 接口（即单个 CPU 线程控制多个 GPU）已被弃用。当前推荐的编程模型是一线程对应一设备，
-即本文档所示的 API。如果你是后端开发者并希望支持单线程控制多个设备，请联系 PyTorch 分布式维护者。
-:::</p>
-<p>(object_collectives)=</p>
-<h2 id="_16">对象级集合通信</h2>
-<p>:::{warning}
-对象集合通信存在若干严重限制，请继续阅读以确认是否适用于你的场景。
-:::</p>
-<p>对象集合通信可在能被 pickle 的任意 Python 对象上执行集合模式（如广播、all_gather 等）。
-其典型流程如下：</p>
-<ol>
-<li>将输入对象 pickle 成字节串并写入字节张量；</li>
-<li>通过一次集合通信告知其它进程该张量的大小；</li>
-<li>根据大小分配合适的张量；</li>
-<li>再执行一次集合通信传输对象数据；</li>
-<li>将字节串反序列化回 Python 对象。</li>
-</ol>
-<p>对象集合通信可能带来令人意外的性能或内存开销，应谨慎使用。常见问题包括：</p>
-<p><strong>序列化/反序列化耗时不均衡</strong> —— 序列化速度取决于对象数量、类型和大小。
-例如在 gather_object 中，接收端需要反序列化 N 倍于发送端的对象数量，可能导致其它进程在后续集合通信中超时。</p>
-<p><strong>低效的张量通信</strong> —— 建议使用常规集合通信 API 处理张量，而不是对象集合通信。
-如果通过对象集合发送张量，会经历序列化与反序列化（非 CPU 张量还需额外的 CPU 同步与设备到主机的复制），
-几乎所有场景下都值得改写代码，直接调用张量集合通信接口。</p>
-<p><strong>设备不一致的问题</strong> —— 如果仍要通过对象集合发送张量，还需注意 CUDA（或其他加速器）设备。
-当 pickle 一个位于 <code>cuda:3</code> 的张量并在另一进程中 unpickle 时，得到的张量依旧位于 <code>cuda:3</code>，
-而不会根据本地默认设备调整。常规张量集合通信的输出张量始终位于本地设备，更符合预期。</p>
-<p>此外，如果首次在进程中 unpickle 张量，会隐式创建一个 CUDA 上下文，可能浪费大量显存。
-可在传入对象集合前将张量移动到 CPU 以规避该问题。</p>
-<h2 id="_17">第三方后端</h2>
-<p>除了内置的 GLOO/MPI/NCCL 后端之外，PyTorch 分布式支持通过运行时注册机制接入第三方后端。
-如需通过 C++ 扩展开发第三方后端，请参考
-<a href="https://pytorch.org/tutorials/advanced/cpp_extension.html">自定义 C++/CUDA 扩展教程</a>
-以及 <code>test/cpp_extensions/cpp_c10d_extension.cpp</code>。第三方后端的能力取决于自身的实现。</p>
+<p>启用日志功能：</p>
+<ul>
+<li><code>TORCH_LOGS=+pp</code>（管道并行日志）</li>
+<li><code>TORCH_LOGS=+dtensor</code>（DTensor 日志）</li>
+</ul>
+<h2 id="experimental">对象级集合通信（Experimental）</h2>
+<p>对象集合通信允许在多个进程之间广播或聚合任意可 pickle 的 Python 对象，但存在如下限制：</p>
+<ul>
+<li>序列化/反序列化开销可能导致超时。</li>
+<li>对张量执行对象集合通信会触发额外的 CPU 同步，不建议在性能敏感场景使用。</li>
+<li>对于 CUDA 张量，unpickle 时会在默认设备上分配显存，可能导致意外的显存占用。</li>
+</ul>
+<p>若需要发送张量，请优先使用常规集合通信函数。</p>
+<h2 id="_12">其他常用函数</h2>
+<ul>
+<li><code>torch.distributed.get_group_rank()</code> / <code>get_global_rank()</code></li>
+<li><code>torch.distributed.batch_isend_irecv()</code></li>
+<li><code>torch.distributed.loss_parallel</code>（张量并行中的损失并行）</li>
+</ul>
+<h2 id="_13">关闭与资源释放</h2>
+<p>在训练结束时应调用 <code>torch.distributed.destroy_process_group()</code> 释放所有通信资源，避免在退出阶段出现死锁。此外，如果你的程序会多次创建进程组（例如容错训练），务必在每次销毁后进行额外同步，再重新初始化。</p>
+<hr />
+<p>以上内容概述了 <code>torch.distributed</code> 的核心用法。有关更多示例和细节，请参考本项目其他章节以及 PyTorch 官方文档。</p>
 
 
 
