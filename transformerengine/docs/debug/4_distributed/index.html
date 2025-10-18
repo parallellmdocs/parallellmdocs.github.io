@@ -3027,7 +3027,7 @@
 <h2 id="_2">功能行为</h2>
 <p>在分布式场景下，<strong>DisableFP8GEMM</strong> 与 <strong>DisableFP8Layer</strong> 的行为与单 GPU 基本一致。</p>
 <p><strong>PerTensorScaling</strong> 与 <strong>FakeQuant</strong> 会在每个节点独立计算 FP8 缩放因子，因此 GPU 数量会影响结果。这与延迟缩放（Delayed Scaling）FP8 配方不同，后者会同步缩放因子。</p>
-<p><img alt="" src="./img/scaling_factors.svg" /></p>
+<p><img alt="" src="../img/scaling_factors.svg" /></p>
 <p>图 1：对于 <strong>PerTensorScaling</strong> 与 <strong>FakeQuant</strong>，每个张量分片单独计算缩放因子；而延迟缩放 FP8 会在各节点间同步。</p>
 <p>与日志相关的功能更为复杂，后续章节将详细介绍。</p>
 <h2 id="_3">归约分组</h2>
@@ -3040,11 +3040,11 @@
 </code></pre></div>
 <p>该调用保证统计量会在指定分组内归约。激活统计在前向结束（离开 autocast）后记录；梯度（dgrad、wgrad）统计在反向结束后记录。</p>
 <p>下图展示了 4 节点、张量并行度 2、数据并行度 2 的三种归约配置。</p>
-<p><img alt="" src="./img/reduction1.svg" /></p>
+<p><img alt="" src="../img/reduction1.svg" /></p>
 <p>图 2：所有节点组成单一的张量归约组，因此各节点记录到的统计量完全一致。</p>
-<p><img alt="" src="./img/reduction2.svg" /></p>
+<p><img alt="" src="../img/reduction2.svg" /></p>
 <p>图 3：每个节点将自身视为独立的归约组。权重统计仍在张量并行组内同步，但激活与梯度统计不再同步。</p>
-<p><img alt="" src="./img/reduction3.svg" /></p>
+<p><img alt="" src="../img/reduction3.svg" /></p>
 <p>图 4：通过 <code>set_weight_tensor_tp_group_reduce(False)</code> 禁用权重同步后，每个节点记录自身分片的权重统计。</p>
 <h2 id="_4">微批处理</h2>
 <p>下面说明在微批（microbatch）场景下的统计行为。这里的微批指的是在一次 <code>debug_api.step()</code> 前执行多次 <code>forward()</code>。其表现为：</p>
@@ -3055,7 +3055,7 @@
 <h2 id="tensorboard">写入文件与 TensorBoard</h2>
 <p>在单节点运行、且 <code>default_logging_enabled=True</code> 时，日志默认写入 <code>log_dir/nvdlfw_inspect_statistics_logs/nvdlfw_inspect_globalrank-0.log</code>。在多 GPU 训练中，每个节点会将归约后的统计写入自身的文件，同一归约组内的节点由于记录的是已归约数据，因此数值相同。</p>
 <p>若仅部分节点传入 TensorBoard writer，则只有这些节点会输出 TensorBoard 日志。这在复杂的并行场景（如有两个 Transformer 层，且 TP_SIZE=2、DP_SIZE=2、PP_SIZE=2）中非常有用。若希望所有统计写入 TensorBoard，需确保每个流水线并行组至少有一个进程传入 writer。</p>
-<p><img alt="" src="./img/pipeline_logging.svg" /></p>
+<p><img alt="" src="../img/pipeline_logging.svg" /></p>
 <p>图 5：流水线并行示例。为每个流水线并行组选择一个节点传入 <code>tb_writer</code>，并以此指定张量归约组。</p>
 <p>如果将张量归约组设置为 <code>None</code>，每个节点都会保留未归约的 wgrad/dgrad 统计，便于后续处理。若需禁用张量并行组内的权重归约，可调用：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">transformer_engine</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">set_weight_tensor_tp_group_reduce</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>

@@ -3102,7 +3102,7 @@
 </ul>
 <p>有些层（如 <code>LayerNormLinear</code>）融合了 <code>LayerNorm</code> 与 <code>Linear</code>。在精度调试中，只有其中的 <code>Linear</code> 部分会受到影响。</p>
 <p>下图展示了一个包含四个线性层的 <code>TransformerLayer</code> 示例，这些层都可以通过精度调试工具进行调整。</p>
-<p><img alt="" src="./img/names.svg" /></p>
+<p><img alt="" src="../img/names.svg" /></p>
 <p>图 1：示例 TransformerLayer 中各层的命名。最内层方块表示基础层，每个基础层包含一个线性层。不包含线性层的模块（如 <code>DotProductAttention</code>）未显示。</p>
 <p><strong>配置文件示例</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 禁用四个 GEMM 的 wgrad</span>

@@ -2907,7 +2907,7 @@
 </blockquote>
 <h1 id="nvidia-dl-framework-inspect">调用 Nvidia-DL-Framework-Inspect</h1>
 <p>本节更详细地说明 Transformer Engine 与 Nvidia-DL-Framework-Inspect 的协作方式。TransformerEngine 的各个 GEMM 内部都预留了钩子（hook）。用户可以实现自定义功能类，也可以复用 TE 内置功能。<code>config.yaml</code> 用于描述哪些层需要启用哪些钩子。Nvidia-DL-Framework-Inspect 会结合 TE 训练流程、功能类以及 <code>config.yaml</code>，并负责在正确位置插入钩子。下图给出了示意：</p>
-<p><img alt="" src="./img/api_calls1.svg" /></p>
+<p><img alt="" src="../img/api_calls1.svg" /></p>
 <p>图 1：仅含一个 Linear 层的训练脚本示例。对于 <code>config.yaml</code> 中提到的张量，<code>modify_tensor_enabled()</code> 与 <code>modify_tensor()</code> 的行为会被功能类中的定义替换。其他调用则返回默认值（即不执行任何操作）。</p>
 <p>本页列出了 TransformerEngine 在每个 GEMM 中触发的 Nvidia-DL-Framework-Inspect API 调用。调用分为两类：</p>
 <ul>

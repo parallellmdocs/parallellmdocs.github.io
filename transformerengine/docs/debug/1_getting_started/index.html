@@ -3060,7 +3060,7 @@
 <li>Transformer Engine 内置功能，例如 DisableFP8GEMM、LogTensorStats，详见 <a href="../3_api_features/">调试功能 API</a>。</li>
 <li>用户自定义功能。关于如何编写自定义功能，请参考 <a href="../3_api_te_calls/">Nvidia-DL-Framework-Inspect 调用说明</a>。</li>
 </ul>
-<p><img alt="" src="./img/introduction.svg" /></p>
+<p><img alt="" src="../img/introduction.svg" /></p>
 <p>图 1：Nvidia-DL-Framework-Inspect 对含 3 个 TE Linear 层的训练脚本进行拦截示例。<code>config.yaml</code> 为每个 Linear 层声明要启用的功能。部分功能类由 TE 提供，<code>UserProvidedPrecision</code> 则是用户自定义功能。Nvidia-DL-Framework-Inspect 会按配置将功能注入至对应层。</p>
 <h2 id="_2">示例训练脚本</h2>
 <p>以下展示如何使用 Transformer Engine 以 FP8 精度训练一个 Transformer 层，包括设置层、定义优化器以及使用合成数据运行若干训练迭代。</p>
@@ -3230,7 +3230,7 @@
 <a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="c1"># (...)</span>
 </code></pre></div>
 <p>运行训练脚本后，通过 <code>tensorboard --logdir=./tensorboard_dir/run1</code> 打开 TensorBoard：</p>
-<p><img alt="" src="./img/tensorboard.png" /></p>
+<p><img alt="" src="../img/tensorboard.png" /></p>
 <p>图 2：使用 TensorBoard 绘制的统计信息。</p>
 
 
