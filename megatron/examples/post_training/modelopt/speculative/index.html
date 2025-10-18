@@ -1862,6 +1862,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -1894,6 +1896,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1902,7 +1906,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       训练与导出流程
     </span>
@@ -1912,7 +1916,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       模型转换
     </span>
@@ -1921,7 +1925,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       合成数据生成
     </span>
@@ -1939,7 +1943,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       导出检查点
     </span>
@@ -5893,6 +5897,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -5901,7 +5907,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       训练与导出流程
     </span>
@@ -5911,7 +5917,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       模型转换
     </span>
@@ -5920,7 +5926,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       合成数据生成
     </span>
@@ -5938,7 +5944,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       导出检查点
     </span>
@@ -5976,26 +5982,19 @@
 
 
 
-  <h1>推测解码</h1>
-
-<div align="center">
-
-# 推测式解码
-
-</div>
-
+<h1 id="_1">推测式解码</h1>
 <p><a href="https://arxiv.org/abs/2401.10774">Medusa</a> 与 <a href="https://arxiv.org/pdf/2401.15077">EAGLE</a> 的训练与模型导出均受支持（高速解码可通过 TensorRT-LLM 实现）。</p>
 <p>每步都会报告 Medusa 头部的 top-1 精度。<strong>注意</strong>：此处精度并非论文中的接受率，但第一个头的 top-1 能在一定程度上反映训练收敛情况。</p>
-<h2 id="_1">训练与导出流程</h2>
+<h2 id="_2">训练与导出流程</h2>
 <p>实践中，应结合权重/kv-cache 量化以在不影响模型质量的前提下最大化 TPS。下文给出带自蒸馏的量化感知训练（QAT）流程。</p>
-<h3 id="_2">模型转换</h3>
+<h3 id="_3">模型转换</h3>
 <p>为避免质量下降，我们固定基座模型，仅将草稿模型作为附加组件。对于 Medusa，设置 <code>--export-algorithm medusa</code> 并提供 <code>--export-num-medusa-heads</code>；对于 EAGLE，设置 <code>--export-algorithm eagle</code> 并提供 <code>--export-eagle-algorithm</code>。转换后的 <code>${MLM_MODEL_SAVE}</code> 将包含随机初始化的草稿模型权重。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python<span class="w"> </span>examples/post_training/modelopt/convert_model.py<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span>--export-algorithm<span class="w"> </span>eagle<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span>--export-eagle-algorithm<span class="w"> </span>eagle3<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span>--load<span class="w"> </span><span class="si">${</span><span class="nv">MLM_MODEL_CKPT</span><span class="si">}</span><span class="w"> </span>--save<span class="w"> </span><span class="si">${</span><span class="nv">MLM_MODEL_SAVE</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">MLM_EXTRA_ARGS</span><span class="si">}</span>
 </code></pre></div>
-<h3 id="_3">合成数据生成</h3>
+<h3 id="_4">合成数据生成</h3>
 <p>草稿模型需要拟合基座模型的输出，因此自生成数据对提升精度和接受率至关重要。</p>
 <p>为简化流程，我们使用 <code>vllm serve --quantization modelopt</code> 部署量化模型，并以多轮对话数据作为输入生成回答。详细流程参考 ModelOpt 示例（https://github.com/NVIDIA/TensorRT-Model-Optimizer/tree/main/speculative_decoding）。生成结果以 OpenAI Chat Completion 格式的 jsonlines 保存。</p>
 <h3 id="qat">量化感知训练（QAT）</h3>
@@ -6008,7 +6007,7 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>python<span class="w"> </span>examples/post_training/modelopt/finetune.py<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span>--load<span class="w"> </span><span class="si">${</span><span class="nv">MLM_QUANT_SAVE</span><span class="si">}</span><span class="w"> </span>--save<span class="w"> </span><span class="si">${</span><span class="nv">MLM_QUANT_SAVE</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">MLM_EXTRA_ARGS</span><span class="si">}</span>
 </code></pre></div>
-<h3 id="_4">导出检查点</h3>
+<h3 id="_5">导出检查点</h3>
 <p>最后导出 Medusa 头或 EAGLE 模块，以便在 TensorRT-LLM 等推理框架中部署。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python<span class="w"> </span>examples/post_training/modelopt/export.py<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span>--export-dir<span class="w"> </span><span class="si">${</span><span class="nv">CKPT_DIR</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>

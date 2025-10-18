@@ -5960,11 +5960,11 @@
 
 
 
+<h1 id="faq">常见问题（FAQ）</h1>
 <blockquote>
 <p>Copyright (c) 2022-2025, NVIDIA CORPORATION &amp; AFFILIATES.</p>
 <p>See LICENSE for license information.</p>
 </blockquote>
-<h1 id="faq">常见问题（FAQ）</h1>
 <h2 id="fp8">FP8 检查点兼容性</h2>
 <p>Transformer Engine 自 1.6 起支持 FP8 注意力，会在检查点的 <code>._extra_state</code> 键下存储 FP8 元数据（缩放因子与 amax 历史）。随着 FP8 注意力从单后端扩展到多后端，该键所在的位置也发生了变化。</p>
 <p>以 <code>MultiheadAttention</code> 模块为例。在 Transformer Engine 1.11 中，其 FP8 注意力元数据位于 <code>core_attention._extra_state</code>，如下所示：</p>

@@ -1431,6 +1431,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -1463,6 +1465,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1471,25 +1475,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#megatron-core" class="md-nav__link">
-    <span class="md-ellipsis">
-      Megatron Core 推理指南
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       目录
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="目录">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       1. 快速开始
@@ -1515,12 +1509,8 @@
     </span>
   </a>
   
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
+    <nav class="md-nav" aria-label="1.2 运行示例">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#2-mcore" class="md-nav__link">
@@ -1588,6 +1578,11 @@
       4. Future work
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5957,6 +5952,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -5965,25 +5962,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#megatron-core" class="md-nav__link">
-    <span class="md-ellipsis">
-      Megatron Core 推理指南
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       目录
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="目录">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       1. 快速开始
@@ -6009,12 +5996,8 @@
     </span>
   </a>
   
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
+    <nav class="md-nav" aria-label="1.2 运行示例">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#2-mcore" class="md-nav__link">
@@ -6089,6 +6072,11 @@
     </nav>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
     </ul>
   
@@ -6106,11 +6094,9 @@
 
 
 
-  <h1>推理实践</h1>
-
-<h3 id="megatron-core">Megatron Core 推理指南</h3>
+<h1 id="megatron-core">Megatron Core 推理指南</h1>
 <p>本文展示如何使用 Megatron Core 运行模型推理的示例流程。</p>
-<h3 id="_1">目录</h3>
+<h2 id="_1">目录</h2>
 <ul>
 <li><a href="#megatron-core-推理指南">Megatron Core 推理指南</a></li>
 <li><a href="#目录">目录</a></li>
@@ -6130,10 +6116,10 @@
 <li><a href="#4-后续规划">4. 后续规划</a></li>
 </ul>
 <p><br></p>
-<h4 id="1">1. 快速开始</h4>
+<h2 id="1">1. 快速开始</h2>
 <p>示例脚本演示如何对 Megatron Core 训练得到的模型执行静态批量推理，入口位于 <a href="./gpt/gpt_static_inference.py">gpt_static_inference.py</a>。同样的流程可扩展到 <a href="./gpt/gpt_dynamic_inference.py">gpt_dynamic_inference.py</a>。</p>
 <p><br></p>
-<h5 id="11">1.1 代码解析</h5>
+<h3 id="11">1.1 代码解析</h3>
 <p><strong><em>步骤 1：初始化模型并行及默认参数</em></strong><br />
 微批大小默认为 1。在纯张量并行场景下不会使用；在流水线并行中会在运行时根据配置计算。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Initialize Megatron model using the same model provider from training.</span>
@@ -6184,7 +6170,7 @@
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div>
 <p><br></p>
-<h5 id="12">1.2 运行示例</h5>
+<h3 id="12">1.2 运行示例</h3>
 <p>以下给出一个 Slurm 脚本示例。运行前请配置好 tokenizer 路径、推理参数等。关于采样参数的说明可参考 <a href="https://ivibudh.medium.com/a-guide-to-controlling-llm-model-output-exploring-top-k-top-p-and-temperature-parameters-ed6a31313910">这篇博客</a>。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Slurm cluster settings </span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">ACCOUNT</span><span class="o">=</span>&lt;account&gt;

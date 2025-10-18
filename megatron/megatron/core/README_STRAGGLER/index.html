@@ -626,6 +626,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -658,6 +660,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -666,16 +670,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#tp-stragglerdetector" class="md-nav__link">
-    <span class="md-ellipsis">
-      针对 TP 组的 StragglerDetector
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="针对 TP 组的 StragglerDetector">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       指标说明
@@ -683,8 +677,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       命令行启用
@@ -692,18 +686,13 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#stragglerdetector" class="md-nav__link">
     <span class="md-ellipsis">
       StragglerDetector 编程方式
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -5873,6 +5862,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -5881,16 +5872,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#tp-stragglerdetector" class="md-nav__link">
-    <span class="md-ellipsis">
-      针对 TP 组的 StragglerDetector
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="针对 TP 组的 StragglerDetector">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       指标说明
@@ -5898,8 +5879,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       命令行启用
@@ -5907,18 +5888,13 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#stragglerdetector" class="md-nav__link">
     <span class="md-ellipsis">
       StragglerDetector 编程方式
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -5938,9 +5914,7 @@
 
 
 
-  <h1>Straggler 检测</h1>
-
-<h2 id="tp-stragglerdetector">针对 TP 组的 StragglerDetector</h2>
+<h1 id="tp-stragglerdetector">针对 TP 组的 StragglerDetector</h1>
 <p><code>megatron/core/utils.py</code> 中的 <code>StragglerDetector</code> 类支持上下文管理，可用于基于 TP 组各 rank 的 RTT 找出慢节点。同时还能采集 GPU 的功耗、温度、利用率等指标，方便定位到具体 GPU（例如由硬件异常导致的拖慢）。<br>
 该类还支持针对同一迭代的不同步骤记录时间事件，每个 rank 会持续收集数据。当在日志间隔内调用 reporter 时，会计算各指标在所有 rank 上的最小值与最大值，并按如下格式记录：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w"> </span><span class="m">0</span>:<span class="w"> </span>INFO:megatron.core.utils:<span class="o">[</span><span class="m">2024</span>-03-14<span class="w"> </span><span class="m">23</span>:07:56<span class="o">]</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>MnRtt/Rnk:<span class="w"> </span><span class="m">3453</span>.08ms/8<span class="w"> </span><span class="p">|</span><span class="w"> </span>MxRtt/Rnk:<span class="w"> </span><span class="m">3468</span>.20ms/0<span class="w"> </span><span class="p">|</span><span class="w"> </span>MnPwr/Rnk:<span class="w"> </span>601796W/8<span class="w"> </span><span class="p">|</span><span class="w"> </span>MxPwr/Rnk:<span class="w"> </span>683801W/18<span class="w"> </span><span class="p">|</span><span class="w"> </span>MnTmp/Rnk:<span class="w"> </span>52C/0<span class="w"> </span><span class="p">|</span><span class="w"> </span>MxTmp/Rnk:<span class="w"> </span>65C/21<span class="w"> </span><span class="p">|</span><span class="w"> </span>MnUtl/Rnk:<span class="w"> </span><span class="m">97</span>%/8<span class="w"> </span><span class="p">|</span><span class="w"> </span>MxUtl/Rnk:<span class="w"> </span><span class="m">100</span>%/6<span class="w"> </span><span class="p">|</span><span class="w"> </span>MnClk/Rnk:<span class="w"> </span>1950MHz/28<span class="w"> </span><span class="p">|</span><span class="w"> </span>MxClk/Rnk:<span class="w"> </span>1980MHz/0<span class="w"> </span><span class="p">|</span><span class="w"> </span>MnDRtt/Rnk:<span class="w"> </span><span class="m">14</span>.27ms/23<span class="w"> </span><span class="p">|</span><span class="w"> </span>MxDRtt/Rnk:<span class="w"> </span><span class="m">34</span>.65ms/3<span class="w"> </span><span class="p">|</span><span class="w"> </span>MnEtpt/Rnk:<span class="w"> </span><span class="m">296</span>.02TF/0<span class="w"> </span><span class="p">|</span><span class="w"> </span>MxEtpt/Rnk:<span class="w"> </span><span class="m">297</span>.32TF/8

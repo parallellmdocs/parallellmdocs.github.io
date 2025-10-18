@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#cpu-offload" class="md-skip">
           跳转至
         </a>
       
@@ -672,6 +672,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -704,6 +706,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -713,15 +717,6 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      使用方法
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       配置建议
     </span>
@@ -5849,6 +5844,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -5858,15 +5855,6 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      使用方法
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       配置建议
     </span>
@@ -5890,15 +5878,13 @@
 
 
 
-  <h1>优化器 CPU Offload</h1>
-
-<h2 id="_1">使用方法</h2>
+<h1 id="cpu-offload">优化器 CPU Offload 使用方法</h1>
 <p>在 MCore 中启用优化器 CPU offload 时请添加以下参数：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>--optimizer-cpu-offload
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>--optimizer-offload-fraction<span class="w"> </span><span class="m">1</span>.0
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>--use-precision-aware-optimizer
 </code></pre></div>
-<h2 id="_2">配置建议</h2>
+<h2 id="_1">配置建议</h2>
 <p>梯度从 GPU 复制到 CPU、在 CPU 上执行优化器步骤、再将参数复制回 GPU 的过程会耗费时间。建议加上 <code>--overlap-cpu-optimizer-d2h-h2d</code>，以并行执行这些操作。</p>
 
 

@@ -6142,8 +6142,11 @@
 
 
 
-<p><strong>注意：在 M-Core 0.14 中，自定义 FSDP 的检查点实现已重构为使用基于 DTensor 的 torch distributed checkpointing，并更名为 Megatron FSDP。本文中相关部分已不再适用。</strong></p>
 <h1 id="mcore-fully-sharded-data-parallel-fsdp">MCore 自定义 Fully Sharded Data Parallel (FSDP)</h1>
+<div class="admonition warning">
+<p class="admonition-title">兼容性提示</p>
+<p>在 M-Core 0.14 中，自定义 FSDP 的检查点实现已重构为基于 DTensor 的 <code>torch.distributed.checkpoint</code>，并更名为 Megatron FSDP。本文中相关部分已不再适用。</p>
+</div>
 <h2 id="_1">如何使用？</h2>
 <p>启用 MCore 自定义 FSDP 时需添加以下参数：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>--use-megatron-fsdp
