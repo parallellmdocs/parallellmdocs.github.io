@@ -5766,45 +5766,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#table" class="md-nav__link">
-    <span class="md-ellipsis">
-      Table
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inmemorytable" class="md-nav__link">
-    <span class="md-ellipsis">
-      InMemoryTable
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#memorymappedtable" class="md-nav__link">
-    <span class="md-ellipsis">
-      MemoryMappedTable
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#concatenationtable" class="md-nav__link">
-    <span class="md-ellipsis">
-      ConcatenationTable
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      实用工具
+      常用辅助函数
     </span>
   </a>
   
@@ -5892,45 +5856,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#table" class="md-nav__link">
-    <span class="md-ellipsis">
-      Table
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inmemorytable" class="md-nav__link">
-    <span class="md-ellipsis">
-      InMemoryTable
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#memorymappedtable" class="md-nav__link">
-    <span class="md-ellipsis">
-      MemoryMappedTable
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#concatenationtable" class="md-nav__link">
-    <span class="md-ellipsis">
-      ConcatenationTable
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      实用工具
+      常用辅助函数
     </span>
   </a>
   
@@ -5953,129 +5881,48 @@
 
 
 <h1 id="_1">表格类</h1>
-<p>每个 <code>Dataset</code> 底层都由 PyArrow Table 支持，可通过内存映射或内存加载。所有表类型均继承自 [<code>table.Table</code>]。</p>
-<h2 id="table">Table</h2>
-<p>[[autodoc]] datasets.table.Table
-    - validate
-    - equals
-    - to_batches
-    - to_pydict
-    - to_pandas
-    - to_string
-    - field
-    - column
-    - itercolumns
-    - schema
-    - columns
-    - num_columns
-    - num_rows
-    - shape
-    - nbytes</p>
-<h2 id="inmemorytable">InMemoryTable</h2>
-<p>[[autodoc]] datasets.table.InMemoryTable
-    - validate
-    - equals
-    - to_batches
-    - to_pydict
-    - to_pandas
-    - to_string
-    - field
-    - column
-    - itercolumns
-    - schema
-    - columns
-    - num_columns
-    - num_rows
-    - shape
-    - nbytes
-    - column_names
-    - slice
-    - filter
-    - flatten
-    - combine_chunks
-    - cast
-    - replace_schema_metadata
-    - add_column
-    - append_column
-    - remove_column
-    - set_column
-    - rename_columns
-    - select
-    - drop
-    - from_file
-    - from_buffer
-    - from_pandas
-    - from_arrays
-    - from_pydict
-    - from_batches</p>
-<h2 id="memorymappedtable">MemoryMappedTable</h2>
-<p>[[autodoc]] datasets.table.MemoryMappedTable
-    - validate
-    - equals
-    - to_batches
-    - to_pydict
-    - to_pandas
-    - to_string
-    - field
-    - column
-    - itercolumns
-    - schema
-    - columns
-    - num_columns
-    - num_rows
-    - shape
-    - nbytes
-    - column_names
-    - slice
-    - filter
-    - flatten
-    - combine_chunks
-    - cast
-    - replace_schema_metadata
-    - add_column
-    - append_column
-    - remove_column
-    - set_column
-    - rename_columns
-    - select
-    - drop
-    - from_file</p>
-<h2 id="concatenationtable">ConcatenationTable</h2>
-<p>[[autodoc]] datasets.table.ConcatenationTable
-    - validate
-    - equals
-    - to_batches
-    - to_pydict
-    - to_pandas
-    - to_string
-    - field
-    - column
-    - itercolumns
-    - schema
-    - columns
-    - num_columns
-    - num_rows
-    - shape
-    - nbytes
-    - column_names
-    - slice
-    - filter
-    - flatten
-    - combine_chunks
-    - cast
-    - replace_schema_metadata
-    - add_column
-    - append_column
-    - remove_column
-    - set_column
-    - rename_columns
-    - select
-    - drop
-    - from_blocks
-    - from_tables</p>
-<h2 id="_2">实用工具</h2>
-<p>[[autodoc]] datasets.table.concat_tables</p>
-<p>[[autodoc]] datasets.table.list_table_cache_files</p>
+<p>🤗 Datasets 依赖 PyArrow 提供的列式存储。以下结构位于 <code>datasets.table</code> 模块中，一般无需直接实例化，但了解其差异有助于优化性能。</p>
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th>存储方式</th>
+<th>适用场景</th>
+<th>关键能力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>datasets.table.Table</code></td>
+<td>抽象基类，包装任意 Arrow <code>Table</code>。</td>
+<td>作为统一接口被 <code>Dataset</code> 持有。</td>
+<td>提供 <code>to_pandas()</code>、<code>to_batches()</code>、<code>schema</code> 等读写方法。</td>
+</tr>
+<tr>
+<td><code>datasets.table.InMemoryTable</code></td>
+<td>将数据完全加载到内存。</td>
+<td>小至中等规模数据集、频繁随机访问。</td>
+<td>支持切片、列操作（添加/删除/重命名）、<code>from_pandas()</code> 等构造函数。</td>
+</tr>
+<tr>
+<td><code>datasets.table.MemoryMappedTable</code></td>
+<td>基于内存映射文件按需加载。</td>
+<td>处理超过内存上限的超大数据集。</td>
+<td>保持与 <code>InMemoryTable</code> 类似的列操作，同时避免全量载入。</td>
+</tr>
+<tr>
+<td><code>datasets.table.ConcatenationTable</code></td>
+<td>将多个块视为单个逻辑表。</td>
+<td>读取分块下载的数据或增量追加样本。</td>
+<td>在不复制数据的情况下拼接多个 Arrow 表。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">常用辅助函数</h2>
+<ul>
+<li><code>datasets.table.concat_tables(tables)</code>：沿列一致的情况下拼接多个 Arrow 表。</li>
+<li><code>datasets.table.list_table_cache_files(table)</code>：列出底层缓存文件路径，便于诊断磁盘占用。</li>
+</ul>
 
 
 

@@ -5919,19 +5919,61 @@
 <li><code>logging.INFO</code>（20）：报告错误、警告与基本信息。</li>
 <li><code>logging.DEBUG</code>（10）：输出全部信息。</li>
 </ol>
-<p>[[autodoc]] datasets.logging.get_verbosity</p>
-<p>[[autodoc]] datasets.logging.set_verbosity</p>
-<p>[[autodoc]] datasets.logging.set_verbosity_info</p>
-<p>[[autodoc]] datasets.logging.set_verbosity_warning</p>
-<p>[[autodoc]] datasets.logging.set_verbosity_debug</p>
-<p>[[autodoc]] datasets.logging.set_verbosity_error</p>
-<p>[[autodoc]] datasets.logging.disable_propagation</p>
-<p>[[autodoc]] datasets.logging.enable_propagation</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+<th>常用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>datasets.logging.get_verbosity()</code></td>
+<td>返回当前全局日志级别（<code>logging</code> 常量）。</td>
+<td>在调整级别前先读取现有设置，或编写调试输出。</td>
+</tr>
+<tr>
+<td><code>datasets.logging.set_verbosity(level)</code></td>
+<td>将全局日志级别设置为 <code>logging.DEBUG/INFO/...</code>。</td>
+<td>在脚本开始时统一控制输出量。</td>
+</tr>
+<tr>
+<td><code>datasets.logging.set_verbosity_info()</code><br><code>set_verbosity_warning()</code><br><code>set_verbosity_debug()</code><br><code>set_verbosity_error()</code></td>
+<td>预设的便捷函数，分别将级别设为 <code>INFO</code>、<code>WARNING</code>、<code>DEBUG</code>、<code>ERROR</code>。</td>
+<td>直接调用语义化函数，避免记忆整数级别。</td>
+</tr>
+<tr>
+<td><code>datasets.logging.disable_propagation()</code> / <code>enable_propagation()</code></td>
+<td>控制 🤗 Datasets 日志是否向父记录器传播。</td>
+<td>嵌入在包含自定义日志配置的应用中，避免重复日志。</td>
+</tr>
+</tbody>
+</table>
 <h2 id="_3">配置进度条</h2>
 <p>默认情况下，下载与预处理过程中会显示 <code>tqdm</code> 进度条。可通过环境变量 <code>HF_DATASETS_DISABLE_PROGRESS_BARS</code> 全局关闭；也可以调用 [<code>~utils.enable_progress_bars</code>] 与 [<code>~utils.disable_progress_bars</code>] 控制。若环境变量已设置，将优先生效。</p>
-<p>[[autodoc]] datasets.utils.enable_progress_bars</p>
-<p>[[autodoc]] datasets.utils.disable_progress_bars</p>
-<p>[[autodoc]] datasets.utils.are_progress_bars_disabled</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>datasets.utils.enable_progress_bars()</code></td>
+<td>在当前 Python 进程中启用进度条显示。</td>
+</tr>
+<tr>
+<td><code>datasets.utils.disable_progress_bars()</code></td>
+<td>在当前进程中禁用进度条；优先级低于环境变量。</td>
+</tr>
+<tr>
+<td><code>datasets.utils.are_progress_bars_disabled()</code></td>
+<td>返回布尔值，指示进度条是否已被全局禁用。</td>
+</tr>
+</tbody>
+</table>
 
 
 

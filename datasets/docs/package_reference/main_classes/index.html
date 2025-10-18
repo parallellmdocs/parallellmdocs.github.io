@@ -5732,6 +5732,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      组合与分布式工具
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      缓存控制
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#column" class="md-nav__link">
+    <span class="md-ellipsis">
+      Column
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5918,6 +5945,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      组合与分布式工具
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      缓存控制
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#column" class="md-nav__link">
+    <span class="md-ellipsis">
+      Column
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -5936,144 +5990,85 @@
 
 <h1 id="_1">核心类</h1>
 <h2 id="datasetinfo">DatasetInfo</h2>
-<p>[[autodoc]] datasets.DatasetInfo</p>
+<p><code>datasets.DatasetInfo</code> 保存数据集的元数据，例如许可协议、特征字典、描述与下载大小。它在 <code>load_dataset</code> 时自动构建，也可在自定义构建器中通过 <code>_info()</code> 手动填写。</p>
+<ul>
+<li>通过 <code>info.features</code> 获取列定义。</li>
+<li><code>info.splits</code> 列出可用切分及样本数。</li>
+<li><code>info.push_to_hub()</code> 可将元数据上传至 Hub，与数据集脚本一同分享。</li>
+</ul>
 <h2 id="dataset">Dataset</h2>
-<p>[<code>Dataset</code>] 是基于 Apache Arrow 表实现的核心数据集类。</p>
-<p>[[autodoc]] datasets.Dataset
-    - add_column
-    - add_item
-    - from_file
-    - from_buffer
-    - from_pandas
-    - from_dict
-    - from_generator
-    - data
-    - cache_files
-    - num_columns
-    - num_rows
-    - column_names
-    - shape
-    - unique
-    - flatten
-    - cast
-    - cast_column
-    - remove_columns
-    - rename_column
-    - rename_columns
-    - select_columns
-    - class_encode_column
-    - <strong>len</strong>
-    - <strong>iter</strong>
-    - iter
-    - formatted_as
-    - set_format
-    - set_transform
-    - reset_format
-    - with_format
-    - with_transform
-    - <strong>getitem</strong>
-    - cleanup_cache_files
-    - map
-    - filter
-    - select
-    - sort
-    - shuffle
-    - skip
-    - take
-    - train_test_split
-    - shard
-    - repeat
-    - to_tf_dataset
-    - push_to_hub
-    - save_to_disk
-    - load_from_disk
-    - flatten_indices
-    - to_csv
-    - to_pandas
-    - to_dict
-    - to_json
-    - to_parquet
-    - to_sql
-    - to_iterable_dataset
-    - add_faiss_index
-    - add_faiss_index_from_external_arrays
-    - save_faiss_index
-    - load_faiss_index
-    - add_elasticsearch_index
-    - load_elasticsearch_index
-    - list_indexes
-    - get_index
-    - drop_index
-    - search
-    - search_batch
-    - get_nearest_examples
-    - get_nearest_examples_batch
-    - info
-    - split
-    - builder_name
-    - citation
-    - config_name
-    - dataset_size
-    - description
-    - download_checksums
-    - download_size
-    - features
-    - homepage
-    - license
-    - size_in_bytes
-    - supervised_keys
-    - version
-    - from_csv
-    - from_json
-    - from_parquet
-    - from_text
-    - from_sql
-    - align_labels_with_mapping</p>
-<p>[[autodoc]] datasets.concatenate_datasets</p>
-<p>[[autodoc]] datasets.interleave_datasets</p>
-<p>[[autodoc]] datasets.distributed.split_dataset_by_node</p>
-<p>[[autodoc]] datasets.enable_caching</p>
-<p>[[autodoc]] datasets.disable_caching</p>
-<p>[[autodoc]] datasets.is_caching_enabled</p>
-<p>[[autodoc]] datasets.Column</p>
+<p><code>datasets.Dataset</code> 是 🤗 Datasets 的核心表格数据结构，基于 Apache Arrow 实现随机访问与零拷贝切片。</p>
+<p><strong>常用属性</strong></p>
+<ul>
+<li><code>dataset.num_rows</code> / <code>num_columns</code> / <code>column_names</code></li>
+<li><code>dataset.features</code>：列类型描述。</li>
+<li><code>dataset.cache_files</code>：缓存文件列表，便于调试。</li>
+</ul>
+<p><strong>数据操作</strong></p>
+<ul>
+<li>转换与映射：<code>map()</code>、<code>filter()</code>、<code>shuffle()</code>、<code>select()</code>、<code>train_test_split()</code>。</li>
+<li>列操作：<code>add_column()</code>、<code>remove_columns()</code>、<code>rename_column()</code>、<code>cast_column()</code>。</li>
+<li>导出：<code>to_pandas()</code>、<code>to_dict()</code>、<code>to_parquet()</code>、<code>to_json()</code>、<code>save_to_disk()</code>、<code>push_to_hub()</code>。</li>
+<li>高级检索：<code>add_faiss_index()</code>、<code>search()</code>、<code>get_nearest_examples()</code>。</li>
+</ul>
+<p><strong>创建方式</strong></p>
+<ul>
+<li><code>Dataset.from_dict()</code> / <code>from_pandas()</code> / <code>from_generator()</code> / <code>from_file()</code> 等工厂函数。</li>
+<li><code>Dataset.to_iterable_dataset()</code> 可转为流式数据集。</li>
+</ul>
 <h2 id="datasetdict">DatasetDict</h2>
-<p>[<code>DatasetDict</code>] 以划分名称（如 <code>train</code>、<code>test</code>）为键，<code>Dataset</code> 对象为值，并提供一次性处理全部划分的工具方法。</p>
-<p>[[autodoc]] datasets.DatasetDict
-    - data
-    - cache_files
-    - num_columns
-    - num_rows
-    - column_names
-    - shape
-    - unique
-    - cleanup_cache_files
-    - map
-    - filter
-    - sort
-    - shuffle
-    - set_format
-    - reset_format
-    - formatted_as
-    - with_format
-    - with_transform
-    - flatten
-    - cast
-    - cast_column
-    - remove_columns
-    - rename_column
-    - rename_columns
-    - select_columns
-    - class_encode_column
-    - push_to_hub
-    - save_to_disk
-    - load_from_disk
-    - from_csv
-    - from_json
-    - from_parquet
-    - from_text</p>
-<p><a id="package_reference_features"></a></p>
+<p><code>datasets.DatasetDict</code> 是以切分名称为键、<code>Dataset</code> 为值的容器。常见特性：</p>
+<ul>
+<li>像操作字典一样访问：<code>ds["train"]</code>。</li>
+<li>支持批量操作：<code>ds.map(fn)</code> 会对所有切分执行同一函数。</li>
+<li><code>DatasetDict.save_to_disk()</code> 与 <code>push_to_hub()</code> 用于整体保存或分享。</li>
+</ul>
 <h2 id="iterabledataset">IterableDataset</h2>
-<p>[<code>IterableDataset</code>] 是基于 Python 生成器实现的可迭代数据集类。</p>
+<p><code>datasets.IterableDataset</code> 通过生成器按需读取数据，适合超大或流式数据源。支持 <code>map()</code>、<code>filter()</code>、<code>shuffle()</code>、<code>take()</code>、<code>skip()</code> 等惰性操作，并可通过 <code>set_format()</code> 控制输出类型。</p>
+<h2 id="_2">组合与分布式工具</h2>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>datasets.concatenate_datasets(datasets_list)</code></td>
+<td>沿样本维度拼接多个 <code>Dataset</code>，需要列结构一致。</td>
+</tr>
+<tr>
+<td><code>datasets.interleave_datasets(datasets_list, probabilities=None, seed=None)</code></td>
+<td>交错合并多个数据集，常用于多任务训练或数据集平衡。</td>
+</tr>
+<tr>
+<td><code>datasets.distributed.split_dataset_by_node(dataset, rank=None, world_size=None)</code></td>
+<td>在分布式训练中按节点拆分数据，避免重复读取。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">缓存控制</h2>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>datasets.enable_caching()</code> / <code>datasets.disable_caching()</code></td>
+<td>全局启用或禁用缓存文件的创建。</td>
+</tr>
+<tr>
+<td><code>datasets.is_caching_enabled()</code></td>
+<td>返回布尔值，指示当前缓存策略。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="column">Column</h2>
+<p><code>datasets.Column</code> 表示数据集中的单列，封装特征类型与底层 Arrow 数组。通常通过 <code>dataset["text"]</code> 获取原始列表，而 <code>dataset.column("text")</code> 则返回 <code>Column</code> 对象，便于查询列元数据或执行 Arrow 级别操作。</p>
 
 
 
