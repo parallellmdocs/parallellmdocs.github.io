@@ -1789,10 +1789,25 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="快速开始">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      命令行参数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       教学示例
     </span>
@@ -1865,7 +1880,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       预训练
     </span>
@@ -5965,10 +5980,25 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="快速开始">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      命令行参数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       教学示例
     </span>
@@ -6041,7 +6071,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       预训练
     </span>
@@ -6080,6 +6110,7 @@
 <p>下文将详细介绍流水线、代码结构、使用方式以及预训练流程。</p>
 <!-- ################ contents ################ -->
 <h2 id="_1">目录</h2>
+<p><a id="目录"></a></p>
 <ul>
 <li><a href="#快速开始">快速开始</a></li>
 <li><a href="#教学示例">教学示例</a></li>
@@ -6091,12 +6122,15 @@
 <!-- ################ quick start ################ -->
 
 <h2 id="_2">快速开始</h2>
-<p>关键脚本：</p>
+<p><a id="快速开始"></a>
+关键脚本：</p>
 <ul>
 <li><code>main.py</code>：预处理入口。</li>
 <li><code>examples/preprocess_data.sh</code>：示例预处理脚本（调用 <code>main.py</code>）。</li>
 <li><code>examples/pretrain_data.sh</code>：示例预训练脚本（调用 <code>pretrain_retro.py</code>）。</li>
 </ul>
+<h3 id="_3">命令行参数</h3>
+<p><a id="命令行参数"></a></p>
 <p>通过 <code>--retro-tasks</code> 控制预处理阶段：</p>
 <ul>
 <li>最简流程（一次性全部完成）：<code>--retro-tasks build</code></li>
@@ -6116,7 +6150,8 @@
 </ul>
 <!-- ################ tutorial ################ -->
 
-<h2 id="_3">教学示例</h2>
+<h2 id="_4">教学示例</h2>
+<p><a id="教学示例"></a></p>
 <p>以下以维基百科语料为例，演示如何构建检索数据库与索引，并为预训练数据查询邻居。</p>
 <h2 id="1">步骤 1：准备检索语料</h2>
 <p>语料格式与 Megatron 训练数据一致。若需从 JSON 转换为 mmap 格式，请参考 <a href="../../../#data-preprocessing">数据预处理</a>。</p>
@@ -6236,24 +6271,27 @@ sample['text'] : [   676     14  40656 184 ... 4\n    276  17361 251542]
 sample['neighbor_tokens'][17][1] : [    14     14  30291   1 ... 682    328    379 251527]
 retro.gpt_to_text(sample['text']) : also\nLatgalians (modern) ... ission criticised the AVN
 retro.gpt_to_text(sample['neighbor_tokens']) : \n\nHis second marriage o ... Augusta Eardley-Wilmot (2
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>### 输入与输出数据
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>输入数据：
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>- 通过 `gpt_dataset.py` 加载的 Token 数据集。
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>- **`&lt;RETRO_WORKDIR&gt;/index/&lt;RETRO_INDEX_TYPE&gt;/&lt;RETRO_INDEX_STR&gt;/added.faissindex`**：已经训练并写入全部数据库块的索引（详见前文）。
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>## 代码结构
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>&lt;a id=&quot;代码结构&quot;&gt;&lt;/a&gt;
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>### 输入与输出数据
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>输入数据：
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>输出数据：
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>- **`&lt;RETRO_WORKDIR&gt;/{train,valid,test}_XXns_YYsl_ZZs/WW.hdf5`**：这些目录/文件保存预训练样本各块的邻居索引。例如 `train_indexmap_2047435ns_2048sl_1234s` 目录中包含一组 HDF5 文件（如 `0075700000-0075800000.hdf5`），每个文件覆盖一段连续的邻居 ID，用于索引主检索数据库。某个目录下的所有 HDF5 文件共同构成对应数据集的全部邻居信息。文件大小由 `--retro-block-size` 控制。命名中的 `XX`、`YY`、`ZZ`、`WW` 用于标记数据集属性，以保证在预训练阶段与配置保持一致。这些邻居文件最终由 `retro_dataset.py` 加载，构建 Retro 训练样本。
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>### `tools/retro/cli`
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>提供了检查预处理数据的 CLI。进入 Python 交互式环境后，可通过以下命令加载 Retro 工作目录：
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>```python
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>from tools.retro.cli import retro
-<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>retro.init(&quot;/path/to/retro/workdir&quot;)
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>- 通过 `gpt_dataset.py` 加载的 Token 数据集。
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>- **`&lt;RETRO_WORKDIR&gt;/index/&lt;RETRO_INDEX_TYPE&gt;/&lt;RETRO_INDEX_STR&gt;/added.faissindex`**：已经训练并写入全部数据库块的索引（详见前文）。
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>输出数据：
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>- **`&lt;RETRO_WORKDIR&gt;/{train,valid,test}_XXns_YYsl_ZZs/WW.hdf5`**：这些目录/文件保存预训练样本各块的邻居索引。例如 `train_indexmap_2047435ns_2048sl_1234s` 目录中包含一组 HDF5 文件（如 `0075700000-0075800000.hdf5`），每个文件覆盖一段连续的邻居 ID，用于索引主检索数据库。某个目录下的所有 HDF5 文件共同构成对应数据集的全部邻居信息。文件大小由 `--retro-block-size` 控制。命名中的 `XX`、`YY`、`ZZ`、`WW` 用于标记数据集属性，以保证在预训练阶段与配置保持一致。这些邻居文件最终由 `retro_dataset.py` 加载，构建 Retro 训练样本。
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>### `tools/retro/cli`
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>提供了检查预处理数据的 CLI。进入 Python 交互式环境后，可通过以下命令加载 Retro 工作目录：
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>```python
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>from tools.retro.cli import retro
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>retro.init(&quot;/path/to/retro/workdir&quot;)
 </code></pre></div></p>
 <p>该命令会初始化 Megatron 并准备好 Retro 数据，同时输出可用函数的帮助信息。CLI 中包含多种查看检索数据库以及预训练样本/邻居的工具，例如：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">retro</span><span class="o">.</span><span class="n">get_db_num_indexed_datasets</span><span class="p">()</span> <span class="c1"># 15</span>
@@ -6289,7 +6327,7 @@ retro.gpt_to_text(sample['neighbor_tokens']) : \n\nHis second marriage o ... Aug
 <li><strong><code>--bert-embedder-type megatron</code></strong>：使用 Megatron 的 Bert 模型，具体权重、词表和分词器取决于加载的检查点。</li>
 <li><strong><code>--bert-embedder-type huggingface</code></strong>：使用 Hugging Face 的 <code>bert-large-cased</code>。（<em>注意</em>：该选项后续可能弃用，目前也无法调整大小写配置。）</li>
 </ul>
-<h3 id="_4">预训练</h3>
+<h3 id="_5">预训练</h3>
 <ul>
 <li><strong><code>pretrain_retro.py</code></strong>：Retro 预训练入口，类似 <code>pretrain_gpt.py</code>，但负责加载邻居 token 并设置邻居注意力掩码。</li>
 <li><strong><code>megatron/model/retro_transformer.py</code></strong>：Retro 模型实现，包含主 Transformer、检索编码器与分块交叉注意力层。当前文件中仍保留与 <code>transformer.py</code> 基本一致的多个类，后续会合并差异。</li>
