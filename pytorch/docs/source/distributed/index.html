@@ -1,0 +1,4997 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="中文翻译文档集合">
+      
+      
+      
+      
+        <link rel="prev" href="../../../../nccl/src/include/nccl_device/">
+      
+      
+        <link rel="next" href="../distributed.algorithms.join/">
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>分布式通信包 - Unified Docs (CN)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#torchdistributed" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="Unified Docs (CN)" class="md-header__button md-logo" aria-label="Unified Docs (CN)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unified Docs (CN)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              分布式通信包
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Unified Docs (CN)" class="md-nav__button md-logo" aria-label="Unified Docs (CN)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Unified Docs (CN)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Megatron
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Megatron
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    更新日志
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/CONTRIBUTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    贡献指南
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    官方指南
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            官方指南
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    用户指南索引
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/user-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    用户指南：示例目录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 导航
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    快速入门
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            快速入门
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/megatron/core/QuickStart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    快速开始
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/megatron/core/datasets/readme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数据集管线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/llama_mistral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Llama/Mistral 指南
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    核心能力
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            核心能力
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/megatron/core/MSC_Integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MSC 集成
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/megatron/core/README_STRAGGLER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Straggler 检测
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/megatron/core/transformer/moe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MoE 架构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/megatron/core/optimizer/cpu_offloading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    优化器 CPU Offload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/megatron/core/models/mimo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MIMO 模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/megatron/core/distributed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式 FSDP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/megatron/core/distributed/fsdp/src/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    自定义 FSDP 组件
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/megatron/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    核心概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API 指南
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            API 指南
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transformer 主体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/tensor_parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    张量并行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/pipeline_parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    流水线并行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/pipeline_parallel_layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    流水线布局
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/context_parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Context Parallel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/moe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MoE 系统
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/multi_latent_attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multi-Latent Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/multi_token_prediction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多 Token 预测
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/datasets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数据集接口
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/dist_optimizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式优化器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/custom_fsdp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    自定义 FSDP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/dist_checkpointing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    检查点策略
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/dist_checkpointing.strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    检查点策略（进阶）
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/fusions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    自动融合
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/num_microbatches_calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Microbatch 计算器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/tokenizers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分词体系
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    模型 API 汇总
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    示例与工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            示例与工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8_1" id="__nav_2_8_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    论文脚本
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            论文脚本
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/academic_paper_scripts/detxoify_lm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DeToxify LM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/academic_paper_scripts/msdp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MSDP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/academic_paper_scripts/sc21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SC21
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    模型导出
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/export/trtllm_export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TRT-LLM 导出
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    推理实践
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/bert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BERT 示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/gpt3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GPT-3 示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/t5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    T5 示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/llama/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LLaMA 示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/mixtral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mixtral 示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/mamba/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mamba 示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/multimodal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多模态示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8_12" id="__nav_2_8_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    多模态子示例
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_8_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8_12">
+            <span class="md-nav__icon md-icon"></span>
+            多模态子示例
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/multimodal/llama_3p1_nemotron_nano_vl_8b_v1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nemotron Nano VLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/multimodal/nvlm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    NVLM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/tools/retro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retro 工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/tools/retro/build_db/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retro 数据库构建
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/tools/retro/sft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retro 微调
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8_16" id="__nav_2_8_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    ModelOpt
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_8_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8_16">
+            <span class="md-nav__icon md-icon"></span>
+            ModelOpt
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/post_training/modelopt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/post_training/modelopt/ADVANCED/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    进阶
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/post_training/modelopt/speculative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    推测解码
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8_17" id="__nav_2_8_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    RL 示例
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_8_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8_17">
+            <span class="md-nav__icon md-icon"></span>
+            RL 示例
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/rl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/rl/environments/countdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    倒计时环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/examples/retro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retro 训练
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    进一步阅读
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            进一步阅读
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/models.bert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 参考：BERT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/models.gpt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 参考：GPT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/models.t5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 参考：T5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/optimizer_param_scheduler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    优化器调度
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/optimizer_cpu_offload/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CPU Offload 参考
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/docs/source/api-guide/distributed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    自定义分布式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/post_training/docs/distillation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    蒸馏实践
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/rl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    强化学习
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/tests/functional_tests/test_cases/gpt/gpt3_mr_mcore_reruns_resume_check_grads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    测试案例：梯度校验
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../megatron/tests/functional_tests/test_cases/gpt/gpt_static_inference_tp1_pp1_16b_multiprompt_tokensmatch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    测试案例：静态推理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    TransformerEngine
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            TransformerEngine
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    文档索引
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    安装指南
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    调试工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            调试工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    目录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/debug/1_getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    快速入门
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/debug/2_config_file_structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    配置结构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/debug/3_api_debug_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    初始化 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/debug/3_api_features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    功能列表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/debug/3_api_te_calls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inspect API 调用
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/debug/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API 索引
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/debug/4_distributed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式调试
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API 参考
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            API 参考
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/api/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    通用配方
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/api/framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    框架专属 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/api/pytorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyTorch API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../transformerengine/docs/api/jax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JAX API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    NCCL
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            NCCL
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    示例
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            示例
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    总览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/01_communicators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    通信器概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/01_communicators/01_multiple_devices_single_process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多设备单进程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/01_communicators/02_one_device_per_pthread/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    pthread 一卡一线程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/01_communicators/03_one_device_per_process_mpi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MPI 一卡一进程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/02_point_to_point/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    点对点通信
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/02_point_to_point/01_ring_pattern/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    环形通信示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/03_collectives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    集体通信概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/03_collectives/01_allreduce/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AllReduce 示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/04_user_buffer_registration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    用户缓冲区注册
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/04_user_buffer_registration/01_allreduce/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    注册 AllReduce
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/05_symmetric_memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    对称内存概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/05_symmetric_memory/01_allreduce/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    对称内存 AllReduce
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/06_device_api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    设备端 API 示例
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/06_device_api/01_allreduce/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    设备端 AllReduce
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/examples/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    公共工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    插件
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            插件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/ext-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    网络插件
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_2" id="__nav_4_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Profiler 插件
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Profiler 插件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/ext-profiler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/ext-profiler/example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    示例插件
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/ext-profiler/inspector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inspector 插件
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/ext-profiler/inspector/exporter/example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inspector 导出器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_3" id="__nav_4_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tuner 插件
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tuner 插件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/ext-tuner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    概览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/ext-tuner/basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    基础插件
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/ext-tuner/example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    示例插件
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/ext-tuner/example/scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    配置脚本
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/ext-tuner/example/test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    单元测试
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../nccl/src/include/nccl_device/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    设备 API 结构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    PyTorch
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            PyTorch
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    分布式通信包
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式通信包
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      后端
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="后端">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      PyTorch 自带的后端
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      选择哪个后端？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络接口
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络接口">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nccl" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他 NCCL 环境变量
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      基础概念
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      初始化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      TCP 初始化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      共享文件系统初始化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      环境变量初始化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      缩短初始化时间
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      初始化之后
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      关闭
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="关闭">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      重新初始化
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      分组（Groups）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devicemesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      DeviceMesh
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      点对点通信
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      同步与异步集合通信
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      错误处理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-value-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key-Value Store
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      集合通信的性能分析
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      多 GPU 集合通信
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      对象级集合通信
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      第三方后端
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed.algorithms.join/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式 Join 上下文
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed.fsdp.fully_shard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FSDP2 全分片
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed.checkpoint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式检查点
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed.elastic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    弹性训练 (Elastic)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed.optim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式优化器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed.pipelining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    管道并行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed.tensor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DistributedTensor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed.tensor.parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    张量并行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed._dist2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实验性面向对象 API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_11" id="__nav_5_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    RPC
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_11">
+            <span class="md-nav__icon md-icon"></span>
+            RPC
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rpc/distributed_autograd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分布式 Autograd 设计
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      后端
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="后端">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pytorch" class="md-nav__link">
+    <span class="md-ellipsis">
+      PyTorch 自带的后端
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      选择哪个后端？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络接口
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络接口">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nccl" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他 NCCL 环境变量
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      基础概念
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      初始化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      TCP 初始化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      共享文件系统初始化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      环境变量初始化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      缩短初始化时间
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      初始化之后
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      关闭
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="关闭">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      重新初始化
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      分组（Groups）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devicemesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      DeviceMesh
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      点对点通信
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      同步与异步集合通信
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      错误处理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-value-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key-Value Store
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      集合通信的性能分析
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      多 GPU 集合通信
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      对象级集合通信
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      第三方后端
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>.. role:: hidden
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    :class: hidden-section
+</code></pre></div>
+<h1 id="torchdistributed">分布式通信包 —— torch.distributed</h1>
+<p>:::{note}
+如需快速了解分布式训练的全部功能，请参阅
+<a href="https://pytorch.org/tutorials/beginner/dist_overview.html">PyTorch 分布式概览</a>。
+:::</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.. automodule:: torch.distributed
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>.. currentmodule:: torch.distributed
+</code></pre></div>
+<h2 id="_1">后端</h2>
+<p><code>torch.distributed</code> 提供四种内置后端，它们各自具有不同的能力。下表列出了每个后端在 CPU
+或 GPU 上可以使用的函数。对于 NCCL，GPU 指 CUDA GPU；对于 XCCL，GPU 指 XPU GPU。</p>
+<p>MPI 是否支持 CUDA 取决于构建 PyTorch 的 MPI 实现。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>+----------------+-----------+-----------+-----------+-----------+
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>| Backend        | ``gloo``  | ``mpi``   | ``nccl``  | ``xccl``  |
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>| Device         | CPU | GPU | CPU | GPU | CPU | GPU | CPU | GPU |
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>+================+=====+=====+=====+=====+=====+=====+=====+=====+
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>| send           | ✓   | ✘   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>| recv           | ✓   | ✘   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>| broadcast      | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>| all_reduce     | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>| reduce         | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>| all_gather     | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>| gather         | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>| scatter        | ✓   | ✓   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>| reduce_scatter | ✓   | ✓   | ✘   | ✘   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>| all_to_all     | ✘   | ✘   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>| barrier        | ✓   | ✘   | ✓   | ?   | ✘   | ✓   | ✘   | ✓   |
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>+----------------+-----+-----+-----+-----+-----+-----+-----+-----+
+</code></pre></div>
+<h3 id="pytorch">PyTorch 自带的后端</h3>
+<p>PyTorch 分布式包在 Linux（稳定版）、macOS（稳定版）和 Windows（原型）上受支持。
+在 Linux 上默认构建并包含 Gloo 和 NCCL 后端（仅当启用 CUDA 时才构建 NCCL）。MPI
+属于可选后端，需要从源码编译 PyTorch 时手动启用（例如在安装了 MPI 的主机上构建）。</p>
+<p>:::{note}
+自 PyTorch v1.8 起，Windows 支持除 NCCL 之外的所有通信后端。
+如果 {func}<code>init_process_group</code> 的 <code>init_method</code> 参数指向某个文件，该文件路径必须符合以下模式：</p>
+<ul>
+<li>本地文件系统：<code>init_method="file:///d:/tmp/some_file"</code></li>
+<li>共享文件系统：<code>init_method="file://////{machine_name}/{share_folder_name}/some_file"</code></li>
+</ul>
+<p>与 Linux 平台相同，可以通过设置环境变量 MASTER_ADDR 和 MASTER_PORT 启用 TcpStore。
+:::</p>
+<h3 id="_2">选择哪个后端？</h3>
+<p>某些后端只支持特定的部署环境。例如：Gloo 适用于多 CPU 训练，NCCL 支持多 GPU
+训练，MPI 则需要正确配置的 MPI 实现。需要同时考虑可用硬件、部署环境以及运维成本。</p>
+<h3 id="_3">网络接口</h3>
+<p>在拥有多个网络接口的环境（例如多个网卡或 Infiniband）中，需要显式设置以下环境变量：</p>
+<ul>
+<li><strong>NCCL_SOCKET_IFNAME</strong>，例如 <code>export NCCL_SOCKET_IFNAME=eth0</code></li>
+<li><strong>GLOO_SOCKET_IFNAME</strong>，例如 <code>export GLOO_SOCKET_IFNAME=eth0</code></li>
+</ul>
+<p>对于 Gloo，可以使用逗号分隔多个接口，例如 <code>export GLOO_SOCKET_IFNAME=eth0,eth1,eth2,eth3</code>。
+Gloo 会以轮询方式在这些接口之间分发操作。所有进程必须保证在该变量中指定相同数量的接口。</p>
+<h4 id="nccl">其他 NCCL 环境变量</h4>
+<p><strong>调试</strong> —— 当 NCCL 出现错误时，可设置 <code>NCCL_DEBUG=INFO</code> 输出警告信息和初始化日志。</p>
+<p>也可以使用 <code>NCCL_DEBUG_SUBSYS</code> 定位特定子系统。例如，<code>NCCL_DEBUG_SUBSYS=COLL</code> 会打印
+集合通信日志，便于排查通信类型或消息大小不匹配导致的阻塞；若拓扑检测失败，可以设置
+<code>NCCL_DEBUG_SUBSYS=GRAPH</code> 查看详细的拓扑检测结果，必要时可作为反馈信息提供给 NCCL 团队。</p>
+<p><strong>性能调优</strong> —— NCCL 会基于自动拓扑检测进行调优，无需用户手动配置。在某些基于 socket
+的系统中，可以尝试调节 <code>NCCL_SOCKET_NTHREADS</code> 和 <code>NCCL_NSOCKS_PERTHREAD</code>
+以提升网络带宽。NCCL 已针对部分云厂商（例如 AWS、GCP）预调优这两个变量。</p>
+<p>完整的 NCCL 环境变量列表请参考
+<a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html">NVIDIA NCCL 官方文档</a>。</p>
+<p>你还可以通过 <code>torch.distributed.ProcessGroupNCCL.NCCLConfig</code> 和
+<code>torch.distributed.ProcessGroupNCCL.Options</code> 进一步调节 NCCL 通信器，可在解释器中使用
+<code>help</code>（例如 <code>help(torch.distributed.ProcessGroupNCCL.NCCLConfig)</code>）查阅更详细的说明。</p>
+<p>(distributed-basics)=</p>
+<h2 id="_4">基础概念</h2>
+<p><code>torch.distributed</code> 为多进程并行提供通信原语，可运行在一台或多台机器上。
+{func}<code>torch.nn.parallel.DistributedDataParallel</code> 基于这些原语实现同步分布式训练，
+可以封装任意 PyTorch 模型。与 {doc}<code>multiprocessing</code> 或
+{func}<code>torch.nn.DataParallel</code> 不同，该模块支持多台网络互联的机器，同时需要显式为每个
+进程启动一份主训练脚本。</p>
+<p>在单机同步场景下，<code>torch.distributed</code> 或
+{func}<code>torch.nn.parallel.DistributedDataParallel</code> 相比其他数据并行方式（例如
+{func}<code>torch.nn.DataParallel</code>）依然具备优势：</p>
+<ul>
+<li>每个进程维护自己的优化器，并在每次迭代执行完整的优化步骤。虽然梯度已经在各进程间聚合和平均，
+  但这种方式无需额外的参数广播，从而减少节点之间的张量传输。</li>
+<li>每个进程拥有独立的 Python 解释器，避免了单个 Python 进程驱动多个执行线程、模型副本或 GPU 时的额外开销和 GIL 争用。
+  这对于大量使用 Python 运行时的模型尤为重要，例如包含循环层或大量小模块的模型。</li>
+</ul>
+<h2 id="_5">初始化</h2>
+<p>在调用其他方法之前，需要先调用 {func}<code>torch.distributed.init_process_group</code>
+或 {func}<code>torch.distributed.device_mesh.init_device_mesh</code> 进行初始化。两者都会阻塞，直到所有进程加入。</p>
+<p>:::{warning}
+初始化不是线程安全的。创建进程组时必须在单线程中进行，避免因 UUID 分配不一致或初始化过程中的竞争条件而导致阻塞。
+:::</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>.. autofunction:: is_available
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>.. autofunction:: init_process_group
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>.. autofunction:: torch.distributed.device_mesh.init_device_mesh
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>.. autofunction:: is_initialized
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>.. autofunction:: is_mpi_available
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>.. autofunction:: is_nccl_available
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>.. autofunction:: is_gloo_available
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>.. autofunction:: torch.distributed.distributed_c10d.is_xccl_available
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>.. autofunction:: torch.distributed.distributed_c10d.batch_isend_irecv
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>.. autofunction:: torch.distributed.distributed_c10d.destroy_process_group
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>.. autofunction:: torch.distributed.distributed_c10d.is_backend_available
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>.. autofunction:: torch.distributed.distributed_c10d.irecv
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>.. autofunction:: torch.distributed.distributed_c10d.is_gloo_available
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>.. autofunction:: torch.distributed.distributed_c10d.is_initialized
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>.. autofunction:: torch.distributed.distributed_c10d.is_mpi_available
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>.. autofunction:: torch.distributed.distributed_c10d.is_nccl_available
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>.. autofunction:: torch.distributed.distributed_c10d.is_torchelastic_launched
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>.. autofunction:: torch.distributed.distributed_c10d.is_ucc_available
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>.. autofunction:: is_torchelastic_launched
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>.. autofunction:: get_default_backend_for_device
+</code></pre></div>
+<hr />
+<p>目前支持三种初始化方式：</p>
+<h3 id="tcp">TCP 初始化</h3>
+<p>使用 TCP 初始化需要一个所有进程都可访问的网络地址和期望的 <code>world_size</code>。
+第一种方式需要指定 rank 0 进程的地址，并且所有进程的 rank 必须手动指定。</p>
+<p>请注意，最新版本的分布式包不再支持多播地址，<code>group_name</code> 也已弃用。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>import torch.distributed as dist
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a># 使用任意一台机器的地址
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>dist.init_process_group(backend, init_method=&#39;tcp://10.1.1.20:23456&#39;,
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>                        rank=args.rank, world_size=4)
+</code></pre></div>
+<h3 id="_6">共享文件系统初始化</h3>
+<p>另一种初始化方法依赖所有机器都可访问的共享文件系统，并结合期望的 <code>world_size</code>。URL
+需要以 <code>file://</code> 开头，并指向共享文件系统上一个不存在的文件（所在目录必须存在）。
+若文件不存在，初始化过程会自动创建，但不会自动删除，因此在下一次调用
+{func}<code>init_process_group</code> 之前需要自行清理。</p>
+<p>同样地，自动分配 rank 的方式已经被移除，<code>group_name</code> 也已弃用。</p>
+<p>:::{warning}
+该方法依赖文件系统支持 <code>fcntl</code> 锁。大多数本地文件系统和 NFS 都支持。
+:::</p>
+<p>:::{warning}
+此方法会在初始化时创建文件，并尽力在程序结束时删除。也就是说，每次使用文件系统初始化都需要一个全新的空文件。
+如果重复使用上一轮遗留的文件（未能成功删除），很容易导致死锁或失败。因此，即使自动删除失败，用户也必须确保文件在训练结束时被清理，
+尤其是在同一个文件名上多次调用 {func}<code>init_process_group</code> 时。规则很简单：每次调用前都要确保文件不存在或为空。
+:::</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>import torch.distributed as dist
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a># 必须显式传入 rank
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>dist.init_process_group(backend, init_method=&#39;file:///mnt/nfs/sharedfile&#39;,
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>                        world_size=4, rank=args.rank)
+</code></pre></div>
+<h3 id="_7">环境变量初始化</h3>
+<p>这种方式通过读取环境变量获取配置信息，方便用户自定义信息来源。需要设置的变量有：</p>
+<ul>
+<li><code>MASTER_PORT</code> —— 必填，为 rank 0 机器上的一个空闲端口；</li>
+<li><code>MASTER_ADDR</code> —— 必填（rank 0 可省略），为 rank 0 节点的地址；</li>
+<li><code>WORLD_SIZE</code> —— 必填，可以在环境变量或初始化函数中指定；</li>
+<li><code>RANK</code> —— 必填，可以在环境变量或初始化函数中指定。</li>
+</ul>
+<p>rank 0 节点会用来建立所有连接。该方式是默认选项，即 <code>init_method</code> 可省略或设为 <code>env://</code>。</p>
+<h3 id="_8">缩短初始化时间</h3>
+<ul>
+<li><code>TORCH_GLOO_LAZY_INIT</code> —— 按需建立连接，而不是一次性构建全互连拓扑，对于非 all2all
+  操作可显著缩短初始化时间。</li>
+</ul>
+<h2 id="_9">初始化之后</h2>
+<p>运行 {func}<code>torch.distributed.init_process_group</code> 后，可以调用以下函数。可通过
+{func}<code>torch.distributed.is_initialized</code> 检查进程组是否已初始化。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>.. autoclass:: Backend
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    :members:
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>.. autofunction:: get_backend
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>.. autofunction:: get_rank
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>.. autofunction:: get_world_size
+</code></pre></div>
+<h2 id="_10">关闭</h2>
+<p>训练结束时务必调用 {func}<code>destroy_process_group</code> 释放资源。</p>
+<p>最简单的方式是在脚本中所有通信都完成后（通常是 <code>main()</code> 接近尾部）调用一次
+{func}<code>destroy_process_group()</code>，并保持 <code>group</code> 参数为默认值 None。每个训练进程调用一次即可，
+无需在启动器进程中调用。</p>
+<p>如果应用中存在多个进程组（例如 N 维并行），且不是所有 rank 都在超时时间内调用
+{func}<code>destroy_process_group</code>，程序可能会在退出时挂起。这是因为
+ProcessGroupNCCL 的析构函数内部会调用 <code>ncclCommAbort</code>，而该函数需要全体成员统一调用。
+Python GC 的析构顺序不可预测，因此显式调用 {func}<code>destroy_process_group</code> 能保证
+各个 rank 上的 <code>ncclCommAbort</code> 调用顺序一致，从而避免在析构函数中触发。</p>
+<h3 id="_11">重新初始化</h3>
+<p><code>destroy_process_group</code> 也可以用于销毁单个进程组。例如容错训练场景中，可能需要在运行时销毁旧的进程组并创建新的。
+此时必须确保在调用 <code>destroy</code> 之后、重新初始化之前使用 torch.distributed 以外的方式对训练进程进行同步。
+该行为目前尚未得到充分验证，属于已知限制。如有相关需求请在 GitHub 提交 issue 或 RFC。</p>
+<hr />
+<h2 id="groups">分组（Groups）</h2>
+<p>默认情况下，集合通信运行在默认组（也称 world 上），并要求所有进程进入调用。
+某些工作负载需要更细粒度的通信，这时可以通过 {func}<code>~torch.distributed.new_group</code>
+创建包含任意进程子集的新分组。该函数返回一个不透明的组句柄，可在集合通信函数中通过 <code>group</code>
+参数传入（集合通信即是按照常见模式交换信息的分布式函数）。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>.. autofunction:: new_group
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>.. autofunction:: get_group_rank
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>.. autofunction:: get_global_rank
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>.. autofunction:: get_process_group_ranks
+</code></pre></div>
+<h2 id="devicemesh">DeviceMesh</h2>
+<p>DeviceMesh 是对进程组（或 NCCL 通信器）的更高层抽象。它可以方便地创建跨节点和节点内的进程组，
+无需手动为不同的子进程组设置 rank；同时也便于统一管理这些分布式进程组。
+可使用 {func}<code>~torch.distributed.device_mesh.init_device_mesh</code> 创建新的 DeviceMesh，
+并通过 mesh 形状描述设备拓扑。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>.. autoclass:: torch.distributed.device_mesh.DeviceMesh
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>    :members:
+</code></pre></div>
+<h2 id="_12">点对点通信</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>.. autofunction:: send
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>.. autofunction:: recv
+</code></pre></div>
+<p>{func}<code>~torch.distributed.isend</code> 与 {func}<code>~torch.distributed.irecv</code> 会返回分布式请求对象。
+该对象的类型并未公开（不应手动创建），但一定支持以下方法：</p>
+<ul>
+<li><code>is_completed()</code> —— 操作完成时返回 True；</li>
+<li><code>wait()</code> —— 阻塞当前进程直到操作完成；一旦返回，<code>is_completed()</code> 保证为 True。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>.. autofunction:: isend
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>.. autofunction:: irecv
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>.. autofunction:: send_object_list
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>.. autofunction:: recv_object_list
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>.. autofunction:: batch_isend_irecv
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>.. autoclass:: P2POp
+</code></pre></div>
+<h2 id="_13">同步与异步集合通信</h2>
+<p>所有集合通信函数都支持以下两种模式，通过 <code>async_op</code> 参数进行控制：</p>
+<p><strong>同步模式</strong> —— 默认模式，即 <code>async_op=False</code>。函数返回时保证集合通信已执行完成。
+对于 CPU 集合通信，可立即安全地使用输出结果。对于 CUDA 集合通信，由于 CUDA
+操作是异步的，函数返回并不代表 CUDA 指令已经完成；在同一 CUDA stream 上使用输出结果是安全的。
+若需要跨 stream 使用输出，用户必须自行同步。有关 CUDA 语义和 stream 同步的更多说明，参见
+<a href="https://pytorch.org/docs/stable/notes/cuda.html">CUDA 语义</a>。CPU 与 CUDA 行为的差异可参考下方示例脚本。</p>
+<p><strong>异步模式</strong> —— 当 <code>async_op=True</code> 时，集合通信函数返回一个分布式请求对象。该对象同样提供
+<code>is_completed()</code> 与 <code>wait()</code> 方法：</p>
+<ul>
+<li><code>is_completed()</code> —— 对于 CPU 操作，若完成则返回 <code>True</code>；对于 CUDA 操作，
+  只有当底层 CUDA 指令完成时才返回 <code>True</code>。此外，该调用不会自动触发同步。</li>
+<li><code>wait()</code> —— 阻塞当前进程直到操作完成。<code>is_completed()</code> 在 <code>wait()</code> 返回后一定为 True。</li>
+</ul>
+<p>异步接口允许与其他计算重叠，或在单线程中顺序调度多个集合通信。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>.. autofunction:: all_reduce
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>.. autofunction:: reduce
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>.. autofunction:: all_gather
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>.. autofunction:: all_gather_into_tensor
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>.. autofunction:: all_reduce_coalesced
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>.. autofunction:: all_to_all
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>.. autofunction:: all_to_all_single
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>.. autofunction:: reduce_scatter
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>.. autofunction:: gather_object
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>.. autofunction:: broadcast
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>.. autofunction:: torch.distributed.broadcast_object_list
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>.. autofunction:: torch.distributed.isend
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>.. autofunction:: torch.distributed.irecv
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>.. autofunction:: torch.distributed.scatter_object_list
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>.. autofunction:: torch.distributed.gather_object
+</code></pre></div>
+<h2 id="_14">错误处理</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>.. autoclass:: ProcessGroup
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>    :members:
+</code></pre></div>
+<h2 id="key-value-store">Key-Value Store</h2>
+<p>Key-Value Store 是一个键值存储，用于在组内进程之间共享信息，也可以在
+{func}<code>torch.distributed.init_process_group</code> 初始化时显式构造并传入（作为 <code>init_method</code>
+的替代方案）。可用的存储类型包括 {class}<code>~torch.distributed.TCPStore</code>、
+{class}<code>~torch.distributed.FileStore</code> 和 {class}<code>~torch.distributed.HashStore</code>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>.. autoclass:: Store
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>    :members:
+<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>    :special-members:
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>.. autoclass:: TCPStore
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>    :members:
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>    :special-members: __init__
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>.. autoclass:: HashStore
+<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>    :members:
+<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>    :special-members: __init__
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>.. autoclass:: FileStore
+<a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>    :members:
+<a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a>    :special-members: __init__
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>.. autoclass:: PrefixStore
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>    :members:
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a>    :special-members: __init__
+</code></pre></div>
+<h2 id="_15">集合通信的性能分析</h2>
+<p>可以使用 <code>torch.profiler</code>（推荐，1.8.1 及以上版本提供）或 <code>torch.autograd.profiler</code>
+对集合通信和点对点通信接口进行性能分析。所有内置后端（<code>gloo</code>、<code>nccl</code>、<code>mpi</code>）
+均受到支持，相关调用会在分析结果/日志中按预期展示。使用方式与分析普通 torch 运算相同：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>import torch
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>import torch.distributed as dist
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>with torch.profiler():
+<a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>    tensor = torch.randn(20, 10)
+<a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a>    dist.all_reduce(tensor)
+</code></pre></div>
+<p>更多 profiler 功能请参阅
+<a href="https://pytorch.org/docs/main/profiler.html">Profiler 文档</a>。</p>
+<h2 id="gpu">多 GPU 集合通信</h2>
+<p>:::{warning}
+多 GPU 接口（即单个 CPU 线程控制多个 GPU）已被弃用。当前推荐的编程模型是一线程对应一设备，
+即本文档所示的 API。如果你是后端开发者并希望支持单线程控制多个设备，请联系 PyTorch 分布式维护者。
+:::</p>
+<p>(object_collectives)=</p>
+<h2 id="_16">对象级集合通信</h2>
+<p>:::{warning}
+对象集合通信存在若干严重限制，请继续阅读以确认是否适用于你的场景。
+:::</p>
+<p>对象集合通信可在能被 pickle 的任意 Python 对象上执行集合模式（如广播、all_gather 等）。
+其典型流程如下：</p>
+<ol>
+<li>将输入对象 pickle 成字节串并写入字节张量；</li>
+<li>通过一次集合通信告知其它进程该张量的大小；</li>
+<li>根据大小分配合适的张量；</li>
+<li>再执行一次集合通信传输对象数据；</li>
+<li>将字节串反序列化回 Python 对象。</li>
+</ol>
+<p>对象集合通信可能带来令人意外的性能或内存开销，应谨慎使用。常见问题包括：</p>
+<p><strong>序列化/反序列化耗时不均衡</strong> —— 序列化速度取决于对象数量、类型和大小。
+例如在 gather_object 中，接收端需要反序列化 N 倍于发送端的对象数量，可能导致其它进程在后续集合通信中超时。</p>
+<p><strong>低效的张量通信</strong> —— 建议使用常规集合通信 API 处理张量，而不是对象集合通信。
+如果通过对象集合发送张量，会经历序列化与反序列化（非 CPU 张量还需额外的 CPU 同步与设备到主机的复制），
+几乎所有场景下都值得改写代码，直接调用张量集合通信接口。</p>
+<p><strong>设备不一致的问题</strong> —— 如果仍要通过对象集合发送张量，还需注意 CUDA（或其他加速器）设备。
+当 pickle 一个位于 <code>cuda:3</code> 的张量并在另一进程中 unpickle 时，得到的张量依旧位于 <code>cuda:3</code>，
+而不会根据本地默认设备调整。常规张量集合通信的输出张量始终位于本地设备，更符合预期。</p>
+<p>此外，如果首次在进程中 unpickle 张量，会隐式创建一个 CUDA 上下文，可能浪费大量显存。
+可在传入对象集合前将张量移动到 CPU 以规避该问题。</p>
+<h2 id="_17">第三方后端</h2>
+<p>除了内置的 GLOO/MPI/NCCL 后端之外，PyTorch 分布式支持通过运行时注册机制接入第三方后端。
+如需通过 C++ 扩展开发第三方后端，请参考
+<a href="https://pytorch.org/tutorials/advanced/cpp_extension.html">自定义 C++/CUDA 扩展教程</a>
+以及 <code>test/cpp_extensions/cpp_c10d_extension.cpp</code>。第三方后端的能力取决于自身的实现。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
